@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+       <style name="Title1">
+        <item name="android:textSize">22dp</item>
+        <item name="fontStyle">normal</item>
+        <item name="fontWeight">600</item>
+        <item name="fontFamily">sans-serif</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
+
+
+    <style name="Title2">
+        <item name="android:textSize">18dp</item>
+        <item name="fontStyle">normal</item>
+        <item name="fontWeight">600</item>
+        <item name="fontFamily">sans-serif</item>
+        <item name="android:textColor">@color/AppAdocGray</item>
+    </style>
+
+
+    <style name="Title3">
+        <item name="android:textSize">15dp</item>
+        <item name="fontStyle">normal</item>
+        <item name="fontWeight">600</item>
+        <item name="fontFamily">sans-serif</item>
+        <item name="android:textColor">@color/AppAdocGray</item>
+    </style>
+
+
+    <style name="InputAccount">
+        <item name="android:textSize">18dp</item>
+        <item name="fontStyle">normal</item>
+        <item name="fontWeight">600</item>
+        <item name="fontFamily">sans-serif</item>
+        <item name="android:textColor">@color/AppAdocGray</item>
+        <item name="android:padding">5dp</item>
+        <item name="android:textColorHint">@color/AppAdocGray</item>
+    </style>
+
+
+
+    <style name="InputGeneral">
+        <item name="android:textSize">18dp</item>
+        <item name="fontStyle">normal</item>
+        <item name="fontWeight">600</item>
+        <item name="fontFamily">sans-serif</item>
+        <item name="android:textColor">@color/AppAdocGray</item>
+        <item name="android:padding">12dp</item>
+        <item name="android:textColorHint">@color/AppAdocGray</item>
+    </style>
+
+    <style name="roounded_button">
+        <item name="android:textSize">16dp</item>
+        <item name="fontStyle">normal</item>
+        <item name="fontWeight">600</item>
+        <item name="fontFamily">sans-serif</item>
+        <item name="android:textColor">@color/AppAdocYellow</item>
+        <item name="android:padding">15dp</item>
+        <item name="android:background">@drawable/roundbutton</item>
+    </style>
+
+
+
+
+    <style name="bluebutton">
+        <item name="android:textSize">16dp</item>
+        <item name="fontStyle">normal</item>
+        <item name="fontWeight">600</item>
+        <item name="fontFamily">sans-serif</item>
+        <item name="android:textColor">@color/AppAdocBlue</item>
+        <item name="android:padding">15dp</item>
+        <item name="android:background">@color/white</item>
+    </style>
+
+
+    <style name="Theme.FixedSize" parent="@android:style/Theme.Holo.Light.DarkActionBar">
+        <item name="actionBarSize">32dp</item>
+        <item name="android:actionBarSize">32dp</item>
+    </style>
+
+
+</resources>

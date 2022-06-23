@@ -1,0 +1,75 @@
+<resources>
+    <string name="app_name">AppAdoc</string>
+    <string name="email">Correo Electrónico</string>
+    <string name="password">Contraseña</string>
+    <string name="registrarme">¡Registrarme!</string>
+    <string name="olvidastecontrasena">¿Olvidaste tu contraseña?</string>
+    <string name="ingresar">Ingresar</string>
+    <string name="nombre">Nombre *</string>
+    <string name="apellidos">Apellidos *</string>
+    <string name="selecciona">Selecciona tu marca favorita:</string>
+    <string name="pais">País *</string>
+    <string name="siguiente">Siguiente >></string>
+    <string name="nodocumento">Número de Documento</string>
+    <string name="paganterior"><u>« Página Anterior</u></string>
+    <string name="genero">Género</string>
+    <string name="fechanac">Fecha de Nacimiento</string>
+    <string name="numtelefono">Número de Teléfono *</string>
+    <string name="contrasena">Contraseña *</string>
+    <string name="confirmar">Confirmar Contraseña *</string>
+    <string name="politicadatos">Acepto la Política de Protección y Datos >></string>
+    <string name="terminos">Acepto los Términos y Condiciones >></string>
+
+
+    <string name="aviso">Aviso</string>
+    <string name="tupais">Por favor selecciona tu País..</string>
+    <string name="tunombre">Por favor scribe tu nombre..</string>
+    <string name="tuapellido">Por favor scribe tus apellidos..</string>
+    <string name="tudocumento">Por favor selecciona el tipo de documento..</string>
+    <string name="tudocnumer">Por favor escribe tu número de documento..</string>
+    <string name="tugenero">Por favor selecciona el género..</string>
+    <string name="tufecha">Por favor selecciona tu fecha de nacimiento..</string>
+    <string name="tuphone">Por favor escribe tu Número de telefono..</string>
+    <string name="tuemail">Por favor escribe tu Correo Electrónico..</string>
+    <string name="tuemailinvalido">Tu Correo Electrónico es invalido..</string>
+    <string name="tupass">Por favor escribe tu contraseña..</string>
+    <string name="tucpass">Por favor confirma tu contraseña..</string>
+    <string name="tuminpass">Por favor tu contraseña debe contener al menos 8 caractéres..</string>
+    <string name="passcoinciden">Tu contraseña no coincide..</string>
+    <string name="checkpolitica">Por favor acepta la politica de Protección de datos </string>
+    <string name="checkterminos">Por favor acepta los términos y condiciones</string>
+
+    <string name="invalidlogin">La contraseña es invalida o el usuario no existe!</string>
+
+
+    <string name="iniciasesion">Inicia Sesión</string>
+    <string name="olividopass">Olvidaste tu contraseña</string>
+    <string name="enviacorreo">Enviar correo</string>
+    <string name="registroexitoso">Registro de usuario exitoso</string>
+    <string name="registroinvalido">No fue posible registrar la usuario, verífique el usuario no haya sido dado de alta anteriormente.</string>
+
+
+    <string name="seenviocorreo">!Se ha enviado un correo, con las instrucciones para recuperar tu contraseña!</string>
+
+    <string name="nav_open">Open</string>
+    <string name="nav_close">Close</string>
+
+
+    <string name="my_information">Mi información</string>
+    <string name="account_name">Nombre de la persona</string>
+    <string name="account_lastname">Apellidos de la persona</string>
+    <string name="account_close">Cerrar sessión</string>
+    <string name="account_save">Guardar Cambios</string>
+
+    <string name="my_notificacions">Mis notificaciones</string>
+    <string name="welcome">Bienvenido</string>
+    <string name="my_points">Mis Puntos</string>
+
+
+
+
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+</resources>
