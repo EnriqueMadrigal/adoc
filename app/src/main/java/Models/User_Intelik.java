@@ -27,5 +27,27 @@ public class User_Intelik {
     public String puntos_redimidos_c;
     public String puntos_acumulados_c;
 
+public User_Intelik()
+{
+    this.id= "";
+    this.name= "";
+    this.date_entered= "";
+    this.date_modified= "";
+    this.modified_user_id= "";
+    this.modified_by_name= "";
+    this.description= "";
+    this.first_name= "";
+    this.last_name= "";
+    this.full_name= "";
+    this.phone_home= "";
+    this.phone_mobile= "";
+    this.phone_work= "";
+    this.email1= "";
+    this.nivel_anterior_c= "";
+    this.puntos_disponibles_c= "";
+    this.puntos_redimidos_c= "";
+    this.puntos_acumulados_c= "";
+}
+
 
 }

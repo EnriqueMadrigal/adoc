@@ -244,20 +244,28 @@ public class RegisterActivity extends AppCompatActivity {
                 public void onChanged(@Nullable User_Intelik contacto) {
                     // update ui.
                     _progressDialog.dismiss();
-                    String email1 = datos.email1.toLowerCase();
-                    String email2 = contacto.email1.toLowerCase();
 
-
-                    if (email1.equals(email2)) {
-                        userExists = true;
-                        //Toast.makeText(context, context.getResources().getText(R.string.registroexitoso),  Toast.LENGTH_SHORT).show();
-                        GotoMain();
-                    }
-                    else
-                    {
+            if (contacto == null) {
                         RegisterInSugar();
-                    }
+            }
 
+            else {
+                String email1 = datos.email1.toLowerCase();
+                String email2 = contacto.email1.toLowerCase();
+
+                if (email1.length() == 0 && email2.length() == 0) {
+                    RegisterInSugar();
+                    return;
+                }
+
+                if (email1.equals(email2)) {
+                    userExists = true;
+                    //Toast.makeText(context, context.getResources().getText(R.string.registroexitoso),  Toast.LENGTH_SHORT).show();
+                    GotoMain();
+                } else {
+                    RegisterInSugar();
+                }
+            }
 
                 }
             });
@@ -345,7 +353,7 @@ public class RegisterActivity extends AppCompatActivity {
 
         return mFunctions
                 .getHttpsCallable("saveContact")
-                .call(data)
+                .call(text)
                 .continueWith(new Continuation<HttpsCallableResult, Object>() {
                     @Override
                     public Object then(@NonNull Task<HttpsCallableResult> task) throws Exception {

@@ -106,6 +106,8 @@ public class ContactViewModel extends ViewModel {
                             try {
 
                                 ArrayList<Object> mapa = (ArrayList<Object>) result;
+                            //    if (mapa.size() == 0) return;
+
                                 Map<String, String> hashMap = (Map<String, String>) mapa.get(0);
 
                                 curUser.id = hashMap.get("id");
@@ -129,7 +131,7 @@ public class ContactViewModel extends ViewModel {
 
                             catch (Exception e)
                             {
-                                Contacto = null;
+                                Contacto.postValue(curUser);
                             }
 
 
@@ -153,7 +155,7 @@ public class ContactViewModel extends ViewModel {
 
         return mFunctions
                 .getHttpsCallable("getContact")
-                .call(data)
+                .call(text)
                 .continueWith(new Continuation<HttpsCallableResult, Object>() {
                     @Override
                     public Object then(@NonNull Task<HttpsCallableResult> task) throws Exception {
