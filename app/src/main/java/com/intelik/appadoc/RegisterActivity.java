@@ -30,6 +30,7 @@ import java.util.Locale;
 import java.util.Map;
 
 import Models.ContactViewModel;
+import Models.Email_buscar;
 import Models.Marca;
 import Models.MarcaViewModel;
 import Models.SugarContact;
@@ -295,7 +296,7 @@ public class RegisterActivity extends AppCompatActivity {
             String Birthday = year + "-" + month + "-" + day;
 
 
-            user.sync_key = "0";
+            user.sync_key = "null";
             user.first_name = datos.first_name;
             user.last_name = datos.last_name;
             user.phone_mobile = datos.phone_mobile;
@@ -309,7 +310,16 @@ public class RegisterActivity extends AppCompatActivity {
             user.primary_address_country = "";
             user.date_entered = (String) df.format(new Date());
 
-            String jsonString = new Gson().toJson(user);
+
+            String userData = new Gson().toJson(user);
+
+            //Email_buscar email_ = new Email_buscar();
+            //email_.data = new Gson().toJson(user);;
+
+            //String jsonString = new Gson().toJson(email_);
+
+            String jsonString = "{\"data\" :" + userData + "}";
+
 
 
             RegisterSugar(jsonString)
