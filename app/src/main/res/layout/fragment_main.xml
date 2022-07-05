@@ -6,57 +6,242 @@
     tools:context=".fragments.MainFragment">
 
     <!-- TODO: Update blank fragment layout -->
+    <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scrollbarSize="0dp">
+
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:paddingLeft="20dp"
-        android:paddingRight="20dp"
+        android:paddingLeft="0dp"
+        android:paddingRight="0dp"
         android:background="@color/white"
         android:weightSum="1">
 
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:orientation="vertical"
-        android:paddingLeft="20dp"
-        android:paddingRight="20dp"
-        android:background="@color/white"
-        android:layout_weight="0.15">
-
-
+        android:layout_height="48dp"
+        android:orientation="horizontal"
+        android:background="@color/AppAdocBlue"
+        android:gravity="center">
 
     <TextView
-        style="@style/Title2"
+        style="@style/Title4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:text="@string/welcome" />
+        android:text="@string/gana" />
+
+    <ImageView
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:src="@drawable/network_icon"
+        />
 
 
-        <TextView
-            android:id="@+id/fragment_mainTItle"
-            style="@style/Title3"
-            android:layout_marginTop="10dp"
-            android:layout_width="wrap_content"
+    </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="20dp"
+            android:background="@color/AppAdocYellow"/>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:orientation="horizontal"
+            android:background="@color/white"
+            android:gravity="start">
+
+            <TextView
+                android:id="@+id/fragment_mainTItle"
+                style="@style/Title2"
+                android:layout_marginLeft="20dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="@string/hola" />
+
+
+        </LinearLayout>
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="120dp"
+            android:orientation="horizontal"
+            android:background="@color/white">
+
+           <ImageView
+               android:layout_width="wrap_content"
+               android:layout_height="match_parent"
+               android:src="@drawable/meter"/>
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:src="@drawable/needle_icon"
+                android:layout_marginTop="80dp"/>
+
+
+
+
+
+        </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="10dp"/>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:background="@color/white"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:weightSum="1">
+
+
+        <RelativeLayout
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:text="" />
+            android:layout_weight="0.5"
+            >
 
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:gravity="center">
+
+                <TextView
+                    style="@style/Title3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="@string/nivel" />
+
+
+                <TextView
+                    style="@style/Title2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="@string/plata" />
+
+
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:background="@drawable/blocknivel">
+            </View>
+
+
+        </RelativeLayout>
+
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.5">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:gravity="center">
+
+                <TextView
+                    style="@style/Title3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="@string/puntosdisponibles" />
+
+
+                <TextView
+                    style="@style/Title2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="100pts" />
+
+
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:background="@drawable/blockpuntos">
+            </View>
+
+
+        </RelativeLayout>
+
+
+
+    </LinearLayout>
+
+
+
+
+        <View
+            android:layout_marginTop="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:background="@color/AppAdocGray"/>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="@color/white"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="10dp"
+        android:gravity="left"
+        android:weightSum="1">
 
         <TextView
             style="@style/Title2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
+            android:layout_gravity="start"
+            android:text="@string/respondeygana" />
+
+
+        <TextView
+            style="@style/Title3"
             android:layout_marginTop="10dp"
-            android:text="@string/my_points" />
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start"
+            android:text="@string/queremos" />
+
+
+
+
+
     </LinearLayout>
 
 
-    <LinearLayout
+
+
+
+        <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:orientation="vertical"
@@ -66,21 +251,21 @@
         android:layout_weight="0.85">
 
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recycler_main"
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recycler_main"
+                android:layout_width="match_parent"
+                android:layout_height="420dp"
+                 />
+
+
+        </LinearLayout>
+
+        <View
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginBottom="20dp"
-            />
+            android:layout_height="120dp"/>
 
 
 
     </LinearLayout>
-
-
-
-
-
-    </LinearLayout>
-
+    </ScrollView>
 </FrameLayout>

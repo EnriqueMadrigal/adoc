@@ -115,7 +115,7 @@
 
                 <Spinner
                     style="@style/InputGeneral"
-                    android:id="@+id/spinner_documentos"
+                    android:id="@+id/spinner_documentos2"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_marginLeft="0dp"

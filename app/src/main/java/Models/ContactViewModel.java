@@ -1,5 +1,6 @@
 package Models;
 
+import android.content.Context;
 import android.os.AsyncTask;
 import android.widget.Toast;
 
@@ -25,6 +26,7 @@ import com.google.firebase.functions.HttpsCallableResult;
 import com.google.gson.Gson;
 import com.intelik.appadoc.Common;
 import com.intelik.appadoc.R;
+import com.intelik.appadoc.utils.HttpClient;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -51,7 +53,9 @@ public class ContactViewModel extends ViewModel {
     public LiveData<User_Intelik> getContacto(String email) {
         if (Contacto == null) {
             Contacto = new MutableLiveData<User_Intelik>();
-            loadContacto(email);
+            //loadContacto(email);
+            //GetContacto(email);
+           new ContactoLoad(email).execute();
         }
         return Contacto;
     }
@@ -66,16 +70,33 @@ public class ContactViewModel extends ViewModel {
         BusquedaEmail busqueda = new BusquedaEmail();
         List<Email_buscar> buscar = new ArrayList<Email_buscar>();
 
-        Email_buscar email_ = new Email_buscar();
-        email_.data = email;
-        buscar.add(email_);
+        //Email_buscar email_ = new Email_buscar();
+        //email_.data = email;
+        //buscar.add(email_);
 
-        busqueda.filter = buscar;
+        //busqueda.filter = buscar;
 
-        String jsonString = new Gson().toJson(email_);
+        //email = "emadriga@gmail.com";
+
+        //String jsonString = new Gson().toJson(email_);
         //String jsonString = "emadriga@gmail.com";
 
+        //String jsonString = "{\"data\" : \"" + email + "\"}";
 
+        JSONObject jsonParam = new JSONObject();
+
+        String jsonString = "";
+
+        try {
+            jsonParam.put("data", email);
+
+            jsonString = jsonParam.toString();
+        }
+
+        catch (Exception e)
+        {
+            return;
+        }
 
 
         addMessage(jsonString)
@@ -150,19 +171,20 @@ public class ContactViewModel extends ViewModel {
     private Task<Object> addMessage(String text) {
         // Create the arguments to the callable function.
         Map<String, Object> data = new HashMap<>();
-        data.put("text", text);
-        data.put("push", true);
+        data.put("data", text);
+        //data.put("push", true);
 
         return mFunctions
                 .getHttpsCallable("getContact")
-                .call(text)
+                .call(data)
                 .continueWith(new Continuation<HttpsCallableResult, Object>() {
                     @Override
                     public Object then(@NonNull Task<HttpsCallableResult> task) throws Exception {
                         // This continuation runs on either success or failure, but if the task
                         // has failed then getResult() will throw an Exception which will be
                         // propagated down.
-                        Object result = (Object) task.getResult().getData();
+                        //Object result = (Object) task.getResult().getData();
+                        Object result = (Object) task.getResult();
                         return result;
                     }
                 });
@@ -170,5 +192,180 @@ public class ContactViewModel extends ViewModel {
 
 
 
+    private void GetContacto(String email)
+    {
+
+        new ContactoLoad(email).execute();
+
+    }
+
+
+    private void handleSentContacto(HttpClient.HttpResponse response)
+    {
+        if( response.getCode() == 200 )
+        {
+            try
+            {
+                JSONObject json = new JSONObject( response.getResponse() );
+
+                JSONArray Jarray = json.getJSONArray("result");
+
+                JSONObject result = Jarray.getJSONObject(0);
+
+                User_Intelik curUser = new User_Intelik();
+
+
+                curUser.id =  result.getString("id");
+                curUser.name = result.getString("name");
+                curUser.email1 = result.getString("email1");
+
+                curUser.description = result.getString("description");
+                curUser.first_name = result.getString("first_name");
+                curUser.last_name = result.getString("last_name");
+                curUser.phone_mobile = result.getString("phone_mobile");
+
+
+                curUser.nivel_anterior_c = result.getString("nivel_anterior_c");
+                curUser.puntos_disponibles_c = result.getString("puntos_disponibles_c");
+                curUser.puntos_redimidos_c = result.getString("puntos_redimidos_c");
+                curUser.puntos_acumulados_c = result.getString("puntos_acumulados_c");
+
+                Contacto.postValue(curUser);
+
+
+                ///////////
+
+
+
+
+
+
+
+
+            }
+            catch( Exception e )
+            {
+                android.util.Log.e( "JSONParser", "Cant parse: " + e.getMessage() );
+                //common.showWarningDialog("! No valido ¡", "No se pudo actualizar", myContext);
+            }
+        }
+        else {
+            //Common.alert( this, "No se ha podido registrar, por favor intenta nuevamente más tarde." );
+        }
+
+
+
+    }
+
+    private class ContactoLoad extends  AsyncTask<Void, Void, HttpClient.HttpResponse> {
+
+        //Context _context;
+        String _email;
+
+        public ContactoLoad(String emailBusqueda)
+        {
+            _email = emailBusqueda;
+            //_context = context;
+        }
+
+        @Override
+        protected void onPreExecute()
+        {
+            super.onPreExecute();
+        }
+
+        @Override
+        protected HttpClient.HttpResponse doInBackground( Void... arg0 )
+        {
+
+            JSONObject jsonParam = new JSONObject();
+
+            try {
+                jsonParam.put("data", _email);
+
+            }
+
+
+            catch (Exception e)
+            {
+                return null;
+            }
+
+
+            HttpClient.HttpResponse response = HttpClient.postJson( Common.GetContact_link, jsonParam );
+            android.util.Log.d( "TEST", String.format( "HTTP CODE: %d RESPONSE: %s", response.getCode(), response.getResponse() ) );
+
+            return response;
+        }
+
+
+        @Override
+        protected void onPostExecute( HttpClient.HttpResponse result )
+        {
+            super.onPostExecute( result );
+            //handleSentContacto( result );
+/*
+            User_Intelik curUser = new User_Intelik();
+            Contacto.postValue(curUser);
+
+
+ */
+            User_Intelik curUser = new User_Intelik();
+
+            if( result.getCode() == 200 )
+            {
+                try
+                {
+                    JSONObject json = new JSONObject( result.getResponse() );
+
+                    JSONArray Jarray = json.getJSONArray("result");
+
+                    JSONObject resultado = Jarray.getJSONObject(0);
+
+
+
+
+                    curUser.id =  resultado.getString("id");
+                    curUser.name = resultado.getString("name");
+                    curUser.email1 = resultado.getString("email1");
+
+                    //curUser.description = resultado.getString("description");
+                    curUser.first_name = resultado.getString("first_name");
+                    curUser.last_name = resultado.getString("last_name");
+                    //curUser.phone_mobile = resultado.getString("phone_mobile");
+
+
+                    curUser.nivel_anterior_c = resultado.getString("nivel_anterior_c");
+                    curUser.puntos_disponibles_c = resultado.getString("puntos_disponibles_c");
+                    curUser.puntos_redimidos_c = resultado.getString("puntos_redimidos_c");
+                    curUser.puntos_acumulados_c = resultado.getString("puntos_acumulados_c");
+
+                    Contacto.postValue(curUser);
+
+
+                    ///////////
+
+
+
+
+
+
+
+
+                }
+                catch( Exception e )
+                {
+                    android.util.Log.e( "JSONParser", "Cant parse: " + e.getMessage() );
+                    //common.showWarningDialog("! No valido ¡", "No se pudo actualizar", myContext);
+                    Contacto.postValue(curUser);
+                }
+            }
+
+
+
+        }
+
+
+    }
 
 }

@@ -8,10 +8,14 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.text.method.HideReturnsTransformationMethod;
+import android.text.method.PasswordTransformationMethod;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -25,12 +29,17 @@ public class LoginActivity extends AppCompatActivity {
 
     androidx.appcompat.widget.AppCompatButton buttonRegistrar;
     androidx.appcompat.widget.AppCompatButton buttonIngresar;
-    androidx.appcompat.widget.AppCompatButton buttonOlvidar;
+    TextView buttonOlvidar;
     private EditText _email;
     private EditText _password;
+    private ImageButton _viewPassword;
+
+    private boolean isViewPass = false;
+
 
     Context context;
 
+    Common datos;
 
     private FirebaseAuth mAuth;
 
@@ -46,15 +55,55 @@ public class LoginActivity extends AppCompatActivity {
 
         context = this;
 
+        datos = Common.getInstance();
 
 
         buttonRegistrar = (androidx.appcompat.widget.AppCompatButton) findViewById(R.id.RegistrarButton_aviso);
         buttonIngresar = (androidx.appcompat.widget.AppCompatButton) findViewById(R.id.IngresarButton);
-        buttonOlvidar = (androidx.appcompat.widget.AppCompatButton) findViewById(R.id.OlvidoButton);
+        buttonOlvidar = (TextView) findViewById(R.id.OlvidoButton);
+        _viewPassword = (ImageButton) findViewById(R.id.button_loginviewpass);
 
 
         _email = (EditText) findViewById(R.id.input_email_ingresar);
         _password = (EditText) findViewById(R.id.input_password_ingresar);
+
+        _email.setOnFocusChangeListener(new View.OnFocusChangeListener()
+        {
+            @Override
+            public void onFocusChange(View arg0, boolean gotfocus)
+            {
+                // TODO Auto-generated method stub
+                if(gotfocus)
+                {
+                    _email.setCompoundDrawables(null, null, null, null);
+                }
+                else if(!gotfocus)
+                {
+                    if(_email.getText().length()==0)
+                        _email.setCompoundDrawablesWithIntrinsicBounds(R.drawable.envelope_icon, 0, 0, 0);
+                }
+            }
+        });
+
+        _password.setOnFocusChangeListener(new View.OnFocusChangeListener()
+        {
+            @Override
+            public void onFocusChange(View arg0, boolean gotfocus)
+            {
+                // TODO Auto-generated method stub
+                if(gotfocus)
+                {
+                    _password.setCompoundDrawables(null, null, null, null);
+                }
+                else if(!gotfocus)
+                {
+                    if(_password.getText().length()==0)
+                        _password.setCompoundDrawablesWithIntrinsicBounds(R.drawable.lock_icon, 0, 0, 0);
+                }
+            }
+        });
+
+
 
 
         buttonRegistrar.setOnClickListener(new View.OnClickListener() {
@@ -89,6 +138,27 @@ public class LoginActivity extends AppCompatActivity {
                 intent.setClass(context, ForgetPassword.class);
                 //finish();
                 startActivity(intent);
+
+
+            }
+        });
+
+
+        _viewPassword.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                isViewPass = !isViewPass;
+
+                if (!isViewPass){
+                    _viewPassword.setImageResource(R.drawable.icon_eye_close);
+                    _password.setTransformationMethod(PasswordTransformationMethod.getInstance());
+                }
+                else
+                {
+                    _viewPassword.setImageResource(R.drawable.icon_eye_open);
+                    _password.setTransformationMethod(HideReturnsTransformationMethod.getInstance());
+                }
 
 
             }
@@ -165,6 +235,8 @@ public class LoginActivity extends AppCompatActivity {
 
                                     // hide the progress bar
                                     _progressDialog.dismiss();
+
+                                     datos.email1 = email;
 
                                     // if sign-in is successful
                                     // intent to home activity

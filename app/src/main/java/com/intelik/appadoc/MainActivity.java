@@ -73,6 +73,8 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
 
     private User_Intelik curUsuario;
 
+    Common datos;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -84,7 +86,7 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         mAuth = FirebaseAuth.getInstance();
 
 
-        Common datos = Common.getInstance();
+      datos = Common.getInstance();
 
 
         // drawer layout instance to toggle the menu icon to open
@@ -92,14 +94,14 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         //drawerLayout = findViewById(R.id.my_drawer_layout);
         //actionBarDrawerToggle = new ActionBarDrawerToggle(this, drawerLayout, R.string.nav_open, R.string.nav_close);
 
-        toolbar = (androidx.appcompat.widget.Toolbar) findViewById(R.id.toolbarMain);
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayShowTitleEnabled(false);
+        //toolbar = (androidx.appcompat.widget.Toolbar) findViewById(R.id.toolbarMain);
+        //setSupportActionBar(toolbar);
+        //getSupportActionBar().setDisplayShowTitleEnabled(false);
 
 
         bottomNavigationView = findViewById(R.id.bottomNavigationView);
 
-        ver_notificaciones = findViewById(R.id.button_notifications);
+        //ver_notificaciones = findViewById(R.id.button_notifications);
 
         bottomNavigationView.setOnNavigationItemSelectedListener(this);
         bottomNavigationView.setSelectedItemId(R.id.nav_home);
@@ -111,26 +113,33 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
 
         // Obtener el contacto
 
+        String user_email = mAuth.getCurrentUser().getEmail();
 
-        contactos.getContacto(datos.email1).observe(this, new Observer<User_Intelik>() {
+        contactos.getContacto(user_email).observe(this, new Observer<User_Intelik>() {
             @Override
             public void onChanged(@Nullable User_Intelik contacto) {
                 // update ui.
                 Log.d("RegisterActiviti", "Marcas recibidas");
+
+                datos.first_name = contacto.first_name;
+                datos.last_name = contacto.last_name;
+                datos.email1 = contacto.email1;
+
+                Common.saveUserValue(context);
 
             }
         });
 
 
 
-
+/*
         ver_notificaciones.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 GotoNotificaciones();
             }
         });
-
+*/
 
 
         // pass the Open and Close toggle for the drawer layout listener

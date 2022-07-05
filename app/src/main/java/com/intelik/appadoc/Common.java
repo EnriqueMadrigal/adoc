@@ -53,7 +53,10 @@ public class Common {
     public String password = "";
 
 
-    
+    public static final String GetContact_link = "https://us-central1-puntos-adoc.cloudfunctions.net/getContact";
+    public static final String Register_link = "https://us-central1-puntos-adoc.cloudfunctions.net/saveContact";
+
+
 
 
     //shared values
@@ -135,6 +138,23 @@ public class Common {
 
     }
 
+    public static ArrayList<Custom> getDocumentosTodos()
+    {
+        ArrayList<Custom> documentos = new ArrayList<>();
+
+        documentos.add(new Custom(0, "Tipo de Documento *"));
+
+        documentos.add(new Custom(1, "PASAPORTE"));
+        documentos.add(new Custom(2, "DUI"));
+        documentos.add(new Custom(3, "DPI"));
+        documentos.add(new Custom(4, "DNI"));
+        documentos.add(new Custom(5, "CED"));
+
+        return documentos;
+
+    }
+
+
 
     public static ArrayList<Custom> getGeneros() {
         ArrayList<Custom> generos = new ArrayList<>();
@@ -185,6 +205,9 @@ public class Common {
 
         return check;
     }
+
+
+
 
         public static void saveUserValue(Context context)
         {

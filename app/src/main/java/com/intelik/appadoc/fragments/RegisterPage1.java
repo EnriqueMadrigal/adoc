@@ -59,18 +59,20 @@ public class RegisterPage1 extends Fragment implements  View.OnClickListener{
     private Context MyContext;
 
     private Spinner Sp_countries;
+    private Spinner sp_documentos;
+    private ArrayList<Custom> _documentos;
+    private int _curDocumento = -1;
+
+    private EditText _numDocumento;
 
     private androidx.appcompat.widget.AppCompatButton Siguiente;
-    private ImageButton check1;
-    private ImageButton check2;
-    private ImageButton check3;
-    private ImageButton check4;
-    private ImageButton check5;
+
 
     private CountryViewModel countries;
 
     private ArrayList<Custom> _paises;
     private CustomAdapter _customAdapter;
+    private CustomAdapter _customAdapter1;
 
     private String TAG = "RegisterPage1";
 
@@ -81,9 +83,23 @@ public class RegisterPage1 extends Fragment implements  View.OnClickListener{
     private boolean checked5;
 
     private Custom curPais;
+    private Custom curDocumento;
 
     private EditText _name;
     private EditText _lastname;
+
+    private EditText _email;
+    private EditText _password;
+    private EditText _cpassword;
+
+
+
+    private ImageButton check_politica;
+    private ImageButton check_terminos;
+
+    private boolean checked_politica;
+    private boolean checked_terminos;
+
 
     private NavigationInterface navigationInterface;
 
@@ -121,13 +137,24 @@ public class RegisterPage1 extends Fragment implements  View.OnClickListener{
         Sp_countries = (Spinner) _view.findViewById(R.id.spinner_countries);
         Siguiente = (androidx.appcompat.widget.AppCompatButton) _view.findViewById(R.id.Siguiente_Pag2);
 
-        check1 = (ImageButton) _view.findViewById(R.id.check1);
-        check2 = (ImageButton) _view.findViewById(R.id.check2);
-        check3 = (ImageButton) _view.findViewById(R.id.check3);
-        check4 = (ImageButton) _view.findViewById(R.id.check4);
-        check5 = (ImageButton) _view.findViewById(R.id.check5);
+        sp_documentos = (Spinner) _view.findViewById(R.id.spinner_documentos);
+        _numDocumento = (EditText) _view.findViewById(R.id.input_numdocumento);
+
+
         _name = (EditText) _view.findViewById(R.id.input_name);
         _lastname = (EditText) _view.findViewById(R.id.input_lastname);
+        _email = (EditText) _view.findViewById(R.id.input_email);
+        _password = (EditText) _view.findViewById(R.id.input_password);
+        _cpassword = (EditText) _view.findViewById(R.id.input_cpassword);
+        check_terminos = (ImageButton) _view.findViewById(R.id.check_terminos);
+        check_politica = (ImageButton) _view.findViewById(R.id.check_politica);
+
+        check_politica.setOnClickListener(this);
+        check_terminos.setOnClickListener(this);
+
+
+        _documentos = new ArrayList<>();
+        _documentos = Common.getDocumentosTodos();
 
 
 
@@ -142,9 +169,34 @@ public class RegisterPage1 extends Fragment implements  View.OnClickListener{
         _lastname.setText(datos.last_name);
 
 
+        _customAdapter1 = new CustomAdapter(MyContext, R.layout.spinner_item, _documentos);
+        _customAdapter1.setDropDownViewResource(R.layout.spinner_item);
+        sp_documentos.setAdapter(_customAdapter1);
+
         _customAdapter = new CustomAdapter(MyContext, R.layout.spinner_item, _paises);
         _customAdapter.setDropDownViewResource(R.layout.spinner_item);
         Sp_countries.setAdapter(_customAdapter);
+
+
+
+
+        /*
+        Custom noselect = new Custom();
+        noselect.set_desc("Selecciona un país.");
+        noselect.set_id(0);
+
+        Custom noselect2 = new Custom();
+        noselect2.set_desc("");
+        noselect2.set_id(1);
+
+
+        _documentos.add(noselect);
+        _documentos.add(noselect2);
+
+        _customAdapter1.notifyDataSetChanged();
+        */
+
+
 
         Sp_countries.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
 
@@ -161,10 +213,37 @@ public class RegisterPage1 extends Fragment implements  View.OnClickListener{
         Log.d(TAG,String.valueOf(_curPais));
 
         _curPos = position;
+
+        //_documentos.clear();
+        //_documentos = Common.getDocumentos(_curPais);
+        //_customAdapter1.notifyDataSetChanged();
+
     }
     @Override
     public void onNothingSelected(AdapterView<?> adapter) {  }
 });
+
+        sp_documentos.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view,
+                                       int position, long id) {
+                // Here you get the current item (a User object) that is selected by its position
+                ((TextView) adapterView.getChildAt(0)).setTextColor(getResources().getColor(R.color.AppAdocGray));
+                Custom curDoc = _customAdapter1.getItem(position);
+                // Here you can do the action you want to...
+                _curDocumento = curDoc.get_id();
+                curDocumento = curDoc;
+
+                Log.d(TAG,String.valueOf(_curDocumento));
+
+                //_curPos = position;
+            }
+            @Override
+            public void onNothingSelected(AdapterView<?> adapter) {  }
+        });
+
+
 
 
         //Obtener los paises
@@ -194,11 +273,6 @@ public class RegisterPage1 extends Fragment implements  View.OnClickListener{
             public void onClick(View v) {
                 Log.d(TAG,"Siguiente");
 
-                if (_curPais <1)
-                {
-                    Common.showWarningDialog(MyContext.getResources().getString(R.string.aviso),MyContext.getResources().getString(R.string.tupais), MyContext);
-                    return;
-                }
 
                  String name = _name.getText().toString();
                  String lastname = _lastname.getText().toString();
@@ -216,11 +290,98 @@ public class RegisterPage1 extends Fragment implements  View.OnClickListener{
                 }
 
 
+                if (_curPais <1)
+                {
+                    Common.showWarningDialog(MyContext.getResources().getString(R.string.aviso),MyContext.getResources().getString(R.string.tupais), MyContext);
+                    return;
+                }
+
+
+
+                if (_curDocumento <1)
+                {
+                    Common.showWarningDialog(MyContext.getResources().getString(R.string.aviso),MyContext.getResources().getString(R.string.tudocumento), MyContext);
+                    return;
+                }
+
+                String numDocumento = _numDocumento.getText().toString();
+
+
+                if(numDocumento.length() < 8)
+                {
+                    Common.showWarningDialog(MyContext.getResources().getString(R.string.aviso),MyContext.getResources().getString(R.string.tudocnumer), MyContext);
+                    return;
+                }
+
+
+                String email = _email.getText().toString();
+                String password = _password.getText().toString();
+                String cpassword = _cpassword.getText().toString();
+
+
+                if(email.length() == 0)
+                {
+                    Common.showWarningDialog(MyContext.getResources().getString(R.string.aviso),MyContext.getResources().getString(R.string.tuemail), MyContext);
+                    return;
+                }
+
+
+                if (!Common.isValidMail(email))
+                {
+                    Common.showWarningDialog(MyContext.getResources().getString(R.string.aviso),MyContext.getResources().getString(R.string.tuemailinvalido), MyContext);
+                    return;
+                }
+
+                if(password.length() == 0)
+                {
+                    Common.showWarningDialog(MyContext.getResources().getString(R.string.aviso),MyContext.getResources().getString(R.string.tupass), MyContext);
+                    return;
+                }
+
+                if(password.length() < 8)
+                {
+                    Common.showWarningDialog(MyContext.getResources().getString(R.string.aviso),MyContext.getResources().getString(R.string.tuminpass), MyContext);
+                    return;
+                }
+
+                if (!password.equals(cpassword))
+                {
+                    Common.showWarningDialog(MyContext.getResources().getString(R.string.aviso),MyContext.getResources().getString(R.string.passcoinciden), MyContext);
+                    return;
+                }
+
+
+                if (!checked_politica)
+                {
+                    Common.showWarningDialog(MyContext.getResources().getString(R.string.aviso),MyContext.getResources().getString(R.string.checkpolitica), MyContext);
+                    return;
+                }
+
+
+                if (!checked_terminos)
+                {
+                    Common.showWarningDialog(MyContext.getResources().getString(R.string.aviso),MyContext.getResources().getString(R.string.checkterminos), MyContext);
+                    return;
+                }
+
+
+
+
+
+
+
                 Common datos = Common.getInstance();
                 datos.first_name = name;
                 datos.last_name = lastname;
                 datos.country_id = _curPais;
                 datos.country = curPais.get_name();
+                datos.tipo_documento_identidad_c = curDocumento.get_name();
+                datos.doc_identidad_c = numDocumento;
+                datos.email1 = email;
+                datos.password = password;
+
+
+
 
                 navigationInterface.closeFragment();
 
@@ -241,11 +402,8 @@ public class RegisterPage1 extends Fragment implements  View.OnClickListener{
 
         });
 
-check1.setOnClickListener(this);
-check2.setOnClickListener(this);
-check3.setOnClickListener(this);
-check4.setOnClickListener(this);
-check5.setOnClickListener(this);
+//check1.setOnClickListener(this);
+
 
 /*
         check1.setOnClickListener(new View.OnClickListener() {
@@ -286,71 +444,33 @@ check5.setOnClickListener(this);
 
         switch (v.getId()) {
 
-            case R.id.check1:
+            case R.id.check_politica:
                 // code for button when user clicks buttonOne.
-                checked1 = !checked1;
-                if (checked1){
-                    check1.setImageResource(R.drawable.check_on);
+                checked_politica = !checked_politica;
+                if (checked_politica){
+                    check_politica.setImageResource(R.drawable.check_on);
                 }
 
                 else {
-                    check1.setImageResource(R.drawable.check_off);
+                    check_politica.setImageResource(R.drawable.check_off);
                 }
 
 
                 break;
 
-            case R.id.check2:
+            case R.id.check_terminos:
                 // do your code
-                checked2 = !checked2;
-                if (checked2){
-                    check2.setImageResource(R.drawable.check_on);
+                checked_terminos = !checked_terminos;
+                if (checked_terminos){
+                    check_terminos.setImageResource(R.drawable.check_on);
                 }
 
                 else {
-                    check2.setImageResource(R.drawable.check_off);
+                    check_terminos.setImageResource(R.drawable.check_off);
                 }
 
                 break;
 
-            case R.id.check3:
-                // do your code
-                checked3 = !checked3;
-                if (checked3){
-                    check3.setImageResource(R.drawable.check_on);
-                }
-
-                else {
-                    check3.setImageResource(R.drawable.check_off);
-                }
-
-                break;
-
-            case R.id.check4:
-                // do your code
-                checked4 = !checked4;
-                if (checked4){
-                    check4.setImageResource(R.drawable.check_on);
-                }
-
-                else {
-                    check4.setImageResource(R.drawable.check_off);
-                }
-
-                break;
-
-            case R.id.check5:
-                // do your code
-                checked5 = !checked5;
-                if (checked5){
-                    check5.setImageResource(R.drawable.check_on);
-                }
-
-                else {
-                    check5.setImageResource(R.drawable.check_off);
-                }
-
-                break;
 
             default:
                 break;

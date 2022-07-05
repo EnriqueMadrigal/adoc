@@ -21,6 +21,16 @@ public class Custom {
     private String _name;
     private String _desc;
 
+    private String _link;
+    private int _value1;
+
+    public String getLink() {return _link;}
+    public int getValue1() {return -_value1;}
+
+    public void set_link(String link){this._link = link;}
+    public void set_value1(int value){this._value1 = value;}
+
+
     public Integer get_id() {
         return _id;
     }
@@ -43,6 +53,17 @@ public class Custom {
         _desc = "";
         _id = _curid;
     }
+
+
+    public Custom(int curid, String desc, String link, int value)
+    {
+        _desc = desc;
+        _id = curid;
+        _link = link;
+        _value1 = value;
+    }
+
+
 
 
 }

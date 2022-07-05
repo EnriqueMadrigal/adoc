@@ -23,7 +23,7 @@ public class CountryViewModel extends ViewModel {
 
     private void loadCountries() {
         // Do an asynchronous operation to fetch users.
-        Country country0 = new Country("País" ,0);
+        Country country0 = new Country("País *" ,0);
         Country country1 = new Country("Costa Rica" ,1);
         Country country2 = new Country("El Salvador" ,2);
         Country country3 = new Country("Honduras" ,3);

@@ -56,7 +56,7 @@
             style="@style/Title1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/iniciasesion"
+            android:text="@string/welcome"
             />
 
 
@@ -87,7 +87,8 @@
                 android:layout_height="wrap_content"
                 android:hint="@string/email"
                 android:background="@drawable/roundtext"
-                android:inputType="textEmailAddress"/>
+                android:inputType="textEmailAddress"
+                android:drawableLeft="@drawable/envelope_icon"/>
 
 
             <View
@@ -98,6 +99,53 @@
 
 
         </LinearLayout>
+
+
+
+
+
+
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:gravity="center"
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp"
+            android:orientation="vertical">
+
+
+            <EditText
+                android:id="@+id/input_password_ingresar"
+                style="@style/InputGeneral"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/roundtext"
+                android:drawableLeft="@drawable/lock_icon"
+                android:hint="@string/password"
+                android:inputType="textPassword" />
+
+
+            <ImageButton
+                android:id="@+id/button_loginviewpass"
+                android:layout_width="28dp"
+                android:layout_height="28dp"
+                android:layout_alignParentRight="true"
+                android:layout_marginTop="12dp"
+                android:layout_marginRight="10dp"
+                android:background="@color/white"
+                android:foregroundGravity="right"
+                android:src="@drawable/icon_eye_close" />
+
+
+        </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="20dp"
+            />
 
 
         <LinearLayout
@@ -109,14 +157,17 @@
             android:paddingRight="20dp"
             android:orientation="vertical">
 
-            <EditText
-                android:id="@+id/input_password_ingresar"
-                style="@style/InputGeneral"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:hint="@string/password"
-                android:inputType="textPassword"
-                android:background="@drawable/roundtext" />
+
+            <TextView
+                android:id="@+id/OlvidoButton"
+                style="@style/Title2"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:clickable="true"
+                android:text="@string/olvidastecontrasena"
+                />
+
 
 
             <View
@@ -126,7 +177,12 @@
 
 
 
+
+
         </LinearLayout>
+
+
+
 
          <LinearLayout
             android:layout_width="match_parent"
@@ -138,13 +194,47 @@
             android:orientation="vertical">
 
     <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/IngresarButton"
+    android:id="@+id/IngresarButton"
     style="@style/roounded_button"
-    android:layout_width="match_parent"
+    android:layout_width="@dimen/rounded_button"
     android:layout_height="match_parent"
-    android:text="@string/ingresar"
+    android:text="@string/iniciasesion"
     />
 
+
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="20dp"
+                />
+
+             <View
+                 android:layout_width="match_parent"
+                 android:background="@color/AppAdocGray"
+                 android:layout_height="2dp"
+                 />
+             <View
+                 android:layout_width="match_parent"
+                 android:layout_height="20dp"
+                 />
+
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <TextView
+                style="@style/Title2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/siaun"
+                />
 
 
             <View
@@ -167,40 +257,11 @@
             android:orientation="vertical">
 
             <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/OlvidoButton"
-                style="@style/bluebutton"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:text="@string/olvidastecontrasena"
-                />
-
-
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="20dp"
-                />
-
-
-
-        </LinearLayout>
-
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/white"
-            android:gravity="center"
-            android:paddingLeft="20dp"
-            android:paddingRight="20dp"
-            android:orientation="vertical">
-
-            <androidx.appcompat.widget.AppCompatButton
-                style="@style/roounded_button"
+                style="@style/roounded_button_clear"
                 android:id="@+id/RegistrarButton_aviso"
-                android:layout_width="match_parent"
+                android:layout_width="@dimen/rounded_button"
                 android:layout_height="match_parent"
-                android:text="@string/registrarme"
+                android:text="@string/registrate"
                 />
 
 

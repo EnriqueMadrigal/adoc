@@ -1,5 +1,6 @@
 package com.intelik.appadoc.fragments;
 
+import android.app.AlertDialog;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -16,20 +17,28 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
+import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.intelik.appadoc.Common;
 import com.intelik.appadoc.R;
+import com.intelik.appadoc.adapters.MainQuestionsAdapter;
 import com.intelik.appadoc.adapters.MirPuntosAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import Models.Country;
-import Models.CountryViewModel;
+import Models.ContactViewModel;
 import Models.Custom;
-import Models.IViewHolderClick;
+import com.intelik.appadoc.interfaces.IViewHolderClick;
+
+import Models.MisPreguntasViewModel;
 import Models.MisPuntosViewModel;
+import Models.User_Intelik;
+import com.google.firebase.auth.FirebaseAuth;
+
 
 /**
  * A simple {@link Fragment} subclass.
@@ -53,11 +62,19 @@ public class MainFragment extends Fragment {
     private RecyclerView _recyclerview;
     private LinearLayoutManager _linearLayoutManager;
 
-    private MirPuntosAdapter _adapter;
+    //private MirPuntosAdapter _adapter;
+    private MainQuestionsAdapter _adapter;
 
     private ArrayList<Custom> _mispuntos;
 
+    private ArrayList<Custom> _mispreguntas;
+
     private MisPuntosViewModel puntos;
+    private MisPreguntasViewModel preguntas;
+    private String TAG = "MainFragment";
+
+    private ContactViewModel contactos;
+    private FirebaseAuth mAuth;
 
 
     public MainFragment() {
@@ -98,6 +115,7 @@ public class MainFragment extends Fragment {
         View _view;
         _view = inflater.inflate( R.layout.fragment_main, container, false );
 
+        mAuth = FirebaseAuth.getInstance();
 
         mainTitle = (TextView) _view.findViewById(R.id.fragment_mainTItle);
 
@@ -105,15 +123,112 @@ public class MainFragment extends Fragment {
 
 
         puntos = new ViewModelProvider(this).get(MisPuntosViewModel.class);
+        preguntas = new ViewModelProvider(this).get(MisPreguntasViewModel.class);
 
 
         _mispuntos = new ArrayList<>();
+        _mispreguntas = new ArrayList<>();
 
+        /*
         _adapter = new MirPuntosAdapter(getActivity(), _mispuntos, new IViewHolderClick() {
             @Override
             public void onClick(int position) {
             }
         });
+        */
+
+
+        _adapter = new MainQuestionsAdapter(getActivity(), _mispreguntas, new IViewHolderClick() {
+            @Override
+            public void onClick(int position) {
+                Log.d(TAG, "CLick");
+
+                //Mostrar el dialogo
+
+                AlertDialog.Builder builder = new AlertDialog.Builder(MyContext);
+                builder.setTitle("Envia tu respuesta");
+
+                View viewInflated = LayoutInflater.from(getContext()).inflate(R.layout.dialog_responder, (ViewGroup) getView(), false);
+// Set up the input
+                ImageView  mainImage = (ImageView) viewInflated.findViewById(R.id.dialog_mainimage);
+                TextView mainText = (TextView) viewInflated.findViewById(R.id.dialog_mainquestion);
+                TextView mainPts = (TextView) viewInflated.findViewById(R.id.dialog_points);
+                EditText curResp = (EditText) viewInflated.findViewById(R.id.dialog_inputresp);
+
+                ImageButton closeDialog = (ImageButton) viewInflated.findViewById(R.id.dialog_buttonclose);
+                androidx.appcompat.widget.AppCompatButton sendResp = (androidx.appcompat.widget.AppCompatButton) viewInflated.findViewById(R.id.dialog_responder);
+
+                final AlertDialog dialog = builder.create();
+
+
+                builder.setView(viewInflated);
+                curResp.setText("");
+
+
+                Custom currentCustom = new Custom();
+
+                for(Custom cust : _mispreguntas) {
+                    if(cust.get_id().equals(position)) {
+                        currentCustom = cust;
+                    }
+                }
+
+
+                if (!currentCustom.getLink().equals(""))
+                {
+                    String curLink = currentCustom.getLink();
+                    mainPts.setText(String.valueOf(currentCustom.getValue1()));
+
+                    switch (curLink) {
+                        case "example1":
+                            mainImage.setImageResource(R.drawable.example1);
+                            mainText.setText(MyContext.getResources().getString(R.string.question1));
+                            break;
+
+                        case "example2":
+                            mainImage.setImageResource(R.drawable.example2);
+                            mainText.setText(MyContext.getResources().getString(R.string.question2));
+                            break;
+
+                        case "example3":
+                            mainImage.setImageResource(R.drawable.example3);
+                            mainText.setText(MyContext.getResources().getString(R.string.question3));
+                            break;
+                    }
+
+
+
+
+
+                }
+
+
+                final AlertDialog alertDialog = builder.show();
+                //builder.show();
+
+                closeDialog.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                            alertDialog.dismiss();
+                    }
+                });
+
+                sendResp.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        alertDialog.dismiss();
+                    }
+                });
+
+
+
+
+
+
+
+            }
+        });
+
 
 
 
@@ -134,17 +249,53 @@ public class MainFragment extends Fragment {
                     newCustom.set_desc(curCustom.get_desc());
                     _mispuntos.add(newCustom);
                 }
+                //_adapter.notifyDataSetChanged();
+            }
+        });
+
+//Obtener las preguntas
+
+        preguntas.getPreguntas().observe(getViewLifecycleOwner(), new Observer<List<Custom>>() {
+            @Override
+            public void onChanged(@Nullable List<Custom> customs) {
+                // update ui.
+                Log.d("RegisterActiviti", "Marcas recibidas");
+
+
+
+                for (Custom curCustom: customs) {
+                    Custom newCustom = new Custom();
+                    newCustom.set_id(curCustom.get_id());
+                    newCustom.set_name(curCustom.get_name());
+                    newCustom.set_desc(curCustom.get_desc());
+                    newCustom.set_link(curCustom.getLink());
+                    newCustom.set_value1(curCustom.getValue1());
+                    _mispreguntas.add(newCustom);
+                }
                 _adapter.notifyDataSetChanged();
             }
         });
 
+
+        contactos = new ViewModelProvider(this).get(ContactViewModel.class);
+        String user_email = mAuth.getCurrentUser().getEmail();
+
+        contactos.getContacto(user_email).observe(getActivity(), new Observer<User_Intelik>() {
+            @Override
+            public void onChanged(@Nullable User_Intelik contacto) {
+                // update ui.
+                Log.d("RegisterActiviti", "Marcas recibidas");
+                mainTitle.setText("!Hola, " + contacto.first_name );
+
+            }
+        });
 
 
 
         //Recycler
 
 
-        _linearLayoutManager = new LinearLayoutManager( getActivity() );
+        _linearLayoutManager = new LinearLayoutManager( getActivity() , LinearLayoutManager.HORIZONTAL, false);
 
         _recyclerview.setHasFixedSize( true );
         _recyclerview.setAdapter( _adapter );
@@ -155,15 +306,12 @@ public class MainFragment extends Fragment {
         // Inflate the layout for this fragment
         //return inflater.inflate(R.layout.fragment_main, container, false);
 
-        String fullName = "";
-        SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences( MyContext );
 
-        String name = sharedPref.getString(Common.VAR_USER_NAME, "");
-        String last_name = sharedPref.getString(Common.VAR_USER_APELLIDOS, "");
+        //SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences( MyContext );
 
-        fullName = name + " " + last_name;
+        //String name = sharedPref.getString(Common.VAR_USER_NAME, "");
 
-        mainTitle.setText(fullName);
+        //mainTitle.setText("!Hola, " + name );
 
 
         return _view;

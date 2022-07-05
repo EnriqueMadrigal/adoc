@@ -1,7 +1,7 @@
 package Models;
 
 public class SugarContact {
-            public String sync_key;
+            //public String sync_key;
             public String first_name;
             public String last_name;
             public String phone_mobile;

@@ -72,35 +72,7 @@
 
             </LinearLayout>
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@color/white"
-                android:gravity="center"
-                android:paddingLeft="20dp"
-                android:paddingRight="20dp"
-                android:orientation="vertical">
 
-                <Spinner
-                    style="@style/InputGeneral"
-                    android:id="@+id/spinner_countries"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginLeft="0dp"
-                    android:textColor="@color/AppAdocGray"
-                    android:background="@drawable/roundtext"
-                    >
-
-                </Spinner>
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="20dp"
-                    />
-
-
-
-            </LinearLayout>
 
 
 
@@ -162,183 +134,116 @@
             </LinearLayout>
 
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:gravity="center"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp"
+                android:orientation="vertical">
+
+                <Spinner
+                    style="@style/InputGeneral"
+                    android:id="@+id/spinner_countries"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="0dp"
+                    android:textColor="@color/AppAdocGray"
+                    android:background="@drawable/roundtext"
+                    >
+
+                </Spinner>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="20dp"
+                    />
+
+
+
+            </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/white"
-                android:gravity="start"
+                android:gravity="center"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp"
                 android:orientation="vertical">
 
-                <TextView
-                    style="@style/Title1"
-                    android:paddingStart="20dp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/selecciona"
+                <Spinner
+                    style="@style/InputGeneral"
+                    android:id="@+id/spinner_documentos"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="0dp"
+                    android:textColor="@color/AppAdocGray"
+                    android:background="@drawable/roundtext"
+                    >
+
+                </Spinner>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="20dp"
                     />
 
 
-                <LinearLayout
-                    android:layout_width="match_parent"
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:gravity="center"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp"
+                android:orientation="vertical">
+
+                <EditText
+                    android:id="@+id/input_numdocumento"
+                    android:inputType="textNoSuggestions"
+                    style="@style/InputGeneral"
+                    android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
-                    android:background="@color/white"
-                    android:gravity="start"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginTop="10dp"
-                    android:orientation="horizontal">
-
-                    <ImageButton
-                        android:id="@+id/check1"
-                        android:layout_width="28dp"
-                        android:layout_height="28dp"
-                        android:scaleType="fitXY"
-                        android:adjustViewBounds="true"
-                        android:src="@drawable/check_off"
-                        android:background="@color/white"
-                        />
-
-                    <TextView
-                        style="@style/Title1"
-                        android:paddingStart="20dp"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Adoc"
-                        />
-
-
-
-                </LinearLayout>
-
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@color/white"
-                    android:gravity="start"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginTop="10dp"
-                    android:orientation="horizontal">
-
-                    <ImageButton
-                        android:id="@+id/check2"
-                        android:layout_width="28dp"
-                        android:layout_height="28dp"
-                        android:scaleType="fitXY"
-                        android:adjustViewBounds="true"
-                        android:src="@drawable/check_off"
-                        android:background="@color/white"
-                        />
-
-                    <TextView
-                        style="@style/Title1"
-                        android:paddingStart="20dp"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Hush Puppies"
-                        />
-
-
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@color/white"
-                    android:gravity="start"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginTop="10dp"
-                    android:orientation="horizontal">
-
-                    <ImageButton
-                        android:id="@+id/check3"
-                        android:layout_width="28dp"
-                        android:layout_height="28dp"
-                        android:scaleType="fitXY"
-                        android:adjustViewBounds="true"
-                        android:src="@drawable/check_off"
-                        android:background="@color/white"
-                        />
-
-                    <TextView
-                        style="@style/Title1"
-                        android:paddingStart="20dp"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="CAT"
-                        />
-
-
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@color/white"
-                    android:gravity="start"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginTop="10dp"
-                    android:orientation="horizontal">
-
-                    <ImageButton
-                        android:id="@+id/check4"
-                        android:layout_width="28dp"
-                        android:layout_height="28dp"
-                        android:scaleType="fitXY"
-                        android:adjustViewBounds="true"
-                        android:src="@drawable/check_off"
-                        android:background="@color/white"
-                        />
-
-                    <TextView
-                        style="@style/Title1"
-                        android:paddingStart="20dp"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="PAR2"
-                        />
-
-
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@color/white"
-                    android:gravity="start"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginTop="10dp"
-                    android:orientation="horizontal">
-
-                    <ImageButton
-                        android:id="@+id/check5"
-                        android:layout_width="28dp"
-                        android:layout_height="28dp"
-                        android:scaleType="fitXY"
-                        android:adjustViewBounds="true"
-                        android:src="@drawable/check_off"
-                        android:background="@color/white"
-                        />
-
-                    <TextView
-                        style="@style/Title1"
-                        android:paddingStart="20dp"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="The North Face"
-                        />
-
-
-
-                </LinearLayout>
+                    android:hint="@string/nodocumento"
+                    android:background="@drawable/roundtext" />
 
 
                 <View
                     android:layout_width="match_parent"
-                    android:layout_height="25dp"
+                    android:layout_height="20dp"
+                    />
+
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:gravity="center"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp"
+                android:orientation="vertical">
+
+                <EditText
+                    android:id="@+id/input_email"
+                    style="@style/InputGeneral"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/email"
+                    android:inputType="textEmailAddress"
+                    android:background="@drawable/roundtext" />
+
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="20dp"
                     />
 
 
@@ -346,7 +251,166 @@
             </LinearLayout>
 
 
-        <LinearLayout
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:gravity="center"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp"
+                android:orientation="vertical">
+
+                <EditText
+                    android:id="@+id/input_password"
+                    style="@style/InputGeneral"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/contrasena"
+                    android:inputType="textPassword"
+                    android:background="@drawable/roundtext" />
+
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="20dp"
+                    />
+
+
+
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:gravity="center"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp"
+                android:orientation="vertical">
+
+                <EditText
+                    android:id="@+id/input_cpassword"
+                    style="@style/InputGeneral"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/confirmar"
+                    android:inputType="textPassword"
+                    android:background="@drawable/roundtext" />
+
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="20dp"
+                    />
+
+
+
+            </LinearLayout>
+
+
+
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:gravity="start"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="10dp"
+                android:orientation="vertical">
+
+
+                <TextView
+                    style="@style/Title3"
+                    android:paddingStart="0dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/camposrequeridos"
+                    />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="20dp"
+                    />
+
+            </LinearLayout>
+
+
+
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:gravity="start"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal">
+
+                <ImageButton
+                    android:id="@+id/check_politica"
+                    android:layout_width="28dp"
+                    android:layout_height="28dp"
+                    android:scaleType="fitXY"
+                    android:adjustViewBounds="true"
+                    android:src="@drawable/check_off"
+                    android:background="@color/white"
+                    />
+
+                <TextView
+                    style="@style/Title3"
+                    android:paddingStart="20dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/politicadatos"
+                    />
+
+
+
+            </LinearLayout>
+
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:gravity="start"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal">
+
+                <ImageButton
+                    android:id="@+id/check_terminos"
+                    android:layout_width="28dp"
+                    android:layout_height="28dp"
+                    android:scaleType="fitXY"
+                    android:adjustViewBounds="true"
+                    android:src="@drawable/check_off"
+                    android:background="@color/white"
+                    />
+
+                <TextView
+                    style="@style/Title3"
+                    android:paddingStart="20dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/terminos"
+                    />
+
+
+
+            </LinearLayout>
+
+
+
+
+
+
+            <LinearLayout
             android:id="@+id/LineaMarcas"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -373,19 +437,26 @@
                 android:paddingRight="20dp"
                 android:orientation="vertical">
 
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="20dp"
+                />
+
+
                 <androidx.appcompat.widget.AppCompatButton
                     style="@style/roounded_button"
                     android:id="@+id/Siguiente_Pag2"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:text="@string/siguiente"
+                    android:text="@string/registrarme"
                     />
 
 
 
                 <View
                     android:layout_width="match_parent"
-                    android:layout_height="20dp"
+                    android:layout_height="40dp"
                     />
 
 

@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="200dp">
+
+        <ImageView
+            android:id="@+id/dialog_mainimage"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:scaleType="fitXY"
+            android:src="@drawable/example1" />
+
+        <ImageButton
+            android:id="@+id/dialog_buttonclose"
+            android:layout_width="28dp"
+            android:layout_height="28dp"
+            android:layout_alignParentRight="true"
+            android:background="@color/white"
+            android:src="@drawable/icon_close" />
+
+        <TextView
+            android:id="@+id/dialog_points"
+            style="@style/Title2"
+            android:layout_width="80dp"
+            android:layout_height="50dp"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginLeft="10dp"
+            android:background="@color/AppAdocYellow"
+            android:gravity="center_horizontal|center_vertical"
+            android:text="50 pts" />
+
+
+
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/dialog_mainquestion"
+        style="@style/Title2"
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:layout_weight="0.70"
+        android:layout_gravity="center"
+        android:paddingTop="10dp"
+        android:text="@string/question2"
+        android:background="@color/white"/>
+
+    <EditText
+        android:id="@+id/dialog_inputresp"
+        android:inputType="textNoSuggestions"
+        style="@style/InputGeneral"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/respuesta"
+        android:layout_marginRight="40dp"
+        android:layout_marginLeft="40dp"
+        android:background="@drawable/roundtext" />
+
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/dialog_responder"
+        style="@style/roounded_button"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginLeft="40dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginRight="40dp"
+        android:layout_weight="0.70"
+        android:text="@string/enviar" />
+
+    <TextView
+        android:id="@+id/pag_ant2"
+        style="@style/Title2"
+        android:layout_gravity="center"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/maspreguntas"
+        android:layout_marginTop="20dp"
+        android:clickable="true"
+
+        />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="40dp"/>
+
+
+
+</LinearLayout>

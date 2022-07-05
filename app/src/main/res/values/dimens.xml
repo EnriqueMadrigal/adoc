@@ -3,10 +3,11 @@
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
     <dimen name="toolbar_height">38dp</dimen>
-    <dimen name="toolbar_image_height">38dp</dimen>
-    <dimen name="toolbar_image_width">38dp</dimen>
+    <dimen name="toolbar_image_height">18dp</dimen>
+    <dimen name="toolbar_image_width">18dp</dimen>
     <dimen name="fab_margin">16dp</dimen>
 
     <dimen name="account_button">32dp</dimen>
-    <dimen name="bottom_navigation_icon_size" tools:override="true">48dp</dimen>
+    <dimen name="rounded_button">200dp</dimen>
+    <dimen name="bottom_navigation_icon_size" tools:override="true">24dp</dimen>
 </resources>

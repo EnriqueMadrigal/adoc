@@ -13,7 +13,7 @@ import com.intelik.appadoc.R;
 import java.util.ArrayList;
 
 import Models.Custom;
-import Models.IViewHolderClick;
+import com.intelik.appadoc.interfaces.IViewHolderClick;
 
 public class MirPuntosAdapter extends RecyclerView.Adapter<MirPuntosAdapter.ViewHolder>{
     private Context _context;

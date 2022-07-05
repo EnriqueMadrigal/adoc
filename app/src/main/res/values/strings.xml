@@ -1,9 +1,10 @@
 <resources>
     <string name="app_name">AppAdoc</string>
-    <string name="email">Correo Electrónico</string>
-    <string name="password">Contraseña</string>
-    <string name="registrarme">¡Registrarme!</string>
-    <string name="olvidastecontrasena">¿Olvidaste tu contraseña?</string>
+    <string name="email">&#160;&#160;Correo Electrónico</string>
+    <string name="password">&#160;&#160;Contraseña</string>
+    <string name="registrate">¡REGISTRATE!</string>
+    <string name="registrarme">¡REGISTRARME!</string>
+    <string name="olvidastecontrasena"><u>¿Olvidaste tu contraseña?</u></string>
     <string name="ingresar">Ingresar</string>
     <string name="nombre">Nombre *</string>
     <string name="apellidos">Apellidos *</string>
@@ -19,6 +20,7 @@
     <string name="confirmar">Confirmar Contraseña *</string>
     <string name="politicadatos">Acepto la Política de Protección y Datos >></string>
     <string name="terminos">Acepto los Términos y Condiciones >></string>
+    <string name="camposrequeridos">* Campos requeridos</string>
 
 
     <string name="aviso">Aviso</string>
@@ -42,9 +44,10 @@
     <string name="invalidlogin">La contraseña es invalida o el usuario no existe!</string>
 
 
-    <string name="iniciasesion">Inicia Sesión</string>
-    <string name="olividopass">Olvidaste tu contraseña</string>
+    <string name="iniciasesion">INICIAR SESIÓN</string>
+    <string name="olividopass"><u>Olvidaste tu contraseña</u></string>
     <string name="enviacorreo">Enviar correo</string>
+    <string name="siaun">Si aún no tienes cuenta,</string>
     <string name="registroexitoso">Registro de usuario exitoso</string>
     <string name="registroinvalido">No fue posible registrar la usuario, verífique el usuario no haya sido dado de alta anteriormente.</string>
 
@@ -62,8 +65,27 @@
     <string name="account_save">Guardar Cambios</string>
 
     <string name="my_notificacions">Mis notificaciones</string>
-    <string name="welcome">Bienvenido</string>
+    <string name="welcome">¡Bienvenido!</string>
+    <string name="please_input">Por favor ingresa tus datos de registro</string>
+
     <string name="my_points">Mis Puntos</string>
+    <string name="gana">¡Gana 1000 puntos al referir!</string>
+    <string name="hola">¡Hola,</string>
+    <string name="plata">Plata</string>
+    <string name="nivel">Nivel actual</string>
+    <string name="puntosdisponibles">Puntos Disponibles</string>
+    <string name="respondeygana">¡RESPONDE Y GANA!</string>
+    <string name="queremos">Queremos conocerte mejor y hacer tu experiencia en Puntos ADOC la mejor.</string>
+
+
+    <string name="question1">¿Cuál es tu talla de zapato?</string>
+    <string name="question2">¿Cuál fué tu última compra?</string>
+    <string name="question3">¿Cuál es tu marca favorita?</string>
+    <string name="responder">RESPONDER</string>
+    <string name="respuesta">RESPUESTA</string>
+    <string name="enviar">ENVIAR</string>
+    <string name="maspreguntas"><u>Responder más preguntas</u></string>
+
 
 
 

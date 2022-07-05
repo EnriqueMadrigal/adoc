@@ -9,6 +9,7 @@ import androidx.lifecycle.ViewModelProvider;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.Toast;
@@ -43,6 +44,10 @@ import com.google.firebase.auth.AuthResult;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseUser;
+import com.intelik.appadoc.utils.HttpClient;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 
 public class RegisterActivity extends AppCompatActivity {
@@ -114,7 +119,8 @@ public class RegisterActivity extends AppCompatActivity {
             @Override
             public void closeFragment() {
                 Log.d(TAG, "Se recibio salida pagina 1");
-                GotoPage2();
+                //GotoPage2();
+                RegisterUser();
 
             }
 
@@ -246,26 +252,13 @@ public class RegisterActivity extends AppCompatActivity {
                     // update ui.
                     _progressDialog.dismiss();
 
-            if (contacto == null) {
+            if (contacto.email1.equals("")) {
                         RegisterInSugar();
             }
 
             else {
-                String email1 = datos.email1.toLowerCase();
-                String email2 = contacto.email1.toLowerCase();
+                UpdateInSugar();
 
-                if (email1.length() == 0 && email2.length() == 0) {
-                    RegisterInSugar();
-                    return;
-                }
-
-                if (email1.equals(email2)) {
-                    userExists = true;
-                    //Toast.makeText(context, context.getResources().getText(R.string.registroexitoso),  Toast.LENGTH_SHORT).show();
-                    GotoMain();
-                } else {
-                    RegisterInSugar();
-                }
             }
 
                 }
@@ -276,13 +269,16 @@ public class RegisterActivity extends AppCompatActivity {
         private void RegisterInSugar()
         {
 
+            Log.d(TAG, "Register in sugar1");
+
             ProgressDialog _progressDialog;
-            _progressDialog = ProgressDialog.show( context, "Espera un momento..", "Registrando en sugar..", true );
+          //  _progressDialog = ProgressDialog.show( context, "Espera un momento..", "Registrando en sugar..", true );
 
             SugarContact user = new SugarContact();
 
-            SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd", Locale.US);
+            SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss", Locale.US);
 
+            /*
             String curBirthday = datos.birthdate;
             String[] parts = curBirthday.split("/");
 
@@ -294,9 +290,10 @@ public class RegisterActivity extends AppCompatActivity {
             if (day.length() ==1) day = "0" + day;
 
             String Birthday = year + "-" + month + "-" + day;
+            */
 
 
-            user.sync_key = "null";
+            //user.sync_key = "null";
             user.first_name = datos.first_name;
             user.last_name = datos.last_name;
             user.phone_mobile = datos.phone_mobile;
@@ -304,7 +301,7 @@ public class RegisterActivity extends AppCompatActivity {
             user.email1 = datos.email1;
             user.primary_address_street = "";
             user.alt_address_street = "";
-            user.birthday = Birthday;
+            user.birthday = "";
             user.estado_civil_c = "";
             user.primary_address_state = "";
             user.primary_address_country = "";
@@ -313,15 +310,19 @@ public class RegisterActivity extends AppCompatActivity {
 
             String userData = new Gson().toJson(user);
 
-            //Email_buscar email_ = new Email_buscar();
-            //email_.data = new Gson().toJson(user);;
+            Email_buscar email_ = new Email_buscar();
+            email_.data = user;
 
-            //String jsonString = new Gson().toJson(email_);
+            String jsonString = new Gson().toJson(email_);
 
-            String jsonString = "{\"data\" :" + userData + "}";
+            //String jsonString = "{\"data\" :\"" + userData + "\"}";
+
+            Log.d(TAG, "Register in sugar2");
 
 
+            new SugarRegister(user).execute();
 
+            /*
             RegisterSugar(jsonString)
                     .addOnCompleteListener(new OnCompleteListener<Object>() {
 
@@ -330,6 +331,7 @@ public class RegisterActivity extends AppCompatActivity {
                         public void onComplete(@NonNull Task<Object> task) {
                             _progressDialog.dismiss();
 
+                            Log.d(TAG, "Register in sugar completed");
                             if (!task.isSuccessful()) {
                                 Toast.makeText(context, context.getResources().getText(R.string.registroinvalido),  Toast.LENGTH_SHORT).show();
                                 Exception e = task.getException();
@@ -342,13 +344,14 @@ public class RegisterActivity extends AppCompatActivity {
 
                             else
                             {
+                                Object result = task.getResult();
                                 GotoMain();
 
                             }
 
                         }
                     });
-
+*/
 
 
 
@@ -377,7 +380,221 @@ public class RegisterActivity extends AppCompatActivity {
     }
 
 
+    private void UpdateInSugar()
+    {
 
+        ProgressDialog _progressDialog;
+        _progressDialog = ProgressDialog.show( context, "Espera un momento..", "Actualizando en sugar..", true );
+
+        SugarContact user = new SugarContact();
+
+        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd", Locale.US);
+
+        String curBirthday = datos.birthdate;
+        String[] parts = curBirthday.split("/");
+
+        String year = parts[2].trim();
+        String month = parts[1].trim();
+        String day = parts[0].trim();
+
+        if (month.length() ==1) month = "0" + month;
+        if (day.length() ==1) day = "0" + day;
+
+        String Birthday = year + "-" + month + "-" + day;
+
+
+        //user.sync_key = "null";
+        user.first_name = datos.first_name;
+        user.last_name = datos.last_name;
+        user.phone_mobile = datos.phone_mobile;
+        user.doc_identidad_c = datos.doc_identidad_c;
+        user.email1 = datos.email1;
+        user.primary_address_street = "";
+        user.alt_address_street = "";
+        user.birthday = Birthday;
+        user.estado_civil_c = "";
+        user.primary_address_state = "";
+        user.primary_address_country = "";
+        user.date_entered = (String) df.format(new Date());
+
+
+        String userData = new Gson().toJson(user);
+
+        //Email_buscar email_ = new Email_buscar();
+        //email_.data = new Gson().toJson(user);;
+
+        //String jsonString = new Gson().toJson(email_);
+
+        String jsonString = "{\"data\" :" + userData + "}";
+
+
+
+        UpdateSugar(jsonString)
+                .addOnCompleteListener(new OnCompleteListener<Object>() {
+
+
+                    @Override
+                    public void onComplete(@NonNull Task<Object> task) {
+                        _progressDialog.dismiss();
+
+                        if (!task.isSuccessful()) {
+                            Toast.makeText(context, context.getResources().getText(R.string.registroinvalido),  Toast.LENGTH_SHORT).show();
+                            Exception e = task.getException();
+                            if (e instanceof FirebaseFunctionsException) {
+                                FirebaseFunctionsException ffe = (FirebaseFunctionsException) e;
+                                FirebaseFunctionsException.Code code = ffe.getCode();
+                                Object details = ffe.getDetails();
+                            }
+                        }
+
+                        else
+                        {
+                            GotoMain();
+
+                        }
+
+                    }
+                });
+
+
+
+
+    }
+
+
+
+    private Task<Object> UpdateSugar(String text) {
+        // Create the arguments to the callable function.
+        Map<String, Object> data = new HashMap<>();
+        data.put("text", text);
+        data.put("push", true);
+
+        return mFunctions
+                .getHttpsCallable("updateContact")
+                .call(text)
+                .continueWith(new Continuation<HttpsCallableResult, Object>() {
+                    @Override
+                    public Object then(@NonNull Task<HttpsCallableResult> task) throws Exception {
+                        // This continuation runs on either success or failure, but if the task
+                        // has failed then getResult() will throw an Exception which will be
+                        // propagated down.
+                        Object result = (Object) task.getResult().getData();
+                        return result;
+                    }
+                });
+    }
+
+///// Nuevos metodos para registro
+
+    private class SugarRegister extends AsyncTask<Void, Void, HttpClient.HttpResponse> {
+
+        //Context _context;
+        SugarContact sugarUser;
+        ProgressDialog _progressDialog;
+
+
+
+
+        public SugarRegister(SugarContact sugaruser)
+        {
+            sugarUser = sugaruser;
+            //_context = context;
+        }
+
+        @Override
+        protected void onPreExecute()
+        {
+            super.onPreExecute();
+            _progressDialog = ProgressDialog.show( context, "Espera un momento..", "Registrando en sugar..", true );
+        }
+
+        @Override
+        protected HttpClient.HttpResponse doInBackground( Void... arg0 )
+        {
+
+            JSONObject jsonParam = new JSONObject();
+            JSONObject jsonUser = new JSONObject();
+
+            try {
+
+
+                jsonUser.put("first_name", sugarUser.first_name);
+                jsonUser.put("last_name", sugarUser.last_name);
+                jsonUser.put("phone_mobile", sugarUser.phone_mobile);
+                jsonUser.put("doc_identidad_c", sugarUser.doc_identidad_c);
+                jsonUser.put("email1", sugarUser.email1);
+                jsonUser.put("primary_address_street", sugarUser.primary_address_street);
+                jsonUser.put("alt_address_street", sugarUser.alt_address_street);
+                jsonUser.put("birthday", sugarUser.birthday);
+                jsonUser.put("estado_civil_c", sugarUser.estado_civil_c);
+                jsonUser.put("primary_address_state", sugarUser.primary_address_state);
+                jsonUser.put("primary_address_country", sugarUser.primary_address_country);
+                jsonUser.put("date_entered", sugarUser.date_entered);
+
+
+
+                jsonParam.put("data", jsonUser);
+
+            }
+
+
+            catch (Exception e)
+            {
+                _progressDialog.dismiss();
+                return null;
+            }
+
+            String StrJson = jsonParam.toString();
+
+            HttpClient.HttpResponse response = HttpClient.postJson( Common.Register_link, jsonParam );
+            android.util.Log.d( "TEST", String.format( "HTTP CODE: %d RESPONSE: %s", response.getCode(), response.getResponse() ) );
+
+            return response;
+        }
+
+
+        @Override
+        protected void onPostExecute( HttpClient.HttpResponse result )
+        {
+            super.onPostExecute( result );
+
+            _progressDialog.dismiss();
+
+            if( result.getCode() == 200 )
+            {
+                try
+                {
+                    JSONObject json = new JSONObject( result.getResponse() );
+
+                    //JSONArray Jarray = json.getJSONArray("result");
+
+
+                    ///////////
+
+                    GotoMain();
+
+
+
+
+
+
+                }
+                catch( Exception e )
+                {
+                    android.util.Log.e( "JSONParser", "Cant parse: " + e.getMessage() );
+                    //common.showWarningDialog("! No valido ¡", "No se pudo actualizar", myContext);
+                }
+            }
+
+
+
+        }
+
+
+    }
+
+
+    /// Nuevos metodos
 
 
 }

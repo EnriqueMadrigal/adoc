@@ -112,7 +112,7 @@ public class RegisterPage2 extends Fragment {
         // Inflate the layout for this fragment
 
 
-        sp_documentos = (Spinner) _view.findViewById(R.id.spinner_documentos);
+        sp_documentos = (Spinner) _view.findViewById(R.id.spinner_documentos2);
         sp_generos = (Spinner) _view.findViewById(R.id.spinner_generos);
         fechaNac = (EditText) _view.findViewById(R.id.input_fechanac);
         _numDocumento = (EditText) _view.findViewById(R.id.input_numdocumento);
