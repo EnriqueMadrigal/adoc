@@ -74,6 +74,8 @@ public class RegisterActivity extends AppCompatActivity {
     private Boolean userExists;
     private FirebaseFunctions mFunctions;
 
+    private String sugar_id;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -257,6 +259,7 @@ public class RegisterActivity extends AppCompatActivity {
             }
 
             else {
+                sugar_id = contacto.id;
                 UpdateInSugar();
 
             }
@@ -388,8 +391,8 @@ public class RegisterActivity extends AppCompatActivity {
 
         SugarContact user = new SugarContact();
 
-        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd", Locale.US);
-
+        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss", Locale.US);
+/*
         String curBirthday = datos.birthdate;
         String[] parts = curBirthday.split("/");
 
@@ -401,7 +404,7 @@ public class RegisterActivity extends AppCompatActivity {
         if (day.length() ==1) day = "0" + day;
 
         String Birthday = year + "-" + month + "-" + day;
-
+        */
 
         //user.sync_key = "null";
         user.first_name = datos.first_name;
@@ -411,24 +414,25 @@ public class RegisterActivity extends AppCompatActivity {
         user.email1 = datos.email1;
         user.primary_address_street = "";
         user.alt_address_street = "";
-        user.birthday = Birthday;
+        //user.birthday = Birthday;
         user.estado_civil_c = "";
         user.primary_address_state = "";
         user.primary_address_country = "";
         user.date_entered = (String) df.format(new Date());
 
 
-        String userData = new Gson().toJson(user);
+        //String userData = new Gson().toJson(user);
 
         //Email_buscar email_ = new Email_buscar();
         //email_.data = new Gson().toJson(user);;
 
         //String jsonString = new Gson().toJson(email_);
 
-        String jsonString = "{\"data\" :" + userData + "}";
+        //String jsonString = "{\"data\" :" + userData + "}";
 
+        new SugarUpdate(user).execute();
 
-
+        /*
         UpdateSugar(jsonString)
                 .addOnCompleteListener(new OnCompleteListener<Object>() {
 
@@ -456,7 +460,7 @@ public class RegisterActivity extends AppCompatActivity {
                     }
                 });
 
-
+*/
 
 
     }
@@ -565,18 +569,9 @@ public class RegisterActivity extends AppCompatActivity {
                 try
                 {
                     JSONObject json = new JSONObject( result.getResponse() );
+                    datos.first_name = sugarUser.first_name;
 
-                    //JSONArray Jarray = json.getJSONArray("result");
-
-
-                    ///////////
-
-                    GotoMain();
-
-
-
-
-
+                     GotoMain();
 
                 }
                 catch( Exception e )
@@ -593,6 +588,105 @@ public class RegisterActivity extends AppCompatActivity {
 
     }
 
+
+
+    private class SugarUpdate extends AsyncTask<Void, Void, HttpClient.HttpResponse> {
+
+        //Context _context;
+        SugarContact sugarUser;
+        ProgressDialog _progressDialog;
+
+
+
+
+        public SugarUpdate(SugarContact sugaruser)
+        {
+            sugarUser = sugaruser;
+            //_context = context;
+        }
+
+        @Override
+        protected void onPreExecute()
+        {
+            super.onPreExecute();
+            _progressDialog = ProgressDialog.show( context, "Espera un momento..", "Actualizando en sugar..", true );
+        }
+
+        @Override
+        protected HttpClient.HttpResponse doInBackground( Void... arg0 )
+        {
+
+            JSONObject jsonParam = new JSONObject();
+            JSONObject jsonUser = new JSONObject();
+
+            try {
+
+
+                jsonUser.put("first_name", sugarUser.first_name);
+                jsonUser.put("last_name", sugarUser.last_name);
+                jsonUser.put("phone_mobile", sugarUser.phone_mobile);
+                jsonUser.put("doc_identidad_c", sugarUser.doc_identidad_c);
+                //jsonUser.put("email1", sugarUser.email1);
+                //jsonUser.put("primary_address_street", sugarUser.primary_address_street);
+                //jsonUser.put("alt_address_street", sugarUser.alt_address_street);
+                //jsonUser.put("birthday", sugarUser.birthday);
+                //jsonUser.put("estado_civil_c", sugarUser.estado_civil_c);
+                //jsonUser.put("primary_address_state", sugarUser.primary_address_state);
+                //jsonUser.put("primary_address_country", sugarUser.primary_address_country);
+                jsonUser.put("id", sugar_id);
+
+
+
+
+                jsonParam.put("data", jsonUser);
+
+            }
+
+
+            catch (Exception e)
+            {
+                _progressDialog.dismiss();
+                return null;
+            }
+
+            String StrJson = jsonParam.toString();
+
+            HttpClient.HttpResponse response = HttpClient.postJson( Common.Update_link, jsonParam );
+            android.util.Log.d( "TEST", String.format( "HTTP CODE: %d RESPONSE: %s", response.getCode(), response.getResponse() ) );
+
+            return response;
+        }
+
+
+        @Override
+        protected void onPostExecute( HttpClient.HttpResponse result )
+        {
+            super.onPostExecute( result );
+
+            _progressDialog.dismiss();
+
+            if( result.getCode() == 200 )
+            {
+                try
+                {
+                    JSONObject json = new JSONObject( result.getResponse() );
+                    datos.first_name = sugarUser.first_name;
+                    GotoMain();
+
+                }
+                catch( Exception e )
+                {
+                    android.util.Log.e( "JSONParser", "Cant parse: " + e.getMessage() );
+                    //common.showWarningDialog("! No valido ¡", "No se pudo actualizar", myContext);
+                }
+            }
+
+
+
+        }
+
+
+    }
 
     /// Nuevos metodos
 

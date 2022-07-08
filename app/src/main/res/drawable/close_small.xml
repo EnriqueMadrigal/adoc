@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:drawable="@drawable/ic_close"
+        android:width="@dimen/account_button"
+        android:height="@dimen/account_button">
+    </item>
+</layer-list>

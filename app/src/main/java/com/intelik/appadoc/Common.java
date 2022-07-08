@@ -52,11 +52,16 @@ public class Common {
     public int token_expires_in = 0;
     public String password = "";
 
+    public int Curpage = 0;
 
     public static final String GetContact_link = "https://us-central1-puntos-adoc.cloudfunctions.net/getContact";
     public static final String Register_link = "https://us-central1-puntos-adoc.cloudfunctions.net/saveContact";
+    public static final String Update_link = "https://us-central1-puntos-adoc.cloudfunctions.net/updateContact";
 
 
+    public boolean notificaciones_sms = false;
+    public boolean notificaciones_push = false;
+    public boolean notificaciones_email = false;
 
 
     //shared values

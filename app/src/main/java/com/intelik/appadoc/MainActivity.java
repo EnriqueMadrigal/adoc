@@ -35,11 +35,17 @@ import com.google.firebase.auth.FirebaseUser;
 
 import com.google.android.material.navigation.NavigationView;
 import com.intelik.appadoc.fragments.Account;
+import com.intelik.appadoc.fragments.Alertas;
+import com.intelik.appadoc.fragments.Contacto;
 import com.intelik.appadoc.fragments.MainFragment;
 import com.intelik.appadoc.fragments.Notifications;
+import com.intelik.appadoc.fragments.Perfil;
 import com.intelik.appadoc.fragments.RegisterPage1;
 import com.intelik.appadoc.fragments.RegisterPage2;
+import com.intelik.appadoc.interfaces.AlertasNavigationInterface;
+import com.intelik.appadoc.interfaces.ContactoNavigationInterface;
 import com.intelik.appadoc.interfaces.NavigationInterface;
+import com.intelik.appadoc.interfaces.PerfilNavigationInterface;
 
 import java.util.List;
 
@@ -64,7 +70,7 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
     MainFragment mainFragment;
     Notifications notifications;
 
-    private Account account;
+
     private String TAG = "MainActivity";
 
     private ImageButton ver_notificaciones;
@@ -208,26 +214,81 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
                // getSupportFragmentManager().beginTransaction().replace(R.id.container, firstFragment).commit();
 
                 //registerPage2 = new RegisterPage2();
-                account = new Account();
-                getSupportFragmentManager().beginTransaction().setCustomAnimations(android.R.anim.slide_in_left, android.R.anim.slide_out_right).replace(R.id.fragment_containerMain, account, "Account").commit();
 
+                Perfil perfil = new Perfil();
+                getSupportFragmentManager().beginTransaction().setCustomAnimations(android.R.anim.slide_in_left, android.R.anim.slide_out_right).replace(R.id.fragment_containerMain, perfil, "Perfil").commit();
 
-                account.setOnClickListener(new NavigationInterface() {
+                perfil.setOnClickListener(new PerfilNavigationInterface() {
                     @Override
-                    public void closeFragment() {
-                        Log.d(TAG, "Se recibio salida pagina account");
+                    public void Edit_action() {
 
-                        GotoMain();
+                        Account account = new Account();
+                        getSupportFragmentManager().beginTransaction().setCustomAnimations(android.R.anim.slide_in_left, android.R.anim.slide_out_right).replace(R.id.fragment_containerMain, account, "Account").commit();
+
+                        account.setOnClickListener(new NavigationInterface() {
+                            @Override
+                            public void closeFragment() {
+                                GotoMain();
+                            }
+
+                            @Override
+                            public void backFragment() {
+                                GotoMain();
+                            }
+                        });
+
+
+
 
 
                     }
 
                     @Override
-                    public void backFragment() {
+                    public void Configurar_action() {
+
+                        Alertas alertas = new Alertas();
+                        getSupportFragmentManager().beginTransaction().setCustomAnimations(android.R.anim.slide_in_left, android.R.anim.slide_out_right).replace(R.id.fragment_containerMain, alertas, "Alertas").commit();
+
+                        alertas.setOnClickListener(new AlertasNavigationInterface() {
+                            @Override
+                            public void Close_action() {
+                                GotoMain();
+                            }
+                        });
+
+
+                    }
+
+                    @Override
+                    public void Contacto_action() {
+
+                        Contacto contacto = new Contacto();
+                        getSupportFragmentManager().beginTransaction().setCustomAnimations(android.R.anim.slide_in_left, android.R.anim.slide_out_right).replace(R.id.fragment_containerMain, contacto, "Contacto").commit();
+
+                            contacto.setOnClickListener(new ContactoNavigationInterface() {
+                                @Override
+                                public void Whatsapp_action() {
+
+                                }
+
+                                @Override
+                                public void Email_action() {
+
+                                }
+
+                                @Override
+                                public void Close_action() {
+                                    GotoMain();
+                                }
+                            });
+
+
+                    }
+
+                    @Override
+                    public void Cerrar_action() {
                         confirmLogout();
                     }
-
-
                 });
 
 

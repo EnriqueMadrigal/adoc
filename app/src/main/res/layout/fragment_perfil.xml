@@ -1,0 +1,222 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".fragments.Perfil">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        android:background="@color/white">
+
+
+        <LinearLayout
+            android:id="@+id/linearLayout3"
+            android:layout_width="match_parent"
+            android:layout_height="140dp"
+            android:layout_marginLeft="4dp"
+            android:layout_marginRight="4dp"
+            android:layout_marginTop="4dp"
+            android:weightSum="1"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp">
+
+            <ImageView
+                android:id="@+id/imageView_perfil"
+                android:layout_width="0dp"
+                android:layout_height="100dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_weight="0.7"
+                android:src="@drawable/icon_peson"/>
+
+
+
+
+        </LinearLayout>
+
+
+<View
+    android:layout_width="match_parent"
+    android:layout_height="2dp"
+    android:background="@color/AppAdocGray"/>
+
+
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:gravity="center"
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp"
+            android:paddingTop="20dp"
+            android:orientation="vertical">
+
+            <androidx.appcompat.widget.AppCompatButton
+                style="@style/roounded_button_small"
+                android:id="@+id/button_perfil_refiere"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="@string/refiereamino"
+                android:drawableRight="@drawable/network_icon_small"/>
+                />
+
+
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="20dp"
+                />
+
+
+
+        </LinearLayout>
+
+
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:gravity="center"
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp"
+            android:paddingTop="20dp"
+            android:orientation="vertical">
+
+            <androidx.appcompat.widget.AppCompatButton
+                style="@style/Title2"
+                android:id="@+id/button_perfil_editar"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="@string/editarperfil"
+                android:drawableLeft="@drawable/person_small"
+                android:background="@color/white"
+                android:gravity="left|center_vertical"
+                android:drawablePadding="10dp"
+                android:textAllCaps="false" />
+            />
+
+
+
+
+        </LinearLayout>
+
+
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:gravity="center"
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp"
+            android:paddingTop="10dp"
+            android:orientation="vertical">
+
+            <androidx.appcompat.widget.AppCompatButton
+                style="@style/Title2"
+                android:id="@+id/button_perfil_alertas"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="@string/configuraralertas"
+                android:drawableLeft="@drawable/bell_small"
+                android:gravity="left|center_vertical"
+                android:drawablePadding="10dp"
+                android:background="@color/white"
+                android:textAllCaps="false" />
+            />
+
+
+
+
+
+
+        </LinearLayout>
+
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:gravity="center"
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp"
+            android:paddingTop="10dp"
+            android:orientation="vertical">
+
+            <androidx.appcompat.widget.AppCompatButton
+                style="@style/Title2"
+                android:id="@+id/button_perfil_contacto"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="@string/contactanos"
+                android:drawableLeft="@drawable/contactanos_small"
+                android:gravity="left|center_vertical"
+                android:drawablePadding="10dp"
+                android:background="@color/white"
+                android:textAllCaps="false" />
+            />
+
+
+
+
+
+
+        </LinearLayout>
+
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:gravity="center"
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp"
+            android:paddingTop="40dp"
+            android:orientation="vertical">
+
+            <androidx.appcompat.widget.AppCompatButton
+                style="@style/Title3"
+                android:id="@+id/button_perfil_cerrar"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="@string/account_close"
+                android:drawableRight="@drawable/close_small"
+             android:background="@color/transparent"
+                android:drawablePadding="10dp"
+                android:textAllCaps="false" />
+            />
+
+
+
+
+
+
+        </LinearLayout>
+
+
+
+
+
+    </LinearLayout>
+
+
+
+
+
+
+
+</FrameLayout>

@@ -58,7 +58,7 @@ public class Account extends Fragment {
     private ImageButton editFechaNac;
 
     private Button saveChanges;
-    private Button logout;
+
 
     private String TAG ="Account";
     private NavigationInterface navigationInterface;
@@ -114,7 +114,6 @@ public class Account extends Fragment {
         editFechaNac = (ImageButton) _view.findViewById(R.id.button_editfechac);
 
         saveChanges = (Button) _view.findViewById(R.id.button_savechanges);
-        logout = (Button) _view.findViewById(R.id.button_closesession);
 
 
         name.setInputType(TYPE_NULL);
@@ -185,15 +184,7 @@ public class Account extends Fragment {
 
         });
 
-        logout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
 
-                navigationInterface.backFragment();
-
-            }
-
-        });
 
 
 

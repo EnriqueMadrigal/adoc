@@ -74,6 +74,18 @@
         <item name="android:background">@drawable/roundbutton</item>
     </style>
 
+    <style name="roounded_button_small">
+        <item name="android:textSize">12dp</item>
+        <item name="fontStyle">normal</item>
+        <item name="fontWeight">800</item>
+        <item name="android:textStyle">bold</item>
+        <item name="fontFamily">sans-serif</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:padding">5dp</item>
+        <item name="android:background">@drawable/roundbutton</item>
+    </style>
+
+
 
     <style name="roounded_button_clear">
         <item name="android:textSize">16dp</item>

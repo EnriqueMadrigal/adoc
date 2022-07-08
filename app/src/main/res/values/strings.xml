@@ -1,8 +1,8 @@
 <resources>
     <string name="app_name">AppAdoc</string>
-    <string name="email">&#160;&#160;Correo Electrónico</string>
+    <string name="email">&#160;&#160;Correo Electrónico *</string>
     <string name="password">&#160;&#160;Contraseña</string>
-    <string name="registrate">¡REGISTRATE!</string>
+    <string name="registrate">¡REGÍSTRATE!</string>
     <string name="registrarme">¡REGISTRARME!</string>
     <string name="olvidastecontrasena"><u>¿Olvidaste tu contraseña?</u></string>
     <string name="ingresar">Ingresar</string>
@@ -11,7 +11,7 @@
     <string name="selecciona">Selecciona tu marca favorita:</string>
     <string name="pais">País *</string>
     <string name="siguiente">Siguiente >></string>
-    <string name="nodocumento">Número de Documento</string>
+    <string name="nodocumento">Número de Documento *</string>
     <string name="paganterior"><u>« Página Anterior</u></string>
     <string name="genero">Género</string>
     <string name="fechanac">Fecha de Nacimiento</string>
@@ -61,7 +61,7 @@
     <string name="my_information">Mi información</string>
     <string name="account_name">Nombre de la persona</string>
     <string name="account_lastname">Apellidos de la persona</string>
-    <string name="account_close">Cerrar sessión</string>
+    <string name="account_close"><u>Cerrar sessión</u></string>
     <string name="account_save">Guardar Cambios</string>
 
     <string name="my_notificacions">Mis notificaciones</string>
@@ -85,10 +85,19 @@
     <string name="respuesta">RESPUESTA</string>
     <string name="enviar">ENVIAR</string>
     <string name="maspreguntas"><u>Responder más preguntas</u></string>
+    <string name="refiereamino">Refiere a un amigo, ¡ gana 100 puntos!</string>
 
-
-
-
+    <string name="editarperfil">Editar Perfil</string>
+    <string name="configuraralertas">Configurar alertas</string>
+    <string name="contactanos">Contáctanos</string>
+    <string name="profavoringresa">Por favor ingresa tus datos de registro</string>
+    <string name="restablecer">Re establecer contraseña</string>
+    <string name="chatea">Chatea con nosotros</string>
+    <string name="escribenos">Escribenos</string>
+    <string name="configraralertas">Configurar alertas</string>
+    <string name="notificacionessms">Notificaciones SMS</string>
+    <string name="notificacionespush">Notificaciones push</string>
+    <string name="notificacionesemail">Notificaciones email</string>
 
 
     <!-- TODO: Remove or change this placeholder text -->

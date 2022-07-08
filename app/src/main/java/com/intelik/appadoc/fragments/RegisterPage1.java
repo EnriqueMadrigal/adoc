@@ -177,8 +177,7 @@ public class RegisterPage1 extends Fragment implements  View.OnClickListener{
         _customAdapter.setDropDownViewResource(R.layout.spinner_item);
         Sp_countries.setAdapter(_customAdapter);
 
-
-
+        sp_documentos.setEnabled(false);
 
         /*
         Custom noselect = new Custom();
@@ -198,8 +197,7 @@ public class RegisterPage1 extends Fragment implements  View.OnClickListener{
 
 
 
-        Sp_countries.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-
+    Sp_countries.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
     @Override
     public void onItemSelected(AdapterView<?> adapterView, View view,
                                int position, long id) {
@@ -214,9 +212,11 @@ public class RegisterPage1 extends Fragment implements  View.OnClickListener{
 
         _curPos = position;
 
-        //_documentos.clear();
-        //_documentos = Common.getDocumentos(_curPais);
-        //_customAdapter1.notifyDataSetChanged();
+        _documentos.clear();
+        _documentos = Common.getDocumentos(_curPais);
+        _customAdapter1.notifyDataSetChanged();
+        sp_documentos.setEnabled(true);
+
 
     }
     @Override
