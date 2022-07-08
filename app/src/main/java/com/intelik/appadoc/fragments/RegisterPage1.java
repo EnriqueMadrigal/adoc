@@ -212,8 +212,9 @@ public class RegisterPage1 extends Fragment implements  View.OnClickListener{
 
         _curPos = position;
 
+        _customAdapter1.clear();
         _documentos.clear();
-        _documentos = Common.getDocumentos(_curPais);
+        _documentos.addAll(Common.getDocumentos(_curPais));
         _customAdapter1.notifyDataSetChanged();
         sp_documentos.setEnabled(true);
 
