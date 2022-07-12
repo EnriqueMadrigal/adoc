@@ -6,7 +6,7 @@
     tools:context=".fragments.MainFragment">
 
     <!-- TODO: Update blank fragment layout -->
-    <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:scrollbarSize="0dp">
@@ -71,28 +71,21 @@
         </LinearLayout>
 
 
-        <RelativeLayout
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="120dp"
             android:orientation="horizontal"
-            android:background="@color/white">
-
-           <ImageView
-               android:layout_width="wrap_content"
-               android:layout_height="match_parent"
-               android:src="@drawable/meter"/>
+            android:background="@color/white"
+            android:gravity="center">
 
             <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:src="@drawable/needle_icon"
-                android:layout_marginTop="80dp"/>
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:scaleType="fitCenter"
+                android:src="@drawable/ic_meter_0" />
 
 
-
-
-
-        </RelativeLayout>
+        </LinearLayout>
 
         <View
             android:layout_width="match_parent"
@@ -135,7 +128,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:text="@string/plata" />
+                    android:text="..." />
 
 
 
@@ -167,25 +160,25 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:text="@string/puntosdisponibles" />
+                    android:text="@string/puntosdisponibles"/>
+
 
 
                 <TextView
+                    android:id="@+id/main_currentpoints"
                     style="@style/Title2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:text="100pts" />
+                    android:text="" />
 
 
 
             </LinearLayout>
-
             <View
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
-                android:background="@drawable/blockpuntos">
-            </View>
+                android:background="@drawable/blockpuntos"></View>
 
 
         </RelativeLayout>

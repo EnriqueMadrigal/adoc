@@ -75,10 +75,61 @@
 
         <View
             android:layout_width="match_parent"
-            android:layout_height="50dp"
+            android:layout_height="20dp"
             />
 
     </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:background="@color/white"
+            android:weightSum="1">
+
+
+            <TextView
+                style="@style/Title1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/ubicacion"
+                />
+
+
+        </LinearLayout>
+
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <Spinner
+                style="@style/InputGeneral"
+                android:id="@+id/input_spinner_countries"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="0dp"
+                android:textColor="@color/AppAdocGray"
+                android:background="@drawable/roundtext"
+                >
+
+            </Spinner>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="20dp"
+                />
+
+
+
+        </LinearLayout>
+
+
 
 
     <LinearLayout
@@ -88,27 +139,17 @@
         android:background="@color/white"
         android:weightSum="1">
 
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:background="@color/white"
-            android:gravity="center"
-            android:orientation="vertical"
-            android:layout_weight="0.9">
 
             <TextView
-                style="@style/Title2"
+                style="@style/Title1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/account_name"
+                android:text="@string/informacionpersonal"
                 />
 
 
-
-         
-
-
         </LinearLayout>
+
 
 
         <LinearLayout
@@ -125,7 +166,7 @@
 
 
 
-    </LinearLayout>
+
 
    <LinearLayout
             android:layout_width="match_parent"
@@ -134,46 +175,22 @@
             android:background="@color/white"
             android:weightSum="1">
 
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:background="@color/white"
-                android:gravity="center"
-                android:orientation="vertical"
-                android:layout_weight="0.9">
 
-            
+
+
                 <EditText
                     android:id="@+id/input_account_name"
                     android:inputType="textNoSuggestions"
-                    style="@style/InputAccount"
+                    style="@style/InputGeneral"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/nombre"
-                    android:background="@drawable/blocktext"/>
+                    android:background="@drawable/roundtext" />
 
 
 
-            </LinearLayout>
 
 
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:background="@color/white"
-                android:gravity="center"
-                android:orientation="vertical"
-                android:layout_weight="0.1">
-
-                <ImageButton
-                    android:id="@+id/button_editname"
-                    android:layout_width="@dimen/account_button"
-                    android:layout_height="@dimen/account_button"
-                    android:background="@color/transparent"
-                    android:src="@drawable/ic_edit_foreground"
-                    android:scaleType="fitXY"/>
-                
-            </LinearLayout>
 
 
 
@@ -195,38 +212,10 @@
             android:background="@color/white"
             android:weightSum="1">
 
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:background="@color/white"
-                android:gravity="center"
-                android:orientation="vertical"
-                android:layout_weight="0.9">
-
-                <TextView
-                    style="@style/Title2"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/account_lastname"
-                    />
 
 
 
 
-
-
-            </LinearLayout>
-
-
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:background="@color/white"
-                android:gravity="center"
-                android:orientation="vertical"
-                android:layout_weight="0.1">
-
-            </LinearLayout>
 
 
 
@@ -240,49 +229,16 @@
             android:orientation="horizontal"
             android:background="@color/white"
             android:weightSum="1">
-
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:background="@color/white"
-                android:gravity="center"
-                android:orientation="vertical"
-                android:layout_weight="0.9">
 
 
                 <EditText
                     android:id="@+id/input_account_lastname"
                     android:inputType="textNoSuggestions"
-                    style="@style/InputAccount"
+                    style="@style/InputGeneral"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/apellidos"
-                    android:background="@drawable/blocktext"/>
-
-
-
-            </LinearLayout>
-
-
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:background="@color/white"
-                android:gravity="center"
-                android:orientation="vertical"
-                android:layout_weight="0.1">
-
-                <ImageButton
-                    android:id="@+id/button_editlastname"
-                    android:layout_width="@dimen/account_button"
-                    android:layout_height="@dimen/account_button"
-                    android:background="@color/transparent"
-                    android:src="@drawable/ic_edit_foreground"
-                    android:scaleType="fitXY"/>
-
-            </LinearLayout>
-
-
+                    android:background="@drawable/roundtext" />
 
 
 
@@ -294,52 +250,251 @@
             />
 
 
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
             android:background="@color/white"
-            android:weightSum="1">
+            android:gravity="start"
+            android:orientation="vertical">
+
+            <TextView
+                style="@style/Title1"
+                android:paddingStart="20dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/selecciona"
+                />
+
 
             <LinearLayout
-                android:layout_width="0dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/white"
-                android:gravity="center"
-                android:orientation="vertical"
-                android:layout_weight="0.9">
+                android:gravity="start"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal">
+
+                <ImageButton
+                    android:id="@+id/account_check1"
+                    android:layout_width="28dp"
+                    android:layout_height="28dp"
+                    android:scaleType="fitXY"
+                    android:adjustViewBounds="true"
+                    android:src="@drawable/check_off"
+                    android:background="@color/white"
+                    />
 
                 <TextView
-                    style="@style/Title2"
-                    android:layout_width="match_parent"
+                    style="@style/Title1"
+                    android:paddingStart="20dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/fechanac"
+                    android:text="Adoc"
                     />
 
 
 
-
-
-
             </LinearLayout>
 
 
             <LinearLayout
-                android:layout_width="0dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/white"
-                android:gravity="center"
-                android:orientation="vertical"
-                android:layout_weight="0.1">
+                android:gravity="start"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal">
+
+                <ImageButton
+                    android:id="@+id/account_check2"
+                    android:layout_width="28dp"
+                    android:layout_height="28dp"
+                    android:scaleType="fitXY"
+                    android:adjustViewBounds="true"
+                    android:src="@drawable/check_off"
+                    android:background="@color/white"
+                    />
+
+                <TextView
+                    style="@style/Title1"
+                    android:paddingStart="20dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Hush Puppies"
+                    />
+
+
 
             </LinearLayout>
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:gravity="start"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal">
+
+                <ImageButton
+                    android:id="@+id/account_check3"
+                    android:layout_width="28dp"
+                    android:layout_height="28dp"
+                    android:scaleType="fitXY"
+                    android:adjustViewBounds="true"
+                    android:src="@drawable/check_off"
+                    android:background="@color/white"
+                    />
+
+                <TextView
+                    style="@style/Title1"
+                    android:paddingStart="20dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="CAT"
+                    />
+
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:gravity="start"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal">
+
+                <ImageButton
+                    android:id="@+id/account_check4"
+                    android:layout_width="28dp"
+                    android:layout_height="28dp"
+                    android:scaleType="fitXY"
+                    android:adjustViewBounds="true"
+                    android:src="@drawable/check_off"
+                    android:background="@color/white"
+                    />
+
+                <TextView
+                    style="@style/Title1"
+                    android:paddingStart="20dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="PAR2"
+                    />
+
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:gravity="start"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal">
+
+                <ImageButton
+                    android:id="@+id/account_check5"
+                    android:layout_width="28dp"
+                    android:layout_height="28dp"
+                    android:scaleType="fitXY"
+                    android:adjustViewBounds="true"
+                    android:src="@drawable/check_off"
+                    android:background="@color/white"
+                    />
+
+                <TextView
+                    style="@style/Title1"
+                    android:paddingStart="20dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="The North Face"
+                    />
+
+
+
+            </LinearLayout>
+
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="25dp"
+                />
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:background="@color/white"
+                android:layout_marginTop="10dp"
+                android:weightSum="1">
+
+
+                <Spinner
+                    style="@style/InputGeneral"
+                    android:id="@+id/input_spinner_documentos2"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="0dp"
+                    android:textColor="@color/AppAdocGray"
+                    android:background="@drawable/roundtext"
+                    >
+
+                </Spinner>
+
+
+
+
+            </LinearLayout>
+
+
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:background="@color/white"
+                android:layout_marginTop="20dp"
+                android:weightSum="1">
+
+
+                <EditText
+                    android:id="@+id/input_account_numdocumento"
+                    android:inputType="textNoSuggestions"
+                    style="@style/InputGeneral"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/nodocumento"
+                    android:background="@drawable/roundtext" />
+
+
+
+            </LinearLayout>
 
 
 
 
         </LinearLayout>
+
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="20dp"/>
+
+
+
+
+
+
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -348,57 +503,87 @@
             android:background="@color/white"
             android:weightSum="1">
 
-            <LinearLayout
-                android:layout_width="0dp"
+
+
+            <EditText
+                android:id="@+id/input_account_fechanac"
+                style="@style/InputGeneral"
+                android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:background="@color/white"
-                android:gravity="center"
-                android:orientation="vertical"
-                android:layout_weight="0.9">
+                android:hint="@string/fechanac"
+                android:inputType="date"
+                android:focusable="false"
+                android:clickable="true"
+                android:background="@drawable/roundtext" />
 
-
-                <EditText
-                    android:id="@+id/input_account_fechanac"
-                    android:inputType="date"
-                    style="@style/InputAccount"
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="@string/fechanac"
-                    android:background="@drawable/blocktext"/>
+        </LinearLayout>
 
 
 
-            </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:background="@color/white"
+            android:layout_marginTop="20dp"
+            android:weightSum="1">
 
 
-            <LinearLayout
-                android:layout_width="0dp"
+            <EditText
+                android:id="@+id/input_account_phone"
+                style="@style/InputGeneral"
+                android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:background="@color/white"
-                android:gravity="center"
-                android:orientation="vertical"
-                android:layout_weight="0.1">
+                android:hint="@string/numtelefono"
+                android:inputType="phone"
+                android:background="@drawable/roundtext" />
 
-                <ImageButton
-                    android:id="@+id/button_editfechac"
-                    android:layout_width="@dimen/account_button"
-                    android:layout_height="@dimen/account_button"
-                    android:background="@color/transparent"
-                    android:src="@drawable/ic_edit_foreground"
-                    android:scaleType="fitXY"/>
-
-            </LinearLayout>
+        </LinearLayout>
 
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:background="@color/white"
+            android:layout_marginTop="20dp"
+            android:weightSum="1">
 
+            <EditText
+                android:id="@+id/input_account_password"
+                style="@style/InputGeneral"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/contrasena"
+                android:inputType="textPassword"
+                android:background="@drawable/roundtext" />
 
 
         </LinearLayout>
 
-        <View
+
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="30dp"
-            />
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:background="@color/white"
+            android:layout_marginTop="20dp"
+            android:weightSum="1">
+
+
+
+            <EditText
+                android:id="@+id/input_account_cpassword"
+                style="@style/InputGeneral"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/confirmar"
+                android:inputType="textPassword"
+                android:background="@drawable/roundtext" />
+
+        </LinearLayout>
+
 
 
         <LinearLayout
@@ -408,6 +593,7 @@
             android:gravity="center"
             android:paddingLeft="20dp"
             android:paddingRight="20dp"
+            android:layout_marginTop="30dp"
             android:orientation="vertical">
 
             <androidx.appcompat.widget.AppCompatButton
@@ -422,7 +608,7 @@
 
             <View
                 android:layout_width="match_parent"
-                android:layout_height="20dp"
+                android:layout_height="80dp"
                 />
 
 

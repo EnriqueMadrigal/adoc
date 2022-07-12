@@ -14,6 +14,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import Models.Comm_User;
+import Models.Country;
 import Models.Custom;
 import Models.User_Intelik;
 
@@ -36,7 +37,7 @@ public class Common {
     public Boolean cookie_consent = false;
     public String cookie_consent_received_on = "";
     public String dp_consent_last_updated = "";
-    public int assigned_user_id = 1;
+    public String assigned_user_id = "";
     public String team_count = "";
     public String email1 = "";
     public Boolean email_subscription_c = true;
@@ -65,12 +66,17 @@ public class Common {
 
 
     //shared values
-    public static final String VAR_USER_ID = "USER_ID";
+    public static final String VAR_USER_ID = "USER_ID_STR";
     public static final String VAR_USER_NAME = "USER_NAME";
     public static final String VAR_LOGIN_NAME = "LOGIN_NAME";
     public static final String VAR_USER_APELLIDOS = "USER_APELLIDOS";
     public static final String VAR_USER_GENDER = "USER_GENDER";
     public static final String VAR_USER_BIRTHDAY = "USER_BIRTHDAY";
+    public static final String VAR_USER_TYPE_DOC = "USER_TYPE_DOC";
+    public static final String VAR_USER_DOC = "USER_DOC";
+    public static final String VAR_USER_PHONE = "USER_PHONE";
+
+
 
     
     public static void initInstance()
@@ -109,12 +115,12 @@ public class Common {
 
         switch (pais){
             case 1:  //Costa rica
-                documentos.add(new Custom(1, "DUI"));
+                documentos.add(new Custom(1, "CED"));
                 documentos.add(new Custom(2, "PASAPORTE"));
                 break;
 
-            case 2:  //Guatemala
-                documentos.add(new Custom(1, "DPI"));
+            case 2:  //El Salvador
+                documentos.add(new Custom(1, "DUI"));
                 documentos.add(new Custom(2, "PASAPORTE"));
                 break;
 
@@ -128,8 +134,8 @@ public class Common {
                 documentos.add(new Custom(2, "PASAPORTE"));
                 break;
 
-            case 5:  //Nicaragua
-                documentos.add(new Custom(1, "CED"));
+            case 5:  //Guatemala
+                documentos.add(new Custom(1, "DPI"));
                 documentos.add(new Custom(2, "PASAPORTE"));
                 break;
 
@@ -171,6 +177,21 @@ public class Common {
         return generos;
 
     }
+
+    public static ArrayList<Custom> getCountries() {
+
+        ArrayList<Custom> nuevas_countries = new ArrayList<Custom>();
+
+        nuevas_countries.add(new Custom(0,"País *"));
+        nuevas_countries.add(new Custom(1,"Costa Rica"));
+        nuevas_countries.add(new Custom(2,"El Salvador"));
+        nuevas_countries.add(new Custom(3,"Honduras"));
+        nuevas_countries.add(new Custom(4,"Nicaragua"));
+        nuevas_countries.add(new Custom(5,"Guatemala"));
+        return nuevas_countries;
+
+    }
+
 
 
     public static void showWarningDialog(String title ,String message, Context context) {
@@ -222,12 +243,19 @@ public class Common {
 
             Common datos = Common.getInstance();
 
-            editor.putInt(VAR_USER_ID, 0);
+            editor.putString(VAR_USER_ID, datos.assigned_user_id);
             editor.putString(VAR_USER_NAME, datos.first_name);
             editor.putString(VAR_LOGIN_NAME, datos.email1);
             editor.putString(VAR_USER_APELLIDOS, datos.last_name);
+
             editor.putString(VAR_USER_GENDER, datos.gender_c);
-            editor.putString(VAR_USER_BIRTHDAY, datos.birthdate);
+
+            if (datos.birthdate.length()!= 0)  editor.putString(VAR_USER_BIRTHDAY, datos.birthdate);
+            if (datos.tipo_documento_identidad_c.length()!= 0)editor.putString(VAR_USER_TYPE_DOC, datos.tipo_documento_identidad_c);
+            if (datos.doc_identidad_c.length()!= 0)editor.putString(VAR_USER_DOC, datos.doc_identidad_c);
+            if (datos.phone_mobile.length()!= 0)editor.putString(VAR_USER_PHONE, datos.phone_mobile);
+
+
             editor.commit();
 
         }
@@ -254,6 +282,27 @@ public class Common {
     }
 
 
+    public static void getCommonUserValues(Context context)
+    {
+
+        SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences( context );
+        SharedPreferences.Editor editor = sharedPref.edit();
+
+        Common datos = Common.getInstance();
+
+        datos.assigned_user_id = sharedPref.getString(VAR_USER_ID,"");
+        datos.email1 = sharedPref.getString(VAR_LOGIN_NAME, "");
+        datos.first_name = sharedPref.getString(VAR_USER_NAME, "");
+        datos.last_name = sharedPref.getString(VAR_USER_APELLIDOS, "");
+        //datos.user_gender = sharedPref.getString(VAR_USER_GENDER, "");
+        datos.birthdate = sharedPref.getString(VAR_USER_BIRTHDAY, "");
+        datos.tipo_documento_identidad_c = sharedPref.getString(VAR_USER_TYPE_DOC, "");
+        datos.doc_identidad_c = sharedPref.getString(VAR_USER_DOC, "");
+        datos.phone_mobile = sharedPref.getString(VAR_USER_PHONE, "");
+
+    }
+
+
 
         public static Comm_User getUserValues(Context context)
         {
@@ -270,6 +319,8 @@ public class Common {
             curUser.last_name = sharedPref.getString(VAR_USER_APELLIDOS, "");
             curUser.user_gender = sharedPref.getString(VAR_USER_GENDER, "");
             curUser.birthday = sharedPref.getString(VAR_USER_BIRTHDAY, "");
+
+
 
             return curUser;
         }

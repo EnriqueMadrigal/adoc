@@ -8,7 +8,7 @@
     <string name="ingresar">Ingresar</string>
     <string name="nombre">Nombre *</string>
     <string name="apellidos">Apellidos *</string>
-    <string name="selecciona">Selecciona tu marca favorita:</string>
+    <string name="selecciona">Selecciona tu tienda favorita:</string>
     <string name="pais">País *</string>
     <string name="siguiente">Siguiente >></string>
     <string name="nodocumento">Número de Documento *</string>
@@ -64,7 +64,7 @@
     <string name="account_close"><u>Cerrar sessión</u></string>
     <string name="account_save">Guardar Cambios</string>
 
-    <string name="my_notificacions">Mis notificaciones</string>
+    <string name="my_notificacions">Notificaciones</string>
     <string name="welcome">¡Bienvenido!</string>
     <string name="please_input">Por favor ingresa tus datos de registro</string>
 
@@ -98,6 +98,9 @@
     <string name="notificacionessms">Notificaciones SMS</string>
     <string name="notificacionespush">Notificaciones push</string>
     <string name="notificacionesemail">Notificaciones email</string>
+    <string name="informacionpersonal">Información Personal</string>
+    <string name="ubicacion">Ubicación</string>
+    <string name="noactpassword">No fue posible cambiar su contraseña</string>
 
 
     <!-- TODO: Remove or change this placeholder text -->

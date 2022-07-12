@@ -22,6 +22,10 @@ public class User_Intelik {
     public String email1;
 
 
+    public String primary_address_country;
+    public String tipo_documento_identidad_c;
+    public String doc_identidad_c;
+
     public String nivel_anterior_c;
     public String puntos_disponibles_c;
     public String puntos_redimidos_c;
@@ -47,6 +51,11 @@ public User_Intelik()
     this.puntos_disponibles_c= "";
     this.puntos_redimidos_c= "";
     this.puntos_acumulados_c= "";
+
+    this.primary_address_country= "";
+    this.tipo_documento_identidad_c= "";
+    this.doc_identidad_c= "";
+
 }
 
 

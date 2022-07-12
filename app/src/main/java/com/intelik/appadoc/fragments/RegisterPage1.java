@@ -55,6 +55,7 @@ public class RegisterPage1 extends Fragment implements  View.OnClickListener{
 
     private int _curPos = 0;
     private int _curPais = -1;
+    private String _nombrePais = "";
 
     private Context MyContext;
 
@@ -68,7 +69,7 @@ public class RegisterPage1 extends Fragment implements  View.OnClickListener{
     private androidx.appcompat.widget.AppCompatButton Siguiente;
 
 
-    private CountryViewModel countries;
+    //private CountryViewModel countries;
 
     private ArrayList<Custom> _paises;
     private CustomAdapter _customAdapter;
@@ -158,11 +159,12 @@ public class RegisterPage1 extends Fragment implements  View.OnClickListener{
 
 
 
-        countries = new ViewModelProvider(this).get(CountryViewModel.class);
+        //countries = new ViewModelProvider(this).get(CountryViewModel.class);
 
 
 
         _paises = new ArrayList<>();
+        _paises = Common.getCountries();
 
         Common datos = Common.getInstance();
         _name.setText(datos.first_name);
@@ -207,6 +209,7 @@ public class RegisterPage1 extends Fragment implements  View.OnClickListener{
         // Here you can do the action you want to...
         _curPais = curcountry.get_id();
         curPais = curcountry;
+        _nombrePais = curcountry.get_name();
 
         Log.d(TAG,String.valueOf(_curPais));
 
@@ -246,7 +249,7 @@ public class RegisterPage1 extends Fragment implements  View.OnClickListener{
 
 
 
-
+/*
         //Obtener los paises
         countries.getCountries().observe(getViewLifecycleOwner(), new Observer<List<Country>>() {
             @Override
@@ -265,7 +268,7 @@ public class RegisterPage1 extends Fragment implements  View.OnClickListener{
             }
         });
 
-
+*/
 
         //Botón de siguiente
 
@@ -375,13 +378,14 @@ public class RegisterPage1 extends Fragment implements  View.OnClickListener{
                 datos.first_name = name;
                 datos.last_name = lastname;
                 datos.country_id = _curPais;
-                datos.country = curPais.get_name();
+                datos.country = _nombrePais;
+                //datos.country = curPais.get_name();
                 datos.tipo_documento_identidad_c = curDocumento.get_name();
                 datos.doc_identidad_c = numDocumento;
                 datos.email1 = email;
                 datos.password = password;
 
-
+                Common.saveUserValue((MyContext));
 
 
                 navigationInterface.closeFragment();

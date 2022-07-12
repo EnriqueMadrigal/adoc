@@ -260,6 +260,10 @@ public class RegisterActivity extends AppCompatActivity {
 
             else {
                 sugar_id = contacto.id;
+                datos.assigned_user_id = sugar_id;
+                Common.saveUserValue(context);
+
+                //RegisterInSugar();
                 UpdateInSugar();
 
             }
@@ -275,7 +279,7 @@ public class RegisterActivity extends AppCompatActivity {
             Log.d(TAG, "Register in sugar1");
 
             ProgressDialog _progressDialog;
-          //  _progressDialog = ProgressDialog.show( context, "Espera un momento..", "Registrando en sugar..", true );
+          //  _progressDialog = ProgressDialog.show( context, "Espera un momento..", "Guardando tus datos..", true );
 
             SugarContact user = new SugarContact();
 
@@ -301,13 +305,15 @@ public class RegisterActivity extends AppCompatActivity {
             user.last_name = datos.last_name;
             user.phone_mobile = datos.phone_mobile;
             user.doc_identidad_c = datos.doc_identidad_c;
+            user.tipo_documento_identidad_c = datos.tipo_documento_identidad_c;
             user.email1 = datos.email1;
             user.primary_address_street = "";
             user.alt_address_street = "";
             user.birthday = "";
+            user.primary_address_country = datos.country;
             user.estado_civil_c = "";
             user.primary_address_state = "";
-            user.primary_address_country = "";
+
             user.date_entered = (String) df.format(new Date());
 
 
@@ -387,7 +393,7 @@ public class RegisterActivity extends AppCompatActivity {
     {
 
         ProgressDialog _progressDialog;
-        _progressDialog = ProgressDialog.show( context, "Espera un momento..", "Actualizando en sugar..", true );
+        _progressDialog = ProgressDialog.show( context, "Espera un momento..", "Actualizando tus datos..", true );
 
         SugarContact user = new SugarContact();
 
@@ -411,13 +417,15 @@ public class RegisterActivity extends AppCompatActivity {
         user.last_name = datos.last_name;
         user.phone_mobile = datos.phone_mobile;
         user.doc_identidad_c = datos.doc_identidad_c;
+        user.tipo_documento_identidad_c = datos.tipo_documento_identidad_c;
         user.email1 = datos.email1;
         user.primary_address_street = "";
         user.alt_address_street = "";
+        user.primary_address_country = datos.country;
         //user.birthday = Birthday;
         user.estado_civil_c = "";
         user.primary_address_state = "";
-        user.primary_address_country = "";
+
         user.date_entered = (String) df.format(new Date());
 
 
@@ -526,6 +534,7 @@ public class RegisterActivity extends AppCompatActivity {
                 jsonUser.put("last_name", sugarUser.last_name);
                 jsonUser.put("phone_mobile", sugarUser.phone_mobile);
                 jsonUser.put("doc_identidad_c", sugarUser.doc_identidad_c);
+                jsonUser.put("tipo_documento_identidad_c", sugarUser.tipo_documento_identidad_c);
                 jsonUser.put("email1", sugarUser.email1);
                 jsonUser.put("primary_address_street", sugarUser.primary_address_street);
                 jsonUser.put("alt_address_street", sugarUser.alt_address_street);
@@ -534,9 +543,6 @@ public class RegisterActivity extends AppCompatActivity {
                 jsonUser.put("primary_address_state", sugarUser.primary_address_state);
                 jsonUser.put("primary_address_country", sugarUser.primary_address_country);
                 jsonUser.put("date_entered", sugarUser.date_entered);
-
-
-
                 jsonParam.put("data", jsonUser);
 
             }
@@ -626,13 +632,14 @@ public class RegisterActivity extends AppCompatActivity {
                 jsonUser.put("last_name", sugarUser.last_name);
                 jsonUser.put("phone_mobile", sugarUser.phone_mobile);
                 jsonUser.put("doc_identidad_c", sugarUser.doc_identidad_c);
+                jsonUser.put("tipo_documento_identidad_c", sugarUser.tipo_documento_identidad_c);
                 //jsonUser.put("email1", sugarUser.email1);
                 //jsonUser.put("primary_address_street", sugarUser.primary_address_street);
                 //jsonUser.put("alt_address_street", sugarUser.alt_address_street);
                 //jsonUser.put("birthday", sugarUser.birthday);
                 //jsonUser.put("estado_civil_c", sugarUser.estado_civil_c);
                 //jsonUser.put("primary_address_state", sugarUser.primary_address_state);
-                //jsonUser.put("primary_address_country", sugarUser.primary_address_country);
+                jsonUser.put("primary_address_country", sugarUser.primary_address_country);
                 jsonUser.put("id", sugar_id);
 
 

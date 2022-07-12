@@ -92,6 +92,7 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         mAuth = FirebaseAuth.getInstance();
 
 
+        Common.getCommonUserValues(context);
       datos = Common.getInstance();
 
 
@@ -130,6 +131,10 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
                 datos.first_name = contacto.first_name;
                 datos.last_name = contacto.last_name;
                 datos.email1 = contacto.email1;
+                datos.tipo_documento_identidad_c = contacto.tipo_documento_identidad_c;
+                datos.assigned_user_id = contacto.id;
+
+                //datos.doc_identidad_c = contacto.do
 
                 Common.saveUserValue(context);
 
@@ -301,7 +306,9 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
                 return true;
 
             case R.id.nav_settings:
-                //getSupportFragmentManager().beginTransaction().replace(R.id.container, thirdFragment).commit();
+                Notifications notifications = new Notifications();
+                getSupportFragmentManager().beginTransaction().setCustomAnimations(android.R.anim.slide_in_left, android.R.anim.slide_out_right).replace(R.id.fragment_containerMain, notifications, "Notificaciones").commit();
+
                 return true;
         }
         return false;

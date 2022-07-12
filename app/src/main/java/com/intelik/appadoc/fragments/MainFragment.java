@@ -76,6 +76,8 @@ public class MainFragment extends Fragment {
     private ContactViewModel contactos;
     private FirebaseAuth mAuth;
 
+    private TextView main_currentpoints;
+
 
     public MainFragment() {
         // Required empty public constructor
@@ -121,6 +123,7 @@ public class MainFragment extends Fragment {
 
         _recyclerview = (RecyclerView) _view.findViewById(R.id.recycler_main);
 
+        main_currentpoints = (TextView) _view.findViewById(R.id.main_currentpoints);
 
         puntos = new ViewModelProvider(this).get(MisPuntosViewModel.class);
         preguntas = new ViewModelProvider(this).get(MisPreguntasViewModel.class);
@@ -286,6 +289,20 @@ public class MainFragment extends Fragment {
                 // update ui.
                 Log.d("RegisterActiviti", "Marcas recibidas");
                 mainTitle.setText("!Hola, " + contacto.first_name );
+
+                String Puntos_acumulados = contacto.puntos_acumulados_c;
+
+                 int totalPuntos = 0;
+                try{
+                    totalPuntos = Integer.parseInt(Puntos_acumulados);
+
+                }
+                catch (NumberFormatException ex){
+                    ex.printStackTrace();
+                }
+
+                main_currentpoints.setText(String.valueOf(totalPuntos) + " pts");
+
 
             }
         });

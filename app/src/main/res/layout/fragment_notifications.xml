@@ -11,16 +11,24 @@
         android:orientation="vertical"
         android:paddingLeft="20dp"
         android:paddingRight="20dp"
-        android:background="@color/white">
+        android:background="@color/white"
+        android:weightSum="1">
 
 
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:background="@color/white"
         android:gravity="center"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:layout_weight="0.15">
+
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="20dp"
+            android:background="@color/AppAdocYellow"/>
 
         <TextView
             style="@style/Title1"
@@ -30,12 +38,49 @@
             />
 
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            />
+
 
     </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginBottom="20dp"
+            android:orientation="vertical"
+            android:background="@color/white"
+            android:layout_weight="0.65">
+
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recycler_notificaciones"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                />
+
+
+        </LinearLayout>
+
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="0dp"
+    android:layout_weight="0.20"
+    android:orientation="vertical"
+    android:background="@color/white">
+
+        <androidx.appcompat.widget.AppCompatButton
+            style="@style/roounded_button_small"
+            android:id="@+id/button_perfil_refiere"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:text="@string/refiereamino"
+            android:drawableRight="@drawable/network_icon_small"/>
+
+
+
+
   </LinearLayout>
+
+
+</LinearLayout>
 
 </FrameLayout>
