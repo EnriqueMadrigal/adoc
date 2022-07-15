@@ -237,17 +237,18 @@
 
         <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="320dp"
+        android:layout_height="360dp"
         android:orientation="vertical"
         android:paddingLeft="20dp"
         android:paddingRight="20dp"
+        android:layout_marginBottom="10dp"
         android:background="@color/white">
 
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recycler_main"
                 android:layout_width="match_parent"
-                android:layout_height="420dp"
+                android:layout_height="match_parent"
                  />
 
 
@@ -352,6 +353,30 @@
 
         </LinearLayout>
 
+        <include layout="@layout/layout_tiendas" />
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:gravity="center"
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp"
+            android:paddingTop="20dp"
+            android:orientation="vertical">
+
+            <androidx.appcompat.widget.AppCompatButton
+                style="@style/roounded_button_small"
+                android:id="@+id/button_main_refiere"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="@string/refiereamino"
+                android:drawableRight="@drawable/network_icon_small"/>
+
+
+
+        </LinearLayout>
 
 
 

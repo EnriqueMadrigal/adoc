@@ -67,14 +67,6 @@
                 android:layout_height="match_parent"
                 android:text="@string/refiereamino"
                 android:drawableRight="@drawable/network_icon_small"/>
-                />
-
-
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="20dp"
-                />
 
 
 
