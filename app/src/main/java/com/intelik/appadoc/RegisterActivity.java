@@ -533,8 +533,8 @@ public class RegisterActivity extends AppCompatActivity {
                 jsonUser.put("first_name", sugarUser.first_name);
                 jsonUser.put("last_name", sugarUser.last_name);
                 jsonUser.put("phone_mobile", sugarUser.phone_mobile);
-                jsonUser.put("doc_identidad_c", sugarUser.doc_identidad_c);
-                jsonUser.put("tipo_documento_identidad_c", sugarUser.tipo_documento_identidad_c);
+                jsonUser.put("no_documento_c", sugarUser.doc_identidad_c);
+                jsonUser.put("doc_identidad_c", sugarUser.tipo_documento_identidad_c);
                 jsonUser.put("email1", sugarUser.email1);
                 jsonUser.put("primary_address_street", sugarUser.primary_address_street);
                 jsonUser.put("alt_address_street", sugarUser.alt_address_street);
@@ -631,8 +631,8 @@ public class RegisterActivity extends AppCompatActivity {
                 jsonUser.put("first_name", sugarUser.first_name);
                 jsonUser.put("last_name", sugarUser.last_name);
                 jsonUser.put("phone_mobile", sugarUser.phone_mobile);
-                jsonUser.put("doc_identidad_c", sugarUser.doc_identidad_c);
-                jsonUser.put("tipo_documento_identidad_c", sugarUser.tipo_documento_identidad_c);
+                jsonUser.put("no_documento_c", sugarUser.doc_identidad_c);
+                jsonUser.put("doc_identidad_c", sugarUser.tipo_documento_identidad_c);
                 //jsonUser.put("email1", sugarUser.email1);
                 //jsonUser.put("primary_address_street", sugarUser.primary_address_street);
                 //jsonUser.put("alt_address_street", sugarUser.alt_address_street);

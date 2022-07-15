@@ -269,7 +269,7 @@ public class Common {
 
         boolean hasChanges = false;
 
-        editor.putInt(VAR_USER_ID, 0);
+        editor.putString(VAR_USER_ID, "");
 
         if (usuario.first_name.length()>0) {editor.putString(VAR_USER_NAME, usuario.first_name); hasChanges = true;}
         if (usuario.last_name.length()>0) {editor.putString(VAR_USER_APELLIDOS, usuario.last_name); hasChanges = true;}
@@ -289,6 +289,8 @@ public class Common {
         SharedPreferences.Editor editor = sharedPref.edit();
 
         Common datos = Common.getInstance();
+
+        String dato1 =  sharedPref.getString(VAR_USER_ID,"");
 
         datos.assigned_user_id = sharedPref.getString(VAR_USER_ID,"");
         datos.email1 = sharedPref.getString(VAR_LOGIN_NAME, "");

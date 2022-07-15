@@ -40,6 +40,35 @@
     </style>
 
 
+    <style name="Title5">
+        <item name="android:textSize">14dp</item>
+        <item name="fontStyle">normal</item>
+        <item name="fontWeight">600</item>
+        <item name="fontFamily">sans-serif</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
+
+
+
+    <style name="Title6">
+        <item name="android:textSize">14dp</item>
+        <item name="fontStyle">normal</item>
+        <item name="fontWeight">600</item>
+        <item name="fontFamily">sans-serif</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+
+    <style name="Title7">
+        <item name="android:textSize">22dp</item>
+        <item name="fontStyle">normal</item>
+        <item name="android:textStyle">bold</item>
+        <item name="fontWeight">800</item>
+        <item name="fontFamily">sans-serif</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+
 
     <style name="InputAccount">
         <item name="android:textSize">18dp</item>
@@ -121,6 +150,21 @@
         <item name="android:textColor">@color/black</item>
         <item name="android:padding">15dp</item>
         <item name="android:background">@color/white</item>
+    </style>
+
+
+    <style name="gradient_button">
+        <item name="android:textSize">16dp</item>
+        <item name="fontStyle">normal</item>
+        <item name="fontWeight">800</item>
+        <item name="android:textStyle">bold</item>
+        <item name="fontFamily">sans-serif</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:paddingLeft">25dp</item>
+        <item name="android:paddingRight">25dp</item>
+        <item name="android:background">@drawable/gradient_button</item>
+        <item name="android:gravity">left|center_vertical</item>
+
     </style>
 
 

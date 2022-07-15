@@ -26,6 +26,7 @@ public class User_Intelik {
     public String tipo_documento_identidad_c;
     public String doc_identidad_c;
 
+    public String nivel_del_cliente_c;
     public String nivel_anterior_c;
     public String puntos_disponibles_c;
     public String puntos_redimidos_c;
@@ -55,6 +56,7 @@ public User_Intelik()
     this.primary_address_country= "";
     this.tipo_documento_identidad_c= "";
     this.doc_identidad_c= "";
+    this.nivel_del_cliente_c = "";
 
 }
 

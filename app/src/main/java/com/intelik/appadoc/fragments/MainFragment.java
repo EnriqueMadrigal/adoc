@@ -24,6 +24,7 @@ import android.widget.TextView;
 
 import com.intelik.appadoc.Common;
 import com.intelik.appadoc.R;
+import com.intelik.appadoc.adapters.EspecialesAdapter;
 import com.intelik.appadoc.adapters.MainQuestionsAdapter;
 import com.intelik.appadoc.adapters.MirPuntosAdapter;
 
@@ -62,10 +63,15 @@ public class MainFragment extends Fragment {
     private RecyclerView _recyclerview;
     private LinearLayoutManager _linearLayoutManager;
 
+    private RecyclerView _recyclerview1;
+    private LinearLayoutManager _linearLayoutManager1;
+
     //private MirPuntosAdapter _adapter;
     private MainQuestionsAdapter _adapter;
+    private EspecialesAdapter _adapter1;
 
     private ArrayList<Custom> _mispuntos;
+    private ArrayList<Custom> _mispuntos_especiales;
 
     private ArrayList<Custom> _mispreguntas;
 
@@ -77,6 +83,9 @@ public class MainFragment extends Fragment {
     private FirebaseAuth mAuth;
 
     private TextView main_currentpoints;
+    private TextView main_currentlevel;
+
+    private ImageView image_meter;
 
 
     public MainFragment() {
@@ -122,15 +131,45 @@ public class MainFragment extends Fragment {
         mainTitle = (TextView) _view.findViewById(R.id.fragment_mainTItle);
 
         _recyclerview = (RecyclerView) _view.findViewById(R.id.recycler_main);
+        _recyclerview1 = (RecyclerView) _view.findViewById(R.id.recycler_especiales);
 
         main_currentpoints = (TextView) _view.findViewById(R.id.main_currentpoints);
+        main_currentlevel = (TextView) _view.findViewById(R.id.main_currentlevel);
+        image_meter = (ImageView) _view.findViewById(R.id.image_meter);
+
+
 
         puntos = new ViewModelProvider(this).get(MisPuntosViewModel.class);
         preguntas = new ViewModelProvider(this).get(MisPreguntasViewModel.class);
 
 
+
         _mispuntos = new ArrayList<>();
         _mispreguntas = new ArrayList<>();
+        _mispuntos_especiales = new ArrayList<>();
+
+        //Agregar los puntos especiales
+        Custom esp1 = new Custom();
+        esp1.set_name("Gánate $5.00 de descuento en tu próxima compra");
+        esp1.set_desc("Válido hasta el 30 de julio, 2022");
+        esp1.set_value1(1000);
+
+
+        Custom esp2 = new Custom();
+        esp2.set_name("Gánate $10.00 de descuento en tu próxima compra");
+        esp2.set_desc("Válido hasta el 30 de julio, 2022");
+        esp2.set_value1(2000);
+
+        Custom esp3 = new Custom();
+        esp3.set_name("Gánate $15.00 de descuento en tu próxima compra");
+        esp3.set_desc("Válido hasta el 30 de julio, 2022");
+        esp3.set_value1(2000);
+
+        _mispuntos_especiales.add(esp1);
+        _mispuntos_especiales.add(esp2);
+        _mispuntos_especiales.add(esp3);
+
+
 
         /*
         _adapter = new MirPuntosAdapter(getActivity(), _mispuntos, new IViewHolderClick() {
@@ -280,7 +319,15 @@ public class MainFragment extends Fragment {
         });
 
 
-        contactos = new ViewModelProvider(this).get(ContactViewModel.class);
+
+        _adapter1 = new EspecialesAdapter(getActivity(), _mispuntos_especiales, new IViewHolderClick() {
+            @Override
+            public void onClick(int position) {
+            }
+
+        });
+
+                contactos = new ViewModelProvider(this).get(ContactViewModel.class);
         String user_email = mAuth.getCurrentUser().getEmail();
 
         contactos.getContacto(user_email).observe(getActivity(), new Observer<User_Intelik>() {
@@ -303,6 +350,22 @@ public class MainFragment extends Fragment {
 
                 main_currentpoints.setText(String.valueOf(totalPuntos) + " pts");
 
+                String curNivel = contacto.nivel_del_cliente_c.toLowerCase();
+                main_currentlevel.setText(contacto.nivel_del_cliente_c);
+
+                if (curNivel.equals("plata"))
+                {
+                    image_meter.setImageResource(R.drawable.ic_meter_plata);
+                }
+
+                else if (curNivel.equals("oro"))
+                {
+                    image_meter.setImageResource(R.drawable.ic_meter_oro);
+                }
+                else if (curNivel.equals("diamante"))
+                {
+                    image_meter.setImageResource(R.drawable.ic_meter_diamante);
+                }
 
             }
         });
@@ -318,6 +381,15 @@ public class MainFragment extends Fragment {
         _recyclerview.setAdapter( _adapter );
         _recyclerview.setLayoutManager( _linearLayoutManager );
 
+
+        //Recycler1
+
+
+        _linearLayoutManager1 = new LinearLayoutManager( getActivity() , LinearLayoutManager.VERTICAL, false);
+
+        _recyclerview1.setHasFixedSize( true );
+        _recyclerview1.setAdapter( _adapter1 );
+        _recyclerview1.setLayoutManager( _linearLayoutManager1 );
 
 
         // Inflate the layout for this fragment

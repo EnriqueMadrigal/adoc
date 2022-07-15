@@ -361,7 +361,7 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         SharedPreferences.Editor editor = sharedPref.edit();
 
 
-        editor.putInt(Common.VAR_USER_ID, 0);
+        editor.putString(Common.VAR_USER_ID, "");
         editor.putString(Common.VAR_USER_NAME, "");
         editor.putString(Common.VAR_LOGIN_NAME, "");
         editor.putString(Common.VAR_USER_APELLIDOS, "");

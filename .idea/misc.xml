@@ -13,7 +13,9 @@
         <entry key="..\:/Documentos/projects/intelik/AppAdoc/app/src/main/res/drawable/contactanos_small.xml" value="0.190625" />
         <entry key="..\:/Documentos/projects/intelik/AppAdoc/app/src/main/res/drawable/contacto_left.xml" value="0.3328125" />
         <entry key="..\:/Documentos/projects/intelik/AppAdoc/app/src/main/res/drawable/contacto_right.xml" value="0.3328125" />
+        <entry key="..\:/Documentos/projects/intelik/AppAdoc/app/src/main/res/drawable/gradient_button.xml" value="0.3328125" />
         <entry key="..\:/Documentos/projects/intelik/AppAdoc/app/src/main/res/drawable/ic_adoc_background.xml" value="0.19114583333333332" />
+        <entry key="..\:/Documentos/projects/intelik/AppAdoc/app/src/main/res/drawable/ic_darrow.xml" value="0.3328125" />
         <entry key="..\:/Documentos/projects/intelik/AppAdoc/app/src/main/res/drawable/ic_edit_background.xml" value="0.19010416666666666" />
         <entry key="..\:/Documentos/projects/intelik/AppAdoc/app/src/main/res/drawable/ic_edit_foreground.xml" value="0.19010416666666666" />
         <entry key="..\:/Documentos/projects/intelik/AppAdoc/app/src/main/res/drawable/ic_home_background.xml" value="0.19010416666666666" />
@@ -27,8 +29,16 @@
         <entry key="..\:/Documentos/projects/intelik/AppAdoc/app/src/main/res/drawable/ic_person_foreground.xml" value="0.17604166666666668" />
         <entry key="..\:/Documentos/projects/intelik/AppAdoc/app/src/main/res/drawable/ic_settings_background.xml" value="0.19010416666666666" />
         <entry key="..\:/Documentos/projects/intelik/AppAdoc/app/src/main/res/drawable/ic_settings_foreground.xml" value="0.17604166666666668" />
+        <entry key="..\:/Documentos/projects/intelik/AppAdoc/app/src/main/res/drawable/ic_uarrow.xml" value="0.3328125" />
         <entry key="..\:/Documentos/projects/intelik/AppAdoc/app/src/main/res/drawable/ic_user.xml" value="0.19114583333333332" />
         <entry key="..\:/Documentos/projects/intelik/AppAdoc/app/src/main/res/drawable/person_small.xml" value="0.190625" />
+        <entry key="..\:/Documentos/projects/intelik/AppAdoc/app/src/main/res/drawable/punt_right_up.xml" value="0.3328125" />
+        <entry key="..\:/Documentos/projects/intelik/AppAdoc/app/src/main/res/drawable/puntos_especiales.xml" value="0.18854166666666666" />
+        <entry key="..\:/Documentos/projects/intelik/AppAdoc/app/src/main/res/drawable/puntos_left.xml" value="0.3328125" />
+        <entry key="..\:/Documentos/projects/intelik/AppAdoc/app/src/main/res/drawable/puntos_left_botton.xml" value="0.3328125" />
+        <entry key="..\:/Documentos/projects/intelik/AppAdoc/app/src/main/res/drawable/puntos_left_up.xml" value="0.3328125" />
+        <entry key="..\:/Documentos/projects/intelik/AppAdoc/app/src/main/res/drawable/puntos_right_bottom.xml" value="0.3328125" />
+        <entry key="..\:/Documentos/projects/intelik/AppAdoc/app/src/main/res/drawable/puntos_right_up.xml" value="0.18854166666666666" />
         <entry key="..\:/Documentos/projects/intelik/AppAdoc/app/src/main/res/drawable/roundbutton.xml" value="0.209375" />
         <entry key="..\:/Documentos/projects/intelik/AppAdoc/app/src/main/res/drawable/roundtext.xml" value="0.358974358974359" />
         <entry key="..\:/Documentos/projects/intelik/AppAdoc/app/src/main/res/drawable/toggle_colors.xml" value="0.3328125" />
@@ -41,17 +51,20 @@
         <entry key="..\:/Documentos/projects/intelik/AppAdoc/app/src/main/res/layout/activity_splash.xml" value="0.31927083333333334" />
         <entry key="..\:/Documentos/projects/intelik/AppAdoc/app/src/main/res/layout/content_main.xml" value="0.2" />
         <entry key="..\:/Documentos/projects/intelik/AppAdoc/app/src/main/res/layout/dialog_responder.xml" value="0.33" />
+        <entry key="..\:/Documentos/projects/intelik/AppAdoc/app/src/main/res/layout/especiales_item.xml" value="0.5" />
         <entry key="..\:/Documentos/projects/intelik/AppAdoc/app/src/main/res/layout/fragment_account.xml" value="0.2526475037821483" />
         <entry key="..\:/Documentos/projects/intelik/AppAdoc/app/src/main/res/layout/fragment_alertas.xml" value="0.5" />
         <entry key="..\:/Documentos/projects/intelik/AppAdoc/app/src/main/res/layout/fragment_contacto.xml" value="0.5" />
-        <entry key="..\:/Documentos/projects/intelik/AppAdoc/app/src/main/res/layout/fragment_main.xml" value="0.33" />
+        <entry key="..\:/Documentos/projects/intelik/AppAdoc/app/src/main/res/layout/fragment_main.xml" value="0.3204259438528558" />
         <entry key="..\:/Documentos/projects/intelik/AppAdoc/app/src/main/res/layout/fragment_notifications.xml" value="0.16" />
         <entry key="..\:/Documentos/projects/intelik/AppAdoc/app/src/main/res/layout/fragment_perfil.xml" value="0.34479166666666666" />
         <entry key="..\:/Documentos/projects/intelik/AppAdoc/app/src/main/res/layout/fragment_register_page1.xml" value="0.25" />
         <entry key="..\:/Documentos/projects/intelik/AppAdoc/app/src/main/res/layout/fragment_register_page2.xml" value="0.39748953974895396" />
         <entry key="..\:/Documentos/projects/intelik/AppAdoc/app/src/main/res/layout/fragment_register_page3.xml" value="0.2995260663507109" />
+        <entry key="..\:/Documentos/projects/intelik/AppAdoc/app/src/main/res/layout/layout_puntosespeciales.xml" value="0.17239583333333333" />
+        <entry key="..\:/Documentos/projects/intelik/AppAdoc/app/src/main/res/layout/layout_tablapuntos.xml" value="0.18" />
         <entry key="..\:/Documentos/projects/intelik/AppAdoc/app/src/main/res/layout/main_questions.xml" value="0.31979166666666664" />
-        <entry key="..\:/Documentos/projects/intelik/AppAdoc/app/src/main/res/layout/mispuntos_items.xml" value="0.25" />
+        <entry key="..\:/Documentos/projects/intelik/AppAdoc/app/src/main/res/layout/mispuntos_items.xml" value="0.21" />
         <entry key="..\:/Documentos/projects/intelik/AppAdoc/app/src/main/res/layout/spinner_item.xml" value="0.16945288753799392" />
         <entry key="..\:/Documentos/projects/intelik/AppAdoc/app/src/main/res/menu/navigation_menu.xml" value="0.16354166666666667" />
         <entry key="..\:/Documentos/projects/intelik/AppAdoc/app/src/main/res/mipmap-anydpi-v26/ic_adoc.xml" value="0.190625" />

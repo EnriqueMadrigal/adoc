@@ -145,6 +145,7 @@ public class ContactViewModel extends ViewModel {
                                 curUser.puntos_disponibles_c = hashMap.get("puntos_disponibles_c");
                                 curUser.puntos_redimidos_c = hashMap.get("puntos_redimidos_c");
                                 curUser.puntos_acumulados_c = hashMap.get("puntos_acumulados_c");
+                                curUser.nivel_del_cliente_c = hashMap.get("nivel_del_cliente_c");
 
                                 Contacto.postValue(curUser);
 
@@ -223,7 +224,7 @@ public class ContactViewModel extends ViewModel {
                 curUser.first_name = result.getString("first_name");
                 curUser.last_name = result.getString("last_name");
                 curUser.phone_mobile = result.getString("phone_mobile");
-
+                curUser.nivel_del_cliente_c = result.getString("nivel_del_cliente_c");
 
                 curUser.nivel_anterior_c = result.getString("nivel_anterior_c");
                 curUser.puntos_disponibles_c = result.getString("puntos_disponibles_c");
@@ -333,6 +334,7 @@ public class ContactViewModel extends ViewModel {
                     curUser.first_name = resultado.getString("first_name");
                     curUser.last_name = resultado.getString("last_name");
                     //curUser.phone_mobile = resultado.getString("phone_mobile");
+                    curUser.nivel_del_cliente_c = resultado.getString("nivel_del_cliente_c");
 
 
                     curUser.nivel_anterior_c = resultado.getString("nivel_anterior_c");

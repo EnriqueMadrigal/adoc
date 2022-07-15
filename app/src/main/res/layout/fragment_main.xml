@@ -79,6 +79,7 @@
             android:gravity="center">
 
             <ImageView
+                android:id="@+id/image_meter"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:scaleType="fitCenter"
@@ -124,6 +125,7 @@
 
 
                 <TextView
+                    android:id="@+id/main_currentlevel"
                     style="@style/Title2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -137,8 +139,7 @@
             <View
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
-                android:background="@drawable/blocknivel">
-            </View>
+                android:background="@drawable/blocknivel"></View>
 
 
         </RelativeLayout>
@@ -236,12 +237,11 @@
 
         <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="0dp"
+        android:layout_height="320dp"
         android:orientation="vertical"
         android:paddingLeft="20dp"
         android:paddingRight="20dp"
-        android:background="@color/white"
-        android:layout_weight="0.85">
+        android:background="@color/white">
 
 
             <androidx.recyclerview.widget.RecyclerView
@@ -255,10 +255,112 @@
 
         <View
             android:layout_width="match_parent"
-            android:layout_height="120dp"/>
+            android:layout_height="10dp"/>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingLeft="0dp"
+            android:paddingRight="0dp"
+            android:background="@color/white">
+
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:background="@color/AppAdocGray"/>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/button_tablapuntos"
+            style="@style/gradient_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/tablapuntos"
+            android:drawableRight="@drawable/ic_darrow"/>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:background="@color/AppAdocGray"/>
+
+        </LinearLayout>
+
+        <include layout="@layout/layout_tablapuntos" />
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingLeft="0dp"
+            android:paddingRight="0dp"
+            android:layout_marginTop="0dp"
+            android:background="@color/white">
+
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:background="@color/AppAdocGray"/>
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/button_puntos_especiales"
+                style="@style/gradient_button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/puntiosespeciales"
+                android:drawableRight="@drawable/ic_darrow"/>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:background="@color/AppAdocGray"/>
+
+        </LinearLayout>
+
+        <include layout="@layout/layout_puntosespeciales" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingLeft="0dp"
+            android:paddingRight="0dp"
+            android:layout_marginTop="0dp"
+            android:background="@color/white">
+
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:background="@color/AppAdocGray"/>
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/button_nuestras_tiendas"
+                style="@style/gradient_button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/nuestrastiendas"
+                android:drawableRight="@drawable/ic_darrow"/>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:background="@color/AppAdocGray"/>
+
+        </LinearLayout>
 
 
 
-    </LinearLayout>
+
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            />
+
+        </LinearLayout>
     </ScrollView>
 </FrameLayout>
