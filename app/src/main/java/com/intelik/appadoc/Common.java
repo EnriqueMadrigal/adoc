@@ -6,6 +6,10 @@ import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 import android.util.Log;
+import android.widget.SimpleCursorAdapter;
+import android.widget.Spinner;
+
+import com.intelik.appadoc.adapters.CustomAdapter;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -46,12 +50,15 @@ public class Common {
     public String tipo_documento_identidad_c = "";
     public Boolean filtro_sync_market_c = false;
     public String pertenece_programa_c = "1";
+    public String no_documento_c = "";
 
     public String Token = "";
     public String RefreshToken = "";
     public Date TokenTime;
     public int token_expires_in = 0;
     public String password = "";
+
+    public List<String> marcas_favoritas_c;
 
     public int Curpage = 0;
 
@@ -105,6 +112,7 @@ public class Common {
     {
         // Constructor hidden because this is a singleton
         user = new User_Intelik();
+        //this.marcas_favoritas_c = new ArrayList<String>();
     }
 
     public static ArrayList<Custom> getDocumentos(int pais)
@@ -326,6 +334,31 @@ public class Common {
 
             return curUser;
         }
+
+
+    public static boolean isNumeric(String str)
+    {
+        try
+        {
+            int d = Integer.parseInt(str);
+        }
+        catch(NumberFormatException nfe)
+        {
+            return false;
+        }
+        return true;
+    }
+
+    public static void selectSpinnerItemByValue(Spinner spnr, int value) {
+        CustomAdapter adapter = (CustomAdapter) spnr.getAdapter();
+        for (int position = 0; position < adapter.getCount(); position++) {
+     //       if(adapter.getItemId(position) == value) {
+            if(adapter.getItemId(position) == value) {
+                spnr.setSelection(position);
+                return;
+            }
+        }
+    }
 
 
 

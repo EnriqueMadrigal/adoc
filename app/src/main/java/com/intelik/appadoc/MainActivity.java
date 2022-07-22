@@ -131,8 +131,13 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
                 datos.first_name = contacto.first_name;
                 datos.last_name = contacto.last_name;
                 datos.email1 = contacto.email1;
-                datos.tipo_documento_identidad_c = contacto.tipo_documento_identidad_c;
+                //datos.tipo_documento_identidad_c = contacto.tipo_documento_identidad_c;
                 datos.assigned_user_id = contacto.id;
+                datos.primary_address_country = contacto.primary_address_country;
+                datos.marcas_favoritas_c = contacto.marcas_favoritas_c;
+                datos.doc_identidad_c = contacto.doc_identidad_c;
+                datos.no_documento_c = contacto.no_documento_c;
+
 
                 //datos.doc_identidad_c = contacto.do
 

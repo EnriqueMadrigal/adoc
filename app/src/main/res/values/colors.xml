@@ -14,6 +14,20 @@
     <color name="AppAdocYellow">#F8B920</color>
     <color name="AppAdocBlue">#61C4E3</color>
 
+
+    <color name="AppAdocBlue1">#349ac1</color>
+    <color name="AppAdocGreen1">#ccea86</color>
+    <color name="AppAdocBlue2">#5dc9f3</color>
+    <color name="AppAdocOrange1">#f89e43</color>
+
+
+    349ac1
+    cceb86
+    5dc9f3
+    f89e43
+
+
+
     <color name="transparent">#00ffffff</color>
 
 

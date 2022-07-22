@@ -5,12 +5,14 @@
 
 
     <LinearLayout
+        android:id="@+id/stack_tablapuntos"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        android:visibility="gone">
 
 
     <LinearLayout
@@ -55,17 +57,19 @@
 
 
                 <TextView
-                    style="@style/Title1"
+                    android:id="@+id/puntos_parasubir"
+                    style="@style/Title2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="250 pts"/>
 
 
                 <TextView
+                    android:id="@+id/puntos_parasubir_desc"
                     style="@style/Title5"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="para subir a ORO"/>
+                    android:text="@string/parasubirdenivel"/>
 
 
 
@@ -110,17 +114,19 @@
 
 
                 <TextView
-                    style="@style/Title1"
+                    android:id="@+id/puntos_redimidos"
+                    style="@style/Title2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="250 pts" />
 
 
                 <TextView
+                    android:id="@+id/puntos_redimidos_desc"
                     style="@style/Title5"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="en nivel Plata" />
+                    android:text="@string/puntos" />
 
 
             </LinearLayout>
@@ -172,24 +178,24 @@
                         style="@style/Title5"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/actualmentetienes"/>
+                        android:text="@string/estasaunavance"/>
 
 
 
                     <TextView
-                        style="@style/Title1"
+                        android:id="@+id/puntos_tienes"
+                        style="@style/Title2"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="60%"/>
 
 
                     <TextView
+                        android:id="@+id/puntos_tienes_desc"
                         style="@style/Title5"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="del nivel Plata"/>
-
-
+                        android:text="@string/entunivelactual"/>
 
 
                 </LinearLayout>
@@ -224,25 +230,6 @@
                     android:orientation="vertical">
 
 
-                    <TextView
-                        style="@style/Title6"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/puntiosespeciales" />
-
-
-                    <TextView
-                        style="@style/Title7"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="30 de jul" />
-
-
-                    <TextView
-                        style="@style/Title6"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/redimelosya" />
 
 
                 </LinearLayout>

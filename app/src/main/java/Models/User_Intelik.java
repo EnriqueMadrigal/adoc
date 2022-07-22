@@ -1,6 +1,8 @@
 package Models;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 public class User_Intelik {
 
@@ -25,12 +27,28 @@ public class User_Intelik {
     public String primary_address_country;
     public String tipo_documento_identidad_c;
     public String doc_identidad_c;
+    public String no_documento_c;
 
     public String nivel_del_cliente_c;
     public String nivel_anterior_c;
+    public List<String> marcas_favoritas_c;
+
+
+
     public String puntos_disponibles_c;
     public String puntos_redimidos_c;
     public String puntos_acumulados_c;
+
+    public String puntos_disponibles_promo_c;
+    public String puntos_acumulados_promo_c;
+    public String puntos_redimidos_promo_c;
+
+
+    public String avance_nivel_c;
+    public String puntos_mantener_nivel_c;
+    public String porcentaje_subir_c;
+    public String puntos_subir_nivel_c;
+
 
 public User_Intelik()
 {
@@ -57,6 +75,18 @@ public User_Intelik()
     this.tipo_documento_identidad_c= "";
     this.doc_identidad_c= "";
     this.nivel_del_cliente_c = "";
+
+    this.puntos_disponibles_promo_c = "";
+    this.puntos_acumulados_promo_c = "";
+    this.puntos_redimidos_promo_c = "";
+
+    this.primary_address_country  = "";
+    this.tipo_documento_identidad_c  = "";
+    this.doc_identidad_c  = "";
+    this.no_documento_c  = "";
+
+    this.marcas_favoritas_c = new ArrayList<String>();
+
 
 }
 

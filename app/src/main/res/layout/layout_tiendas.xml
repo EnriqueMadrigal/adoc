@@ -7,38 +7,50 @@
 
 
 <LinearLayout
+    android:id="@+id/stack_tiendas"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:paddingLeft="20dp"
     android:paddingRight="20dp"
     android:orientation="vertical"
-    android:gravity="center">
+    android:gravity="center"
+    android:visibility="gone">
 
     <ImageView
+        android:id="@+id/tienda_adoc"
+        android:clickable="true"
         android:layout_width="220dp"
         android:layout_height="wrap_content"
         android:src="@drawable/adoc_logo"
         android:layout_marginTop="10dp"/>
 
     <ImageView
+        android:id="@+id/tienda_cat"
+        android:clickable="true"
         android:layout_width="220dp"
         android:layout_height="wrap_content"
         android:src="@drawable/cat_logo"
         android:layout_marginTop="10dp"/>
 
     <ImageView
+        android:id="@+id/tienda_hush"
+        android:clickable="true"
         android:layout_width="220dp"
         android:layout_height="wrap_content"
         android:src="@drawable/hushpupies_logo"
         android:layout_marginTop="10dp"/>
 
     <ImageView
+        android:id="@+id/tienda_north"
+        android:clickable="true"
         android:layout_width="220dp"
         android:layout_height="wrap_content"
         android:src="@drawable/nothface_logo"
         android:layout_marginTop="10dp"/>
 
     <ImageView
+        android:id="@+id/tienda_par2"
+        android:clickable="true"
         android:layout_width="220dp"
         android:layout_height="wrap_content"
         android:src="@drawable/par2_logo"

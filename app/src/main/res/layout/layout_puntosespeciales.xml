@@ -5,22 +5,272 @@
 
 
     <LinearLayout
+        android:id="@+id/stack_puntosespeciales"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        android:visibility="gone">
 
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recycler_especiales"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="160dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginBottom="10dp"
-            />
+            android:layout_height="100dp"
+            android:orientation="horizontal"
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp"
+            android:layout_marginTop="20dp"
+            android:background="@color/white"
+            android:weightSum="1">
 
+
+
+            <RelativeLayout
+                android:layout_height="match_parent"
+                android:layout_width="0dp"
+                android:layout_weight="0.48">
+
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/puntos_esp_left_up" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:gravity="center"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp">
+
+                    <TextView
+                        style="@style/Title8"
+                        android:gravity="center"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:breakStrategy="balanced"
+                        android:text="@string/puntos"/>
+
+
+                    <TextView
+                        style="@style/Title8"
+                        android:gravity="center"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:breakStrategy="balanced"
+                        android:text="@string/promocionales"/>
+
+
+                    <TextView
+                        style="@style/Title8"
+                        android:gravity="center"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:breakStrategy="balanced"
+                        android:text="@string/disponibles"/>
+
+
+
+
+
+                    <TextView
+                        android:id="@+id/puntos_esp_parasubir"
+                        style="@style/Title2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="250 pts"/>
+
+
+
+
+
+
+                </LinearLayout>
+
+
+            </RelativeLayout>
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.04"/>
+
+
+            <RelativeLayout
+                android:layout_height="match_parent"
+                android:layout_width="0dp"
+                android:layout_weight="0.48">
+
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/puntos_esp_right_up" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+
+                    <TextView
+                        style="@style/Title5"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/puntos" />
+
+
+                    <TextView
+                        style="@style/Title5"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/acumulados" />
+
+
+                    <TextView
+                        android:id="@+id/puntos_esp_tienes"
+                        style="@style/Title2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="250 pts" />
+
+
+
+
+                </LinearLayout>
+
+
+            </RelativeLayout>
+
+
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:orientation="horizontal"
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="20dp"
+
+            android:background="@color/white"
+            android:weightSum="1">
+
+
+
+            <RelativeLayout
+                android:layout_height="match_parent"
+                android:layout_width="0dp"
+                android:layout_weight="0.48">
+
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/puntos_esp_left_bottom" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+
+                    <TextView
+                        style="@style/Title5"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/puntos" />
+
+
+                    <TextView
+                        style="@style/Title5"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/redimidos" />
+
+
+                    <TextView
+                        android:id="@+id/puntos_esp_redimidos"
+                        style="@style/Title2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="60%" />
+
+
+                </LinearLayout>
+
+
+            </RelativeLayout>
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.04"/>
+
+
+            <RelativeLayout
+                android:layout_height="match_parent"
+                android:layout_width="0dp"
+                android:layout_weight="0.48">
+
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/puntos_esp_right_bottom" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="20dp"/>
+
+                    <TextView
+                        style="@style/Title5"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="@string/puntosavencer" />
+
+
+
+
+                    <TextView
+                        style="@style/Title6"
+                        android:visibility="gone"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/redimelosya" />
+
+
+                </LinearLayout>
+
+
+            </RelativeLayout>
+
+
+
+
+        </LinearLayout>
 
 
 

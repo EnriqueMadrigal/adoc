@@ -112,6 +112,22 @@
     <string name="actualmentetienes">Actualmente tienes</string>
 
     <string name="redimelosya">¡Redimelos ya!</string>
+    <string name="cuentascon">Cuentas con</string>
+    <string name="promocionales">Promocionales</string>
+    <string name="disponibles">Disponibles</string>
+    <string name="redimidos">Redimidos</string>
+    <string name="acumulados">Acumulados</string>
+    <string name="puntospromocionalesdisponibles">Puntos promocionales disponibles.</string>
+    <string name="puntosavencer">Puntos a vencer en los próximos 30 dias.</string>
+
+
+    <string name="hasacumulado">Has acumulado</string>
+    <string name="entunivelactual">En tu nivel actual.</string>
+    <string name="puntos">Puntos</string>
+    <string name="estasaunavance">Estas a un avance del</string>
+    <string name="parasubirdenivel">Para subir de nivel.</string>
+    <string name="puntosacumulados">Acumulados</string>
+    <string name="vigenciade">Vigencia de</string>
 
 
     <!-- TODO: Remove or change this placeholder text -->

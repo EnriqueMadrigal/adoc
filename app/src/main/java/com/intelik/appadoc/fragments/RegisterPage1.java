@@ -1,6 +1,7 @@
 package com.intelik.appadoc.fragments;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 
@@ -25,6 +26,7 @@ import android.widget.TextView;
 
 import com.intelik.appadoc.Common;
 import com.intelik.appadoc.R;
+import com.intelik.appadoc.Terminos;
 import com.intelik.appadoc.adapters.CustomAdapter;
 import com.intelik.appadoc.interfaces.NavigationInterface;
 
@@ -101,6 +103,7 @@ public class RegisterPage1 extends Fragment implements  View.OnClickListener{
     private boolean checked_politica;
     private boolean checked_terminos;
 
+    private TextView text_terminos;
 
     private NavigationInterface navigationInterface;
 
@@ -149,9 +152,12 @@ public class RegisterPage1 extends Fragment implements  View.OnClickListener{
         _cpassword = (EditText) _view.findViewById(R.id.input_cpassword);
         check_terminos = (ImageButton) _view.findViewById(R.id.check_terminos);
         check_politica = (ImageButton) _view.findViewById(R.id.check_politica);
+        text_terminos = (TextView) _view.findViewById(R.id.text_terminos);
+
 
         check_politica.setOnClickListener(this);
         check_terminos.setOnClickListener(this);
+        text_terminos.setOnClickListener(this);
 
 
         _documentos = new ArrayList<>();
@@ -475,6 +481,12 @@ public class RegisterPage1 extends Fragment implements  View.OnClickListener{
                 }
 
                 break;
+
+            case R.id.text_terminos:
+                Intent intent
+                        = new Intent(MyContext, Terminos.class);
+                startActivity(intent);
+
 
 
             default:

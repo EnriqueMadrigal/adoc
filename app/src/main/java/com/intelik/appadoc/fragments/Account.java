@@ -55,6 +55,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseUser;
 import com.intelik.appadoc.utils.HttpClient;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 
@@ -91,8 +92,8 @@ public class Account extends Fragment implements  View.OnClickListener{
 
     private EditText input_account_numdocumento;
     private EditText input_account_phone;
-    private EditText input_account_password;
-    private EditText input_account_cpassword;
+    //private EditText input_account_password;
+    //private EditText input_account_cpassword;
 
 
     //private CountryViewModel countries;
@@ -132,7 +133,7 @@ public class Account extends Fragment implements  View.OnClickListener{
 
     private Button saveChanges;
 
-
+    private List<String> marcas_favoritas;
 
     private NavigationInterface navigationInterface;
     private FirebaseAuth mAuth;
@@ -189,8 +190,8 @@ public class Account extends Fragment implements  View.OnClickListener{
 
         input_account_numdocumento = (EditText) _view.findViewById(R.id.input_account_numdocumento);
         input_account_phone = (EditText) _view.findViewById(R.id.input_account_phone);
-        input_account_password = (EditText) _view.findViewById(R.id.input_account_password);
-        input_account_cpassword = (EditText) _view.findViewById(R.id.input_account_cpassword);
+        //input_account_password = (EditText) _view.findViewById(R.id.input_account_password);
+        //input_account_cpassword = (EditText) _view.findViewById(R.id.input_account_cpassword);
 
         Sp_countries = (Spinner) _view.findViewById(R.id.input_spinner_countries);
         sp_documentos = (Spinner) _view.findViewById(R.id.input_spinner_documentos2);
@@ -224,19 +225,46 @@ public class Account extends Fragment implements  View.OnClickListener{
 //        fechanac.setText(usuario.birthday);
 
 
+        marcas_favoritas = new ArrayList<String>();
 
         name.setText(datos.first_name);
         lastname.setText(datos.last_name);
         fechanac.setText(datos.birthdate);
 
-        String curPais = datos.country;
+        String curPais = datos.primary_address_country;
+        int Pais_id = 0;
 
 
-        _documentos = new ArrayList<>();
-        _documentos = Common.getDocumentosTodos();
+
 
         _paises = new ArrayList<>();
         _paises = Common.getCountries();
+
+        for (Custom pais: _paises) {
+            if (pais.get_name().equals(curPais))
+            {
+                Pais_id = pais.get_id();
+            }
+
+        }
+
+
+        _documentos = new ArrayList<>();
+        _documentos = Common.getDocumentos(Pais_id);
+
+        String curDoc = datos.doc_identidad_c;
+        int Doc_id = 0;
+
+        for (Custom doc: _documentos) {
+            if (doc.get_name().equals(curDoc))
+            {
+                Doc_id = doc.get_id();
+            }
+
+        }
+
+
+
 
         //countries = new ViewModelProvider(this).get(CountryViewModel.class);
 
@@ -249,7 +277,46 @@ public class Account extends Fragment implements  View.OnClickListener{
         Sp_countries.setAdapter(_customAdapter);
 
 
-        input_account_numdocumento.setText(datos.doc_identidad_c);
+        Common.selectSpinnerItemByValue(Sp_countries, Pais_id);
+        Common.selectSpinnerItemByValue(sp_documentos, Doc_id);
+
+
+
+        for (String marca: datos.marcas_favoritas_c)
+        {
+
+            switch (marca) {
+                case "ADOC":
+                    checked1 = true;
+                    account_check1.setImageResource(R.drawable.check_on);
+                    break;
+
+                case "Hush Puppies":
+                    checked2 = true;
+                    account_check2.setImageResource(R.drawable.check_on);
+                    break;
+
+                case "CAT":
+                    checked3 = true;
+                    account_check3.setImageResource(R.drawable.check_on);
+                    break;
+
+                case "PAR2":
+                    checked4 = true;
+                    account_check4.setImageResource(R.drawable.check_on);
+                    break;
+
+                case "The North Face":
+                    checked5 = true;
+                    account_check5.setImageResource(R.drawable.check_on);
+                    break;
+
+
+            }
+
+        }
+
+        input_account_numdocumento.setText(datos.no_documento_c);
 
         fechanac.setText(datos.birthdate);
         input_account_phone.setText(datos.phone_mobile);
@@ -512,37 +579,38 @@ public class Account extends Fragment implements  View.OnClickListener{
             return;
         }
 
+        //Marcas favoritas
+
+        //["ADOC","PAR2","CAT","Hush Puppies","The North Face"]
+
+        if (checked1)
+        {
+            //Adoc
+            marcas_favoritas.add("ADOC");
+        }
+
+        if (checked2) {marcas_favoritas.add("Hush Puppies");}
+        if (checked3) {marcas_favoritas.add("CAT");}
+        if (checked4) {marcas_favoritas.add("PAR2");}
+        if (checked5) {marcas_favoritas.add("The North Face");}
 
 
 
 
         //String email = _email.getText().toString();
-        String password = input_account_password.getText().toString();
-        String cpassword = input_account_cpassword.getText().toString();
+
         String fecha_nac = fechanac.getText().toString();
 
+        /*
         if (fecha_nac.length()<2)
         {
             Common.showWarningDialog(MyContext.getResources().getString(R.string.aviso),MyContext.getResources().getString(R.string.tufecha), MyContext);
             return;
         }
-
+*/
 
 
 /*
-        if(email.length() == 0)
-        {
-            Common.showWarningDialog(MyContext.getResources().getString(R.string.aviso),MyContext.getResources().getString(R.string.tuemail), MyContext);
-            return;
-        }
-
-
-        if (!Common.isValidMail(email))
-        {
-            Common.showWarningDialog(MyContext.getResources().getString(R.string.aviso),MyContext.getResources().getString(R.string.tuemailinvalido), MyContext);
-            return;
-        }
-*/
 
     if (password.length() >1) {
         if (password.length() < 8) {
@@ -558,7 +626,7 @@ public class Account extends Fragment implements  View.OnClickListener{
 
 
     newPassword = password;
-
+*/
 
 
 
@@ -573,7 +641,7 @@ public class Account extends Fragment implements  View.OnClickListener{
         datos.phone_mobile = input_account_phone.getText().toString();
         datos.birthdate =fecha_nac;
 
-        datos.password = password;
+        //datos.password = password;
 
         Common.saveUserValue(MyContext);
 
@@ -582,17 +650,20 @@ public class Account extends Fragment implements  View.OnClickListener{
 
 
 
-        String[] parts = fecha_nac.split("/");
+        String Birthday = "";
 
-        String year = parts[2].trim();
-        String month = parts[1].trim();
-        String day = parts[0].trim();
+        if (fecha_nac.length()>6) {
+            String[] parts = fecha_nac.split("/");
 
-        if (month.length() ==1) month = "0" + month;
-        if (day.length() ==1) day = "0" + day;
+            String year = parts[2].trim();
+            String month = parts[1].trim();
+            String day = parts[0].trim();
 
-        String Birthday = year + "-" + month + "-" + day;
+            if (month.length() == 1) month = "0" + month;
+            if (day.length() == 1) day = "0" + day;
 
+            Birthday = year + "-" + month + "-" + day;
+        }
 
         SugarContact user = new SugarContact();
 
@@ -610,6 +681,13 @@ public class Account extends Fragment implements  View.OnClickListener{
         user.estado_civil_c = "";
         user.primary_address_state = "";
         user.id_user = datos.assigned_user_id;
+
+        String[] marcas = new String[marcas_favoritas.size()];
+        for(int i=0;i<marcas_favoritas.size();i++){
+            marcas[i] = marcas_favoritas.get(i);
+        }
+
+        user.marcas_favoritas_c = marcas;
 
         new SugarUpdate(user).execute();
 
@@ -695,7 +773,7 @@ private void UpdatePassword()
                 jsonUser.put("primary_address_country", sugarUser.primary_address_country);
                 jsonUser.put("id", sugarUser.id_user);
 
-
+                jsonUser.put("marcas_favoritas_c",new JSONArray(marcas_favoritas));
 
 
                 jsonParam.put("data", jsonUser);

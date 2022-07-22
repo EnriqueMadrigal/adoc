@@ -2,7 +2,10 @@ package com.intelik.appadoc.fragments;
 
 import android.app.AlertDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.annotation.Nullable;
@@ -13,13 +16,18 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.preference.PreferenceManager;
+import android.text.Layout;
+import android.text.method.PasswordTransformationMethod;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.intelik.appadoc.Common;
@@ -63,15 +71,14 @@ public class MainFragment extends Fragment {
     private RecyclerView _recyclerview;
     private LinearLayoutManager _linearLayoutManager;
 
-    private RecyclerView _recyclerview1;
-    private LinearLayoutManager _linearLayoutManager1;
+
 
     //private MirPuntosAdapter _adapter;
     private MainQuestionsAdapter _adapter;
     private EspecialesAdapter _adapter1;
 
     private ArrayList<Custom> _mispuntos;
-    private ArrayList<Custom> _mispuntos_especiales;
+
 
     private ArrayList<Custom> _mispreguntas;
 
@@ -86,6 +93,41 @@ public class MainFragment extends Fragment {
     private TextView main_currentlevel;
 
     private ImageView image_meter;
+
+    private androidx.appcompat.widget.AppCompatButton button_tablapuntos;
+    private LinearLayout stack_puntos;
+    private boolean isVisible_stack_puntos = false;
+
+    private androidx.appcompat.widget.AppCompatButton button_puntosespeciales;
+    private LinearLayout stack_puntosespeciale;
+    private boolean isVisible_stack_puntosespeciales = false;
+
+    private androidx.appcompat.widget.AppCompatButton button_tiendas;
+    private LinearLayout stack_tiendas;
+    private boolean isVisible_tiendas = false;
+
+
+    private TextView puntos_parasubir;
+    private TextView puntos_parasubir_desc;
+
+    private TextView puntos_redimidos;
+    private TextView puntos_redimidos_desc;
+
+    private TextView puntos_tienes;
+    private TextView puntos_tienes_desc;
+
+    private TextView puntos_esp_parasubir;
+    private TextView puntos_esp_redimidos;
+    private TextView puntos_esp_tienes;
+    //private TextView puntos_esp_vigencia;
+
+
+    private ImageView tienda_adoc;
+    private ImageView tienda_cat;
+    private ImageView tienda_hush;
+    private ImageView tienda_north;
+    private ImageView tienda_par2;
+
 
 
     public MainFragment() {
@@ -131,7 +173,6 @@ public class MainFragment extends Fragment {
         mainTitle = (TextView) _view.findViewById(R.id.fragment_mainTItle);
 
         _recyclerview = (RecyclerView) _view.findViewById(R.id.recycler_main);
-        _recyclerview1 = (RecyclerView) _view.findViewById(R.id.recycler_especiales);
 
         main_currentpoints = (TextView) _view.findViewById(R.id.main_currentpoints);
         main_currentlevel = (TextView) _view.findViewById(R.id.main_currentlevel);
@@ -142,32 +183,48 @@ public class MainFragment extends Fragment {
         puntos = new ViewModelProvider(this).get(MisPuntosViewModel.class);
         preguntas = new ViewModelProvider(this).get(MisPreguntasViewModel.class);
 
+        button_tablapuntos = (androidx.appcompat.widget.AppCompatButton) _view.findViewById(R.id.button_tablapuntos);
+        stack_puntos = (LinearLayout) _view.findViewById(R.id.stack_tablapuntos);
+
+        button_puntosespeciales = (androidx.appcompat.widget.AppCompatButton) _view.findViewById(R.id.button_puntos_especiales);
+        stack_puntosespeciale = (LinearLayout) _view.findViewById(R.id.stack_puntosespeciales);
+
+        button_tiendas = (androidx.appcompat.widget.AppCompatButton) _view.findViewById(R.id.button_nuestras_tiendas);
+        stack_tiendas = (LinearLayout) _view.findViewById(R.id.stack_tiendas);
+
+
+        //Tabla de puntos
+        puntos_parasubir = (TextView) _view.findViewById(R.id.puntos_parasubir);
+        puntos_parasubir_desc = (TextView) _view.findViewById(R.id.puntos_parasubir_desc);
+
+        puntos_redimidos = (TextView) _view.findViewById(R.id.puntos_redimidos);
+        puntos_redimidos_desc = (TextView) _view.findViewById(R.id.puntos_redimidos_desc);
+
+        puntos_tienes = (TextView) _view.findViewById(R.id.puntos_tienes);
+        puntos_tienes_desc = (TextView) _view.findViewById(R.id.puntos_tienes_desc);
+
+        //PUntos Especiales
+        puntos_esp_parasubir = (TextView) _view.findViewById(R.id.puntos_esp_parasubir);
+        puntos_esp_redimidos = (TextView) _view.findViewById(R.id.puntos_esp_redimidos);
+        puntos_esp_tienes = (TextView) _view.findViewById(R.id.puntos_esp_tienes);
+        //puntos_esp_vigencia = (TextView) _view.findViewById(R.id.puntos_esp_vigencia);
+
+        tienda_adoc = (ImageView) _view.findViewById(R.id.tienda_adoc);
+        tienda_cat = (ImageView) _view.findViewById(R.id.tienda_cat);
+        tienda_hush = (ImageView) _view.findViewById(R.id.tienda_hush);
+        tienda_north = (ImageView) _view.findViewById(R.id.tienda_north);
+        tienda_par2 = (ImageView) _view.findViewById(R.id.tienda_par2);
+
+
+
 
 
         _mispuntos = new ArrayList<>();
         _mispreguntas = new ArrayList<>();
-        _mispuntos_especiales = new ArrayList<>();
-
-        //Agregar los puntos especiales
-        Custom esp1 = new Custom();
-        esp1.set_name("Gánate $5.00 de descuento en tu próxima compra");
-        esp1.set_desc("Válido hasta el 30 de julio, 2022");
-        esp1.set_value1(1000);
 
 
-        Custom esp2 = new Custom();
-        esp2.set_name("Gánate $10.00 de descuento en tu próxima compra");
-        esp2.set_desc("Válido hasta el 30 de julio, 2022");
-        esp2.set_value1(2000);
 
-        Custom esp3 = new Custom();
-        esp3.set_name("Gánate $15.00 de descuento en tu próxima compra");
-        esp3.set_desc("Válido hasta el 30 de julio, 2022");
-        esp3.set_value1(2000);
 
-        _mispuntos_especiales.add(esp1);
-        _mispuntos_especiales.add(esp2);
-        _mispuntos_especiales.add(esp3);
 
 
 
@@ -320,14 +377,8 @@ public class MainFragment extends Fragment {
 
 
 
-        _adapter1 = new EspecialesAdapter(getActivity(), _mispuntos_especiales, new IViewHolderClick() {
-            @Override
-            public void onClick(int position) {
-            }
 
-        });
-
-                contactos = new ViewModelProvider(this).get(ContactViewModel.class);
+        contactos = new ViewModelProvider(this).get(ContactViewModel.class);
         String user_email = mAuth.getCurrentUser().getEmail();
 
         contactos.getContacto(user_email).observe(getActivity(), new Observer<User_Intelik>() {
@@ -335,23 +386,49 @@ public class MainFragment extends Fragment {
             public void onChanged(@Nullable User_Intelik contacto) {
                 // update ui.
                 Log.d("RegisterActiviti", "Marcas recibidas");
-                mainTitle.setText("!Hola, " + contacto.first_name );
+                mainTitle.setText("Hola, " + contacto.first_name + "!");
 
                 String Puntos_acumulados = contacto.puntos_acumulados_c;
 
                  int totalPuntos = 0;
-                try{
-                    totalPuntos = Integer.parseInt(Puntos_acumulados);
+                 int totpuntos_parasubir = 0;
+                 int totpuntos_redimidos = 0;
+                 int avance_nivel = 0;
 
-                }
-                catch (NumberFormatException ex){
-                    ex.printStackTrace();
-                }
+                int puntos_disponibles_promo = 0;
+                int puntos_acumulados_promo = 0;
+                int has_redimido = 0;
+                String vigencia_puntos = "Julio";
+
+
+                totalPuntos = Common.isNumeric(contacto.puntos_acumulados_c) ? Integer.parseInt(contacto.puntos_acumulados_c) : 0;
+
+                totpuntos_parasubir = Common.isNumeric(contacto.puntos_subir_nivel_c) ? Integer.parseInt(contacto.puntos_subir_nivel_c) : 0;
+                totpuntos_redimidos = Common.isNumeric(contacto.puntos_redimidos_c) ? Integer.parseInt(contacto.puntos_redimidos_c) : 0;
+                avance_nivel = Common.isNumeric(contacto.avance_nivel_c)  ? Integer.parseInt(contacto.avance_nivel_c) : 0;
+
+                puntos_disponibles_promo = Common.isNumeric(contacto.puntos_disponibles_promo_c) ? Integer.parseInt(contacto.puntos_disponibles_promo_c): 0;
+                puntos_acumulados_promo = Common.isNumeric(contacto.puntos_acumulados_promo_c) ? Integer.parseInt(contacto.puntos_acumulados_promo_c): 0;
+                has_redimido = Common.isNumeric(contacto.puntos_redimidos_promo_c) ? Integer.parseInt(contacto.puntos_redimidos_promo_c): 0;
+
+
+
 
                 main_currentpoints.setText(String.valueOf(totalPuntos) + " pts");
 
                 String curNivel = contacto.nivel_del_cliente_c.toLowerCase();
                 main_currentlevel.setText(contacto.nivel_del_cliente_c);
+
+                puntos_parasubir.setText(String.valueOf(totpuntos_parasubir) + " pts");
+                puntos_redimidos.setText(String.valueOf(totpuntos_redimidos));
+                puntos_tienes.setText(String.valueOf(avance_nivel) + " %");
+
+
+
+                puntos_esp_parasubir.setText(String.valueOf(puntos_disponibles_promo));
+                puntos_esp_redimidos.setText(String.valueOf(has_redimido));
+                puntos_esp_tienes.setText(String.valueOf(puntos_acumulados_promo));
+
 
                 if (curNivel.equals("plata"))
                 {
@@ -385,11 +462,7 @@ public class MainFragment extends Fragment {
         //Recycler1
 
 
-        _linearLayoutManager1 = new LinearLayoutManager( getActivity() , LinearLayoutManager.VERTICAL, false);
 
-        _recyclerview1.setHasFixedSize( true );
-        _recyclerview1.setAdapter( _adapter1 );
-        _recyclerview1.setLayoutManager( _linearLayoutManager1 );
 
 
         // Inflate the layout for this fragment
@@ -403,6 +476,70 @@ public class MainFragment extends Fragment {
         //mainTitle.setText("!Hola, " + name );
 
 
+        button_tablapuntos.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ShowHideStackPuntos();
+            }
+        });
+
+        button_puntosespeciales.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ShowHideStackPuntosEspeciales();
+            }
+        });
+
+        button_tiendas.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ShowHideStackTiendas();
+            }
+        });
+
+
+        tienda_adoc.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://tiendasadoc.com/"));
+                startActivity(browserIntent);
+            }
+        });
+
+        tienda_cat.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://caterpillarca.com/"));
+                startActivity(browserIntent);
+            }
+        });
+
+        tienda_hush.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://hushpuppiesca.com/"));
+                startActivity(browserIntent);
+            }
+        });
+
+        tienda_north.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://thenorthfacecentroamerica.com/"));
+                startActivity(browserIntent);
+            }
+        });
+
+        tienda_par2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://tiendaspar2.com/"));
+                startActivity(browserIntent);
+            }
+        });
+
+
+
         return _view;
     }
 
@@ -411,6 +548,117 @@ public class MainFragment extends Fragment {
         MyContext = context;
         super.onAttach(context);
 
+    }
+
+
+    private void ShowHideStackPuntos()
+    {
+        isVisible_stack_puntos = !isVisible_stack_puntos;
+
+        if (isVisible_stack_puntos)
+        {
+            Drawable img = getContext().getResources().getDrawable(R.drawable.ic_uarrow);
+            button_tablapuntos.setCompoundDrawablesWithIntrinsicBounds(null, null, img, null);
+            stack_puntos.setVisibility(View.VISIBLE);
+            slide_down(MyContext, stack_puntos);
+
+        }
+        else
+        {
+            Drawable img = getContext().getResources().getDrawable(R.drawable.ic_darrow);
+            button_tablapuntos.setCompoundDrawablesWithIntrinsicBounds(null, null, img, null);
+            slide_up(MyContext, stack_puntos);
+            //stack_puntos.setVisibility(View.GONE);
+        }
+
+    }
+
+
+    private void ShowHideStackPuntosEspeciales()
+    {
+        isVisible_stack_puntosespeciales = !isVisible_stack_puntosespeciales;
+
+        if (isVisible_stack_puntosespeciales)
+        {
+            Drawable img = getContext().getResources().getDrawable(R.drawable.ic_uarrow);
+            button_puntosespeciales.setCompoundDrawablesWithIntrinsicBounds(null, null, img, null);
+            stack_puntosespeciale.setVisibility(View.VISIBLE);
+            slide_down(MyContext, stack_puntosespeciale);
+
+        }
+        else
+        {
+            Drawable img = getContext().getResources().getDrawable(R.drawable.ic_darrow);
+            button_puntosespeciales.setCompoundDrawablesWithIntrinsicBounds(null, null, img, null);
+            slide_up(MyContext, stack_puntosespeciale);
+            //stack_puntos.setVisibility(View.GONE);
+        }
+
+    }
+
+    private void ShowHideStackTiendas()
+    {
+        isVisible_tiendas = !isVisible_tiendas;
+
+        if (isVisible_tiendas)
+        {
+            Drawable img = getContext().getResources().getDrawable(R.drawable.ic_uarrow);
+            button_tiendas.setCompoundDrawablesWithIntrinsicBounds(null, null, img, null);
+            stack_tiendas.setVisibility(View.VISIBLE);
+            slide_down(MyContext, stack_tiendas);
+
+        }
+        else
+        {
+            Drawable img = getContext().getResources().getDrawable(R.drawable.ic_darrow);
+            button_tiendas.setCompoundDrawablesWithIntrinsicBounds(null, null, img, null);
+            slide_up(MyContext, stack_tiendas);
+            //stack_puntos.setVisibility(View.GONE);
+        }
+
+    }
+
+
+    public static void slide_down(Context ctx, View v){
+
+        Animation a = AnimationUtils.loadAnimation(ctx, R.anim.slide_down);
+        if(a != null){
+            a.reset();
+            if(v != null){
+                v.clearAnimation();
+                v.startAnimation(a);
+            }
+        }
+    }
+
+    public static void slide_up(Context ctx, View v){
+
+        Animation a = AnimationUtils.loadAnimation(ctx, R.anim.slide_up);
+        if(a != null){
+            a.reset();
+            if(v != null){
+                v.clearAnimation();
+
+                a.setAnimationListener(new Animation.AnimationListener() {
+                    @Override
+                    public void onAnimationStart(Animation animation) {
+
+                    }
+
+                    @Override
+                    public void onAnimationEnd(Animation animation) {
+                        v.setVisibility(View.GONE);
+                    }
+
+                    @Override
+                    public void onAnimationRepeat(Animation animation) {
+
+                    }
+                });
+
+                v.startAnimation(a);
+            }
+        }
     }
 
 

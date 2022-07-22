@@ -1,6 +1,8 @@
 package com.intelik.appadoc.fragments;
 
 import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -10,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
 
 import com.intelik.appadoc.R;
 import com.intelik.appadoc.interfaces.ContactoNavigationInterface;
@@ -37,6 +40,9 @@ public class Contacto extends Fragment {
     private ImageButton contacto_close;
 
     private String TAG = "Contacto_Fragment";
+    private LinearLayout contacto_whatsapp;
+    private LinearLayout contacto_email;
+
 
     public Contacto() {
         // Required empty public constructor
@@ -80,6 +86,9 @@ public class Contacto extends Fragment {
 
         contacto_close = (ImageButton)  _view.findViewById(R.id.contacto_close);
 
+        contacto_whatsapp = (LinearLayout) _view.findViewById(R.id.contacto_whatsapp);
+        contacto_email = (LinearLayout) _view.findViewById(R.id.contacto_email);
+
         contacto_close.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -89,6 +98,23 @@ public class Contacto extends Fragment {
 
             }
 
+        });
+
+
+        contacto_whatsapp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://wa.me/50372752074"));
+                startActivity(browserIntent);
+            }
+        });
+
+        contacto_email.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("mailto:servicioalcliente@empresasadoc.com"));
+                startActivity(browserIntent);
+            }
         });
 
 

@@ -327,7 +327,7 @@ public class ContactViewModel extends ViewModel {
 
 
                     curUser.id =  resultado.getString("id");
-                    curUser.name = resultado.getString("name");
+                    //curUser.name = resultado.getString("name");
                     curUser.email1 = resultado.getString("email1");
 
                     //curUser.description = resultado.getString("description");
@@ -341,6 +341,43 @@ public class ContactViewModel extends ViewModel {
                     curUser.puntos_disponibles_c = resultado.getString("puntos_disponibles_c");
                     curUser.puntos_redimidos_c = resultado.getString("puntos_redimidos_c");
                     curUser.puntos_acumulados_c = resultado.getString("puntos_acumulados_c");
+
+
+                    curUser.puntos_disponibles_promo_c = resultado.getString("puntos_disponibles_promo_c");
+                    curUser.puntos_acumulados_promo_c = resultado.getString("puntos_acumulados_promo_c");
+                    curUser.puntos_redimidos_promo_c = resultado.getString("puntos_redimidos_promo_c");
+
+
+                    curUser.avance_nivel_c = resultado.getString("avance_nivel_c");
+                    curUser.puntos_mantener_nivel_c = resultado.getString("puntos_mantener_nivel_c");
+                    curUser.porcentaje_subir_c = resultado.getString("porcentaje_subir_c");
+                    curUser.puntos_subir_nivel_c = resultado.getString("puntos_subir_nivel_c");
+
+                    curUser.primary_address_country =  resultado.getString("primary_address_country");
+                    curUser.phone_mobile =  resultado.getString("phone_mobile");
+                    curUser.no_documento_c = resultado.getString("no_documento_c");
+                    curUser.doc_identidad_c = resultado.getString("doc_identidad_c");
+
+                    //Obtener las marcas
+                    JSONArray Jarray_marcas = resultado.getJSONArray("marcas_favoritas_c");
+
+                    for(int i = 0; i < Jarray_marcas.length(); i++)
+                        curUser.marcas_favoritas_c.add(Jarray_marcas.getString(i));
+
+
+                    //falta vigencia_puntos_promo_c
+
+                    if (curUser.puntos_redimidos_c.equals("null"))
+                    {
+                        curUser.puntos_redimidos_c = "0";
+                    }
+
+                    if (curUser.puntos_redimidos_promo_c.equals("null"))
+                    {
+                        curUser.puntos_redimidos_promo_c = "0";
+                    }
+
+
 
                     Contacto.postValue(curUser);
 

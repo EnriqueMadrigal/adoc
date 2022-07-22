@@ -19,7 +19,8 @@
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:menu="@menu/navigation_menu"
-        app:itemTextColor="@color/AppAdocGray"
+        app:itemTextColor="@color/botton_nav_color"
+        app:itemIconTint="@color/botton_nav_color"
         app:itemIconSize="@dimen/bottom_navigation_icon_size"
         />
 

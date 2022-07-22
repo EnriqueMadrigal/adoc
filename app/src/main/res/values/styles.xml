@@ -69,6 +69,16 @@
     </style>
 
 
+    <style name="Title8">
+        <item name="android:textSize">13dp</item>
+        <item name="fontStyle">normal</item>
+        <item name="fontWeight">600</item>
+        <item name="fontFamily">sans-serif</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
+
+
+
 
     <style name="InputAccount">
         <item name="android:textSize">18dp</item>
