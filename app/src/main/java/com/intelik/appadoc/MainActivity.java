@@ -35,6 +35,7 @@ import com.google.firebase.auth.FirebaseUser;
 
 import com.google.android.material.navigation.NavigationView;
 import com.intelik.appadoc.fragments.Account;
+import com.intelik.appadoc.fragments.AcercaDe;
 import com.intelik.appadoc.fragments.Alertas;
 import com.intelik.appadoc.fragments.Contacto;
 import com.intelik.appadoc.fragments.MainFragment;
@@ -299,7 +300,21 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
                     public void Cerrar_action() {
                         confirmLogout();
                     }
-                });
+
+                    @Override
+                    public void  AcercaDe_action() {
+
+                        AcercaDe acercaDe = new AcercaDe();
+
+                        getSupportFragmentManager().beginTransaction().setCustomAnimations(android.R.anim.slide_in_left, android.R.anim.slide_out_right).replace(R.id.fragment_containerMain, acercaDe, "AcercaDe").commit();
+
+
+                    }
+
+
+
+
+                    });
 
 
 

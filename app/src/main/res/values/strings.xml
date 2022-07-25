@@ -128,6 +128,17 @@
     <string name="parasubirdenivel">Para subir de nivel.</string>
     <string name="puntosacumulados">Acumulados</string>
     <string name="vigenciade">Vigencia de</string>
+    <string name="acercade">Acerca de</string>
+
+    <string name="puntosadoc">Puntos ADOC (homepage)</string>
+    <string name="preguntasfrecuentes">Preguntas frecuentes</string>
+    <string name="terminos_condiciones">Términos y condiciones</string>
+    <string name="politica_privacidad">Política de privacidad</string>
+
+
+
+
+
 
 
     <!-- TODO: Remove or change this placeholder text -->

@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".fragments.AcercaDe">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        android:background="@color/white">
+
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:orientation="horizontal"
+            android:background="@color/white"
+            android:gravity="start">
+
+            <TextView
+                android:id="@+id/fragment_perfilTItle"
+                style="@style/Title2"
+                android:layout_marginLeft="20dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="@string/hola" />
+
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:background="@color/AppAdocGray"/>
+
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:gravity="center"
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp"
+            android:paddingTop="20dp"
+            android:orientation="vertical">
+
+            <androidx.appcompat.widget.AppCompatButton
+                style="@style/roounded_button_small"
+                android:id="@+id/button_perfil_refiere"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="@string/refiereamino"
+                android:drawableRight="@drawable/network_icon_small"/>
+
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:gravity="center"
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp"
+            android:paddingTop="20dp"
+            android:orientation="vertical">
+
+            <androidx.appcompat.widget.AppCompatButton
+                style="@style/Title2"
+                android:id="@+id/acercade_puntosadoc"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="@string/puntosadoc"
+                android:background="@color/white"
+                android:gravity="center|center_vertical"
+                android:drawablePadding="10dp"
+                android:textAllCaps="false"/>
+
+            <androidx.appcompat.widget.AppCompatButton
+                style="@style/Title2"
+                android:id="@+id/acercade_preguntas"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="@string/preguntasfrecuentes"
+                android:background="@color/white"
+                android:gravity="center|center_vertical"
+                android:drawablePadding="10dp"
+                android:textAllCaps="false"/>
+
+            <androidx.appcompat.widget.AppCompatButton
+                style="@style/Title2"
+                android:id="@+id/acercade_terminos"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="@string/terminos_condiciones"
+                android:background="@color/white"
+                android:gravity="center|center_vertical"
+                android:drawablePadding="10dp"
+                android:textAllCaps="false"/>
+
+
+            <androidx.appcompat.widget.AppCompatButton
+                style="@style/Title2"
+                android:id="@+id/acercade_politica"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="@string/politica_privacidad"
+                android:background="@color/white"
+                android:gravity="center|center_vertical"
+                android:drawablePadding="10dp"
+                android:textAllCaps="false"/>
+
+
+
+
+        </LinearLayout>
+
+
+
+
+
+
+    </LinearLayout>
+
+
+
+</FrameLayout>

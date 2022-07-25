@@ -14,29 +14,22 @@
         android:background="@color/white">
 
 
+
         <LinearLayout
-            android:id="@+id/linearLayout3"
             android:layout_width="match_parent"
-            android:layout_height="140dp"
-            android:layout_marginLeft="4dp"
-            android:layout_marginRight="4dp"
-            android:layout_marginTop="4dp"
-            android:weightSum="1"
+            android:layout_height="48dp"
             android:orientation="horizontal"
-            android:gravity="center"
-            android:layout_marginStart="8dp"
-            android:layout_marginEnd="8dp">
+            android:background="@color/white"
+            android:gravity="start">
 
-            <ImageView
-                android:id="@+id/imageView_perfil"
-                android:layout_width="0dp"
-                android:layout_height="100dp"
-                android:layout_marginStart="8dp"
-                android:layout_marginEnd="8dp"
-                android:layout_weight="0.7"
-                android:src="@drawable/icon_peson"/>
-
-
+            <TextView
+                android:id="@+id/fragment_perfilTItle"
+                style="@style/Title2"
+                android:layout_marginLeft="20dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="@string/hola" />
 
 
         </LinearLayout>
@@ -96,7 +89,7 @@
                 android:gravity="left|center_vertical"
                 android:drawablePadding="10dp"
                 android:textAllCaps="false" />
-            />
+
 
 
 
@@ -127,7 +120,7 @@
                 android:drawablePadding="10dp"
                 android:background="@color/white"
                 android:textAllCaps="false" />
-            />
+
 
 
 
@@ -159,14 +152,36 @@
                 android:drawablePadding="10dp"
                 android:background="@color/white"
                 android:textAllCaps="false" />
-            />
-
-
-
-
 
 
         </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:gravity="center"
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp"
+            android:paddingTop="10dp"
+            android:orientation="vertical">
+
+            <androidx.appcompat.widget.AppCompatButton
+                style="@style/Title2"
+                android:id="@+id/button_perfil_acerca_de"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="@string/acercade"
+                android:drawableLeft="@drawable/ic_info"
+                android:gravity="left|center_vertical"
+                android:drawablePadding="10dp"
+                android:background="@color/white"
+                android:textAllCaps="false" />
+
+
+        </LinearLayout>
+
 
 
 
@@ -190,7 +205,7 @@
              android:background="@color/transparent"
                 android:drawablePadding="10dp"
                 android:textAllCaps="false" />
-            />
+
 
 
 

@@ -8,7 +8,9 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
+import com.intelik.appadoc.Common;
 import com.intelik.appadoc.R;
 import com.intelik.appadoc.interfaces.NavigationInterface;
 import com.intelik.appadoc.interfaces.PerfilNavigationInterface;
@@ -36,7 +38,9 @@ public class Perfil extends Fragment {
     androidx.appcompat.widget.AppCompatButton configurar_alertas;
     androidx.appcompat.widget.AppCompatButton contactanos;
     androidx.appcompat.widget.AppCompatButton cerrar_sesion;
+    androidx.appcompat.widget.AppCompatButton acercade;
 
+    TextView MainTitle;
 
 
     public Perfil() {
@@ -83,6 +87,13 @@ public class Perfil extends Fragment {
         configurar_alertas = (androidx.appcompat.widget.AppCompatButton) _view.findViewById(R.id.button_perfil_alertas);
         contactanos = (androidx.appcompat.widget.AppCompatButton) _view.findViewById(R.id.button_perfil_contacto);
         cerrar_sesion = (androidx.appcompat.widget.AppCompatButton) _view.findViewById(R.id.button_perfil_cerrar);
+        acercade = (androidx.appcompat.widget.AppCompatButton) _view.findViewById(R.id.button_perfil_acerca_de);
+
+        MainTitle = (TextView) _view.findViewById(R.id.fragment_perfilTItle);
+
+        Common datos = Common.getInstance();
+
+        MainTitle.setText("Hola, " + datos.first_name + "!");
 
 
         contactanos.setOnClickListener(new View.OnClickListener() {
@@ -105,6 +116,14 @@ public class Perfil extends Fragment {
             @Override
             public void onClick(View view) {
                 perfilNavigationInterface.Edit_action();
+            }
+        });
+
+
+        acercade.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                perfilNavigationInterface.AcercaDe_action();
             }
         });
 
