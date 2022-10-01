@@ -15,6 +15,7 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.os.Handler;
 import android.preference.PreferenceManager;
 import android.text.Layout;
 import android.text.method.PasswordTransformationMethod;
@@ -43,6 +44,7 @@ import Models.ContactViewModel;
 import Models.Custom;
 import com.intelik.appadoc.interfaces.IViewHolderClick;
 
+import Models.EncuestasViewModel;
 import Models.MisPreguntasViewModel;
 import Models.MisPuntosViewModel;
 import Models.User_Intelik;
@@ -89,6 +91,9 @@ public class MainFragment extends Fragment {
     private ContactViewModel contactos;
     private FirebaseAuth mAuth;
 
+
+    private EncuestasViewModel encuestas;
+
     private TextView main_currentpoints;
     private TextView main_currentlevel;
 
@@ -103,6 +108,7 @@ public class MainFragment extends Fragment {
     private boolean isVisible_stack_puntosespeciales = false;
 
     private androidx.appcompat.widget.AppCompatButton button_tiendas;
+    private androidx.appcompat.widget.AppCompatButton button_refiere;
     private LinearLayout stack_tiendas;
     private boolean isVisible_tiendas = false;
 
@@ -115,12 +121,15 @@ public class MainFragment extends Fragment {
 
     private TextView puntos_tienes;
     private TextView puntos_tienes_desc;
+    private TextView puntos_disponibles_act;
+
 
     private TextView puntos_esp_parasubir;
     private TextView puntos_esp_redimidos;
     private TextView puntos_esp_tienes;
     //private TextView puntos_esp_vigencia;
 
+    private TextView fragment_main_refiereTitle;
 
     private ImageView tienda_adoc;
     private ImageView tienda_cat;
@@ -128,7 +137,11 @@ public class MainFragment extends Fragment {
     private ImageView tienda_north;
     private ImageView tienda_par2;
 
+    private LinearLayout progrees_mainview;
 
+    private Common datos;
+
+    private Boolean errorServer = false;
 
     public MainFragment() {
         // Required empty public constructor
@@ -168,6 +181,8 @@ public class MainFragment extends Fragment {
         View _view;
         _view = inflater.inflate( R.layout.fragment_main, container, false );
 
+        datos = Common.getInstance();
+
         mAuth = FirebaseAuth.getInstance();
 
         mainTitle = (TextView) _view.findViewById(R.id.fragment_mainTItle);
@@ -177,6 +192,7 @@ public class MainFragment extends Fragment {
         main_currentpoints = (TextView) _view.findViewById(R.id.main_currentpoints);
         main_currentlevel = (TextView) _view.findViewById(R.id.main_currentlevel);
         image_meter = (ImageView) _view.findViewById(R.id.image_meter);
+        progrees_mainview = (LinearLayout) _view.findViewById(R.id.progrees_mainview);
 
 
 
@@ -189,6 +205,7 @@ public class MainFragment extends Fragment {
         button_puntosespeciales = (androidx.appcompat.widget.AppCompatButton) _view.findViewById(R.id.button_puntos_especiales);
         stack_puntosespeciale = (LinearLayout) _view.findViewById(R.id.stack_puntosespeciales);
 
+        button_refiere = (androidx.appcompat.widget.AppCompatButton) _view.findViewById(R.id.button_main_refiere);
         button_tiendas = (androidx.appcompat.widget.AppCompatButton) _view.findViewById(R.id.button_nuestras_tiendas);
         stack_tiendas = (LinearLayout) _view.findViewById(R.id.stack_tiendas);
 
@@ -207,6 +224,7 @@ public class MainFragment extends Fragment {
         puntos_esp_parasubir = (TextView) _view.findViewById(R.id.puntos_esp_parasubir);
         puntos_esp_redimidos = (TextView) _view.findViewById(R.id.puntos_esp_redimidos);
         puntos_esp_tienes = (TextView) _view.findViewById(R.id.puntos_esp_tienes);
+        puntos_disponibles_act = (TextView) _view.findViewById(R.id.puntos_disponibles_act);
         //puntos_esp_vigencia = (TextView) _view.findViewById(R.id.puntos_esp_vigencia);
 
         tienda_adoc = (ImageView) _view.findViewById(R.id.tienda_adoc);
@@ -215,7 +233,7 @@ public class MainFragment extends Fragment {
         tienda_north = (ImageView) _view.findViewById(R.id.tienda_north);
         tienda_par2 = (ImageView) _view.findViewById(R.id.tienda_par2);
 
-
+        fragment_main_refiereTitle = (TextView) _view.findViewById(R.id.fragment_main_refiereTitle);
 
 
 
@@ -223,46 +241,31 @@ public class MainFragment extends Fragment {
         _mispreguntas = new ArrayList<>();
 
 
-
-
-
-
-
-        /*
-        _adapter = new MirPuntosAdapter(getActivity(), _mispuntos, new IViewHolderClick() {
+        button_refiere.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(int position) {
+            public void onClick(View view) {
+             Common.sendRefiere(MyContext);
+
+
             }
         });
-        */
+
+        fragment_main_refiereTitle.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Common.sendRefiere(MyContext);
 
 
+            }
+        });
+
+
+        //Ocultar las encuestas
+        /*
         _adapter = new MainQuestionsAdapter(getActivity(), _mispreguntas, new IViewHolderClick() {
             @Override
             public void onClick(int position) {
                 Log.d(TAG, "CLick");
-
-                //Mostrar el dialogo
-
-                AlertDialog.Builder builder = new AlertDialog.Builder(MyContext);
-                builder.setTitle("Envia tu respuesta");
-
-                View viewInflated = LayoutInflater.from(getContext()).inflate(R.layout.dialog_responder, (ViewGroup) getView(), false);
-// Set up the input
-                ImageView  mainImage = (ImageView) viewInflated.findViewById(R.id.dialog_mainimage);
-                TextView mainText = (TextView) viewInflated.findViewById(R.id.dialog_mainquestion);
-                TextView mainPts = (TextView) viewInflated.findViewById(R.id.dialog_points);
-                EditText curResp = (EditText) viewInflated.findViewById(R.id.dialog_inputresp);
-
-                ImageButton closeDialog = (ImageButton) viewInflated.findViewById(R.id.dialog_buttonclose);
-                androidx.appcompat.widget.AppCompatButton sendResp = (androidx.appcompat.widget.AppCompatButton) viewInflated.findViewById(R.id.dialog_responder);
-
-                final AlertDialog dialog = builder.create();
-
-
-                builder.setView(viewInflated);
-                curResp.setText("");
-
 
                 Custom currentCustom = new Custom();
 
@@ -272,63 +275,20 @@ public class MainFragment extends Fragment {
                     }
                 }
 
-
-                if (!currentCustom.getLink().equals(""))
+                if (currentCustom.get_id() == 0)
                 {
-                    String curLink = currentCustom.getLink();
-                    mainPts.setText(String.valueOf(currentCustom.getValue1()));
-
-                    switch (curLink) {
-                        case "example1":
-                            mainImage.setImageResource(R.drawable.example1);
-                            mainText.setText(MyContext.getResources().getString(R.string.question1));
-                            break;
-
-                        case "example2":
-                            mainImage.setImageResource(R.drawable.example2);
-                            mainText.setText(MyContext.getResources().getString(R.string.question2));
-                            break;
-
-                        case "example3":
-                            mainImage.setImageResource(R.drawable.example3);
-                            mainText.setText(MyContext.getResources().getString(R.string.question3));
-                            break;
-                    }
-
-
-
-
-
+                    return;
                 }
 
 
-                final AlertDialog alertDialog = builder.show();
-                //builder.show();
-
-                closeDialog.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                            alertDialog.dismiss();
-                    }
-                });
-
-                sendResp.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        alertDialog.dismiss();
-                    }
-                });
-
-
-
-
-
-
+                String curLink = currentCustom.getLink();
+                Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(curLink));
+                startActivity(browserIntent);
 
             }
         });
-
-
+*/
+//Ocultar las encuestas
 
 
         //Obtener los puntos
@@ -337,7 +297,7 @@ public class MainFragment extends Fragment {
             @Override
             public void onChanged(@Nullable List<Custom> customs) {
                 // update ui.
-                Log.d("RegisterActiviti", "Marcas recibidas");
+                Log.d("RegisterActiviti", "Puntos recibidos");
 
 
 
@@ -353,12 +313,12 @@ public class MainFragment extends Fragment {
         });
 
 //Obtener las preguntas
-
+/*
         preguntas.getPreguntas().observe(getViewLifecycleOwner(), new Observer<List<Custom>>() {
             @Override
             public void onChanged(@Nullable List<Custom> customs) {
                 // update ui.
-                Log.d("RegisterActiviti", "Marcas recibidas");
+                Log.d("RegisterActiviti", "PReguntas recibidas");
 
 
 
@@ -375,18 +335,54 @@ public class MainFragment extends Fragment {
             }
         });
 
+*/
+
+
+
+
+
 
 
 
         contactos = new ViewModelProvider(this).get(ContactViewModel.class);
+
+       //Ocultar las encuestas
+        //encuestas = new ViewModelProvider(this).get(EncuestasViewModel.class);
+
+
         String user_email = mAuth.getCurrentUser().getEmail();
+
+        errorServer = true;
+        Start();
 
         contactos.getContacto(user_email).observe(getActivity(), new Observer<User_Intelik>() {
             @Override
             public void onChanged(@Nullable User_Intelik contacto) {
                 // update ui.
                 Log.d("RegisterActiviti", "Marcas recibidas");
-                mainTitle.setText("Hola, " + contacto.first_name + "!");
+
+                progrees_mainview.setVisibility(View.GONE);
+                errorServer = false;
+
+
+                datos.first_name = contacto.first_name;
+                datos.last_name = contacto.last_name;
+                datos.email1 = contacto.email1;
+                //datos.tipo_documento_identidad_c = contacto.tipo_documento_identidad_c;
+                datos.assigned_user_id = contacto.id;
+                datos.primary_address_country = contacto.primary_address_country;
+                datos.marcas_favoritas_c = contacto.marcas_favoritas_c;
+                datos.doc_identidad_c = contacto.doc_identidad_c;
+                datos.no_documento_c = contacto.no_documento_c;
+                datos.birthdate = contacto.birthdate;
+
+
+                //datos.doc_identidad_c = contacto.do
+
+                Common.saveUserValue(MyContext);
+
+
+                mainTitle.setText(" " + contacto.first_name + "!");
 
                 String Puntos_acumulados = contacto.puntos_acumulados_c;
 
@@ -422,6 +418,7 @@ public class MainFragment extends Fragment {
                 puntos_parasubir.setText(String.valueOf(totpuntos_parasubir) + " pts");
                 puntos_redimidos.setText(String.valueOf(totpuntos_redimidos));
                 puntos_tienes.setText(String.valueOf(avance_nivel) + " %");
+                puntos_disponibles_act.setText(String.valueOf(totalPuntos));
 
 
 
@@ -448,6 +445,23 @@ public class MainFragment extends Fragment {
         });
 
 
+        //Ocultar las encuestas temporalmente
+
+        /*
+        encuestas.getEncuestas().observe(getViewLifecycleOwner(), new Observer<List<Custom>>() {
+            @Override
+            public void onChanged(@Nullable List<Custom> customs) {
+                // update ui.
+                Log.d("RegisterActiviti", "Encuestas recibidas");
+
+                _mispreguntas.addAll(customs);
+
+                _adapter.notifyDataSetChanged();
+            }
+        });
+
+
+
 
         //Recycler
 
@@ -461,7 +475,7 @@ public class MainFragment extends Fragment {
 
         //Recycler1
 
-
+        */  //Ocultar las encuestas
 
 
 
@@ -542,6 +556,33 @@ public class MainFragment extends Fragment {
 
         return _view;
     }
+
+
+    //Timer
+
+    public void Start() {
+        final Handler handler = new Handler();
+        Runnable runnable = new Runnable() {
+            @Override
+            public void run() {
+
+                Log.d("RegisterActiviti", "Timer finalizado");
+
+                if (errorServer) {
+                    progrees_mainview.setVisibility(View.GONE);
+                    Common.showWarningDialog(MyContext.getResources().getString(R.string.aviso), MyContext.getResources().getString(R.string.errorservidor), MyContext);
+                }
+
+                //handler.postDelayed(this, 30000);
+            }
+        };
+
+
+        handler.postDelayed(runnable, 60000);
+    }
+
+
+
 
     @Override
     public void onAttach(Context context) {

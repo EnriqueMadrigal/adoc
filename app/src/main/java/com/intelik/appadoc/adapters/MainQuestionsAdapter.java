@@ -16,6 +16,7 @@ import java.util.ArrayList;
 
 import Models.Custom;
 import com.intelik.appadoc.interfaces.IViewHolderClick;
+import com.squareup.picasso.Picasso;
 
 public class MainQuestionsAdapter extends RecyclerView.Adapter<MainQuestionsAdapter.ViewHolder>{
     private Context _context;
@@ -58,14 +59,31 @@ public class MainQuestionsAdapter extends RecyclerView.Adapter<MainQuestionsAdap
     @Override
     public void onBindViewHolder(MainQuestionsAdapter.ViewHolder holder, final int position) {
         Custom curCustom = _items.get(position);
-        holder.get_labelDescription().setText(String.valueOf(curCustom.get_desc()));
+        holder.get_labelDescription().setText(String.valueOf(curCustom.get_name()));
         int curValue = curCustom.getValue1();
-        holder.get_labelValue().setText(String.valueOf(curValue + " " + "pts"));
+        holder.get_labelValue().setText(String.valueOf(curValue) + " " + "pts");
 
         holder.getButton().setTag(curCustom.get_id());
 
 
-        String curImage = curCustom.getLink();
+        String curImage = curCustom.get_desc();
+
+        if (curImage.length()>6) {
+            Picasso.get()
+                    .load(curImage)
+                    .placeholder(R.drawable.user_placeholder)
+                    //.error(R.drawable.user_placeholder_error)
+                    .into(holder.mainImage);
+        }
+
+        else
+        {
+            holder.mainImage.setImageResource(R.drawable.user_placeholder);
+        }
+
+
+
+        /*
 
         switch (curImage){
 
@@ -82,7 +100,7 @@ public class MainQuestionsAdapter extends RecyclerView.Adapter<MainQuestionsAdap
                 break;
 
         }
-
+    */
 
 
     }

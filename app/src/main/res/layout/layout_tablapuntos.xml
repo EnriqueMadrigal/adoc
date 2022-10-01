@@ -170,7 +170,7 @@
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
                     android:gravity="center"
-                    android:layout_marginTop="10dp"
+                    android:layout_marginTop="5dp"
                     android:layout_marginBottom="10dp">
 
 
@@ -193,8 +193,9 @@
                     <TextView
                         android:id="@+id/puntos_tienes_desc"
                         style="@style/Title5"
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:gravity="center"
                         android:text="@string/entunivelactual"/>
 
 
@@ -218,8 +219,7 @@
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:background="@drawable/puntos_right_bottom"
-                    />
+                    android:background="@drawable/puntos_right_bottom" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -228,6 +228,29 @@
                     android:layout_marginBottom="10dp"
                     android:gravity="center"
                     android:orientation="vertical">
+
+                    <TextView
+                        style="@style/Title6"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/puntosdisponibles"/>
+
+
+                    <TextView
+                        android:id="@+id/puntos_disponibles_act"
+                        style="@style/Title4"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="0"/>
+
+
+                    <TextView
+                        style="@style/Title6"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/puntos"/>
+
+
 
 
 

@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">AppAdoc</string>
+    <string name="app_name">Puntos Adoc</string>
     <string name="email">&#160;&#160;Correo Electrónico *</string>
     <string name="password">&#160;&#160;Contraseña</string>
     <string name="registrate">¡REGÍSTRATE!</string>
@@ -9,7 +9,7 @@
     <string name="nombre">Nombre *</string>
     <string name="apellidos">Apellidos *</string>
     <string name="selecciona">Selecciona tu tienda favorita:</string>
-    <string name="pais">País *</string>
+    <string name="pais">País de residencia *</string>
     <string name="siguiente">Siguiente >></string>
     <string name="nodocumento">Número de Documento *</string>
     <string name="paganterior"><u>« Página Anterior</u></string>
@@ -69,7 +69,7 @@
     <string name="please_input">Por favor ingresa tus datos de registro</string>
 
     <string name="my_points">Mis Puntos</string>
-    <string name="gana">¡Gana 1000 puntos al referir!</string>
+    <string name="gana">¡Gana 100 puntos al referir!</string>
     <string name="hola">¡Hola,</string>
     <string name="plata">Plata</string>
     <string name="nivel">Nivel actual</string>
@@ -122,23 +122,27 @@
 
 
     <string name="hasacumulado">Has acumulado</string>
-    <string name="entunivelactual">En tu nivel actual.</string>
+    <string name="entunivelactual">de avance en tu nivel actual.</string>
     <string name="puntos">Puntos</string>
-    <string name="estasaunavance">Estas a un avance del</string>
+    <string name="estasaunavance">Actualmente tienes un</string>
     <string name="parasubirdenivel">Para subir de nivel.</string>
     <string name="puntosacumulados">Acumulados</string>
     <string name="vigenciade">Vigencia de</string>
     <string name="acercade">Acerca de</string>
+    <string name="masinformacion">Más información</string>
 
-    <string name="puntosadoc">Puntos ADOC (homepage)</string>
+    <string name="puntosadoc">Puntos ADOC</string>
     <string name="preguntasfrecuentes">Preguntas frecuentes</string>
     <string name="terminos_condiciones">Términos y condiciones</string>
     <string name="politica_privacidad">Política de privacidad</string>
 
+    <string name="errorservidor">No fue posible obtener la información..</string>
 
+    <string name="teinvito">te invitó a ser parte de Puntos Adoc</string>
+    <string name="puntosadoces">Puntos Adoc es el programa de lealtad en el que podras acumular y redimir puntos en cualquiera de nuestras marcas.</string>
+    <string name="gana1000">Gana 1000 puntos al regístrarte hoy. Este es el enlace de mi invitación:</string>
 
-
-
+    <string name="default_notification_channel_id">AppAdoc_default_notifications</string>
 
 
     <!-- TODO: Remove or change this placeholder text -->

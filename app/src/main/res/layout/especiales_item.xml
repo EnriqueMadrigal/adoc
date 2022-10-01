@@ -11,20 +11,22 @@
 <LinearLayout
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginTop="10dp"
+    android:layout_marginTop="0dp"
     android:layout_marginBottom="10dp"
-    android:layout_marginLeft="10dp"
-    android:layout_marginRight="10dp"
-    android:orientation="horizontal"
+    android:layout_marginLeft="0dp"
+    android:layout_marginRight="0dp"
+    android:orientation="vertical"
     android:background="@drawable/puntos_especiales">
 
 
     <ImageView
         android:id="@+id/especiales_image"
-        android:layout_width="64dp"
-        android:layout_height="64dp"
-        android:padding="10dp"
-        android:src="@drawable/star1000"/>
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="2dp"
+        android:src="@drawable/star1000"
+        android:scaleType="fitCenter"
+        android:adjustViewBounds="true"/>
 
 
 
@@ -32,13 +34,16 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:layout_marginRight="18dp">
+        android:layout_marginRight="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginBottom="2dp"
+        android:gravity="start">
 
         <TextView
             android:id="@+id/especiales_lblName"
             style="@style/Title2"
             android:layout_width="wrap_content"
-            android:layout_height="45dp"
+            android:layout_height="24dp"
             android:background="@color/white"
             android:text="#"
             android:layout_marginTop="2dp"/>
@@ -48,11 +53,11 @@
             android:id="@+id/especiales_lblDescr"
             style="@style/Title5"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="40dp"
             android:background="@color/white"
             android:text="Ganae"
-            android:layout_marginRight="4dp"
-            android:layout_marginBottom="2dp"/>
+            android:layout_marginRight="0dp"
+            android:layout_marginBottom="0dp"/>
 
 
 
@@ -63,7 +68,7 @@
 
 <View
     android:layout_width="match_parent"
-    android:layout_height="10dp"/>
+    android:layout_height="0dp"/>
 
 
 </LinearLayout>

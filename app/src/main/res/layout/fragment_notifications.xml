@@ -3,14 +3,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:androidx.coordinatorlayout="http://schemas.android.com/apk/res-auto"
     tools:context=".fragments.Notifications">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:paddingLeft="20dp"
-        android:paddingRight="20dp"
         android:background="@color/white"
         android:weightSum="1">
 
@@ -25,10 +24,7 @@
         android:layout_weight="0.15">
 
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="20dp"
-            android:background="@color/AppAdocYellow"/>
+
 
         <TextView
             style="@style/Title1"
@@ -36,19 +32,25 @@
             android:layout_height="wrap_content"
             android:text="@string/my_notificacions"
             />
-
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:background="@color/AppAdocGray"/>
 
 
 
     </LinearLayout>
 
-        <LinearLayout
+
+
+        <androidx.coordinatorlayout.widget.CoordinatorLayout
+            android:id="@+id/coordinatorLayout"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_marginBottom="20dp"
             android:orientation="vertical"
             android:background="@color/white"
-            android:layout_weight="0.65">
+            android:layout_weight="0.80">
 
 
             <androidx.recyclerview.widget.RecyclerView
@@ -58,27 +60,8 @@
                 />
 
 
-        </LinearLayout>
+        </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
-<LinearLayout
-    android:layout_width="match_parent"
-    android:layout_height="0dp"
-    android:layout_weight="0.20"
-    android:orientation="vertical"
-    android:background="@color/white">
-
-        <androidx.appcompat.widget.AppCompatButton
-            style="@style/roounded_button_small"
-            android:id="@+id/button_perfil_refiere"
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:text="@string/refiereamino"
-            android:drawableRight="@drawable/network_icon_small"/>
-
-
-
-
-  </LinearLayout>
 
 
 </LinearLayout>

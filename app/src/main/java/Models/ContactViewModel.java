@@ -230,6 +230,8 @@ public class ContactViewModel extends ViewModel {
                 curUser.puntos_disponibles_c = result.getString("puntos_disponibles_c");
                 curUser.puntos_redimidos_c = result.getString("puntos_redimidos_c");
                 curUser.puntos_acumulados_c = result.getString("puntos_acumulados_c");
+                curUser.birthdate = result.getString("birthdate");
+
 
                 Contacto.postValue(curUser);
 
@@ -329,6 +331,7 @@ public class ContactViewModel extends ViewModel {
                     curUser.id =  resultado.getString("id");
                     //curUser.name = resultado.getString("name");
                     curUser.email1 = resultado.getString("email1");
+                    curUser.birthdate = (resultado.getString("birthdate") != null ?resultado.getString("birthdate") : "");
 
                     //curUser.description = resultado.getString("description");
                     curUser.first_name = resultado.getString("first_name");

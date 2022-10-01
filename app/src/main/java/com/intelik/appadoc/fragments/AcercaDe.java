@@ -1,6 +1,8 @@
 package com.intelik.appadoc.fragments;
 
 import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -8,6 +10,7 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.intelik.appadoc.Common;
 import com.intelik.appadoc.R;
@@ -33,6 +36,13 @@ public class AcercaDe extends Fragment {
     private Context MyContext;
     private String TAG = "AcercaDe";
 
+    private TextView mainTitle;
+
+    private androidx.appcompat.widget.AppCompatButton button_refiere;
+    private androidx.appcompat.widget.AppCompatButton acercade_puntosadoc;
+    private androidx.appcompat.widget.AppCompatButton acercade_preguntas;
+    private androidx.appcompat.widget.AppCompatButton acercade_terminos;
+    private androidx.appcompat.widget.AppCompatButton acercade_politica;
 
 
     public AcercaDe() {
@@ -72,9 +82,68 @@ public class AcercaDe extends Fragment {
         // Inflate the layout for this fragment
         //return inflater.inflate(R.layout.fragment_acerca_de, container, false);
 
+        datos = Common.getInstance();
+
+
+
 
         View _view;
         _view = inflater.inflate( R.layout.fragment_acerca_de, container, false );
+
+    mainTitle = (TextView)  _view.findViewById(R.id.acercade_perfilTItle);
+    button_refiere = (androidx.appcompat.widget.AppCompatButton) _view.findViewById(R.id.button_acercade_refiere);
+
+        acercade_puntosadoc  = (androidx.appcompat.widget.AppCompatButton) _view.findViewById(R.id.acercade_puntosadoc);
+        acercade_preguntas  = (androidx.appcompat.widget.AppCompatButton) _view.findViewById(R.id.acercade_preguntas);
+        acercade_terminos  = (androidx.appcompat.widget.AppCompatButton) _view.findViewById(R.id.acercade_terminos);
+        acercade_politica  = (androidx.appcompat.widget.AppCompatButton) _view.findViewById(R.id.acercade_politica);
+
+
+
+        mainTitle.setText(getString(R.string.masinformacion));
+
+        button_refiere.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Common.sendRefiere(MyContext);
+
+            }
+        });
+
+        acercade_puntosadoc.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(Common.PuntosAdoc_link));
+                startActivity(browserIntent);
+
+            }
+        });
+
+        acercade_preguntas.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(Common.PuntosAdoc_link));
+                startActivity(browserIntent);
+
+            }
+        });
+
+        acercade_terminos.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(Common.PuntosAdoc_link + "terminos-condiciones/"));
+                startActivity(browserIntent);
+
+            }
+        });
+        acercade_politica.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(Common.PuntosAdoc_link + "politicas-privacidad/"));
+                startActivity(browserIntent);
+
+            }
+        });
 
 
 

@@ -175,6 +175,7 @@
 
                 <Spinner
                     style="@style/InputGeneral"
+                    android:focusedByDefault="false"
                     android:id="@+id/spinner_documentos"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
@@ -361,6 +362,8 @@
                     />
 
                 <TextView
+                    android:id="@+id/text_politica"
+                    android:clickable="true"
                     style="@style/Title3"
                     android:paddingStart="20dp"
                     android:layout_width="wrap_content"

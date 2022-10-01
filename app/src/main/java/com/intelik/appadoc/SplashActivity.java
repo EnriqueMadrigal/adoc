@@ -7,6 +7,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.animation.AlphaAnimation;
 import android.widget.ImageView;
 import android.os.Handler;
@@ -16,6 +17,7 @@ import com.google.firebase.auth.AuthResult;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseUser;
+import com.intelik.appadoc.utils.DBHelper;
 
 public class SplashActivity extends AppCompatActivity {
 
@@ -29,6 +31,8 @@ public class SplashActivity extends AppCompatActivity {
 
     private String TAG ="SPLASHActivity";
 
+    private DBHelper db;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,6 +41,59 @@ public class SplashActivity extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
 
         logo = (ImageView) findViewById(R.id.adoc_logo);
+
+        Log.e(TAG, "Iniciando Activity SPLASH");
+
+        Bundle bundle = getIntent().getExtras();
+
+        if (bundle == null){
+
+            Log.e(TAG, "Bundle is null");
+        }
+        else {
+            Log.e(TAG, "Bundle has data");
+        }
+        if (bundle != null) {
+                /*
+            for (String key : bundle.keySet()) {
+                Log.e(TAG, key + " : " + (bundle.get(key) != null ? bundle.get(key) : "NULL"));
+            }
+        */
+
+            if (getIntent().hasExtra("pushnotification")) {
+
+                if (checkUser()) {
+                    Intent intent = new Intent(this, MainActivity.class);
+                    intent.putExtra("pushnotification", "yes");
+                    startActivity(intent);
+                    finish();
+                }
+
+            }
+
+            String title = "";
+            String desc = "";
+            String  image = "";
+
+            if (getIntent().hasExtra("Title")) {
+               title =  getIntent().getExtras().get("Title").toString();
+            }
+
+            if (getIntent().hasExtra("Message")) {
+                desc =  getIntent().getExtras().get("Message").toString();
+            }
+
+            if (getIntent().hasExtra("Image")) {
+                image =  getIntent().getExtras().get("Image").toString();
+            }
+
+            db = new DBHelper(this);
+            db.insertNotification(title,desc,image);
+            db.close();
+            finish();
+
+        }
+
 
         scheduleSplashScreen();
 

@@ -1,9 +1,13 @@
 package com.intelik.appadoc;
 
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
@@ -11,11 +15,14 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 
+import android.Manifest;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
+import android.os.Build;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.util.Log;
@@ -34,6 +41,7 @@ import com.google.firebase.auth.FirebaseUser;
 
 
 import com.google.android.material.navigation.NavigationView;
+import com.google.firebase.messaging.FirebaseMessaging;
 import com.intelik.appadoc.fragments.Account;
 import com.intelik.appadoc.fragments.AcercaDe;
 import com.intelik.appadoc.fragments.Alertas;
@@ -95,7 +103,9 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
 
         Common.getCommonUserValues(context);
       datos = Common.getInstance();
+      datos.sharedContext = context;
 
+      getToken();
 
         // drawer layout instance to toggle the menu icon to open
         // drawer and back button to close drawer
@@ -114,7 +124,7 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         bottomNavigationView.setOnNavigationItemSelectedListener(this);
         bottomNavigationView.setSelectedItemId(R.id.nav_home);
 
-
+/*
 
         contactos = new ViewModelProvider(this).get(ContactViewModel.class);
 
@@ -146,7 +156,7 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
 
             }
         });
-
+*/
 
 
 /*
@@ -209,9 +219,20 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         /////////
             */
 
+        //Revisar si ya se tiene un Token de FireBase
+        String currentToken = Common.getInstance().Token;
+        String savedToken = Common.getInstance().getToken(this);
 
+        if (!currentToken.equals(savedToken)) {
+                Common.getInstance().saveToken(this);
+        }
 
         GotoMain();
+
+        if (getIntent().hasExtra("pushnotification")) {
+        GotoNotificaciones();
+        }
+
 
 
     }
@@ -346,6 +367,28 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
     }
 */
 
+
+    private void getToken(){
+
+        FirebaseMessaging.getInstance().getToken()
+                .addOnCompleteListener(new OnCompleteListener<String>() {
+                    @Override
+                    public void onComplete(@NonNull Task<String> task) {
+                        if (!task.isSuccessful()) {
+                            Log.w(TAG, "Fetching FCM registration token failed", task.getException());
+                            return;
+                        }
+
+                        // Get new FCM registration token
+                        String token = task.getResult();
+                        datos.Token = token;
+
+                    }
+                });
+
+
+    }
+
     public void confirmLogout()
     {
         new AlertDialog.Builder( this )
@@ -412,6 +455,36 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
 
     }
 
+
+/*
+    // Declare the launcher at the top of your Activity/Fragment:
+    private final ActivityResultLauncher<String> requestPermissionLauncher =
+            registerForActivityResult(new ActivityResultContracts.RequestPermission(), isGranted -> {
+                if (isGranted) {
+                    // FCM SDK (and your app) can post notifications.
+                } else {
+                    // TODO: Inform user that that your app will not show notifications.
+                }
+            });
+
+    // ...
+    @RequiresApi(api = Build.VERSION_CODES.M)
+    private void askNotificationPermission() {
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.POST_NOTIFICATIONS) ==
+                PackageManager.PERMISSION_GRANTED) {
+            // FCM SDK (and your app) can post notifications.
+        } else if (shouldShowRequestPermissionRationale(Manifest.permission.POST_NOTIFICATIONS)) {
+            // TODO: display an educational UI explaining to the user the features that will be enabled
+            //       by them granting the POST_NOTIFICATION permission. This UI should provide the user
+            //       "OK" and "No thanks" buttons. If the user selects "OK," directly request the permission.
+            //       If the user selects "No thanks," allow the user to continue without notifications.
+        } else {
+            // Directly ask for the permission
+            requestPermissionLauncher.launch(Manifest.permission.POST_NOTIFICATIONS);
+        }
+    }
+
+*/
 
 
 }

@@ -22,6 +22,7 @@ public class User_Intelik {
     public String phone_mobile;
     public String phone_work;
     public String email1;
+    public String birthdate;
 
 
     public String primary_address_country;

@@ -24,8 +24,8 @@
 
             <ImageButton
                 android:id="@+id/alertas_close"
-                android:layout_width="@dimen/account_button"
-                android:layout_height="@dimen/account_button"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
                 android:src="@drawable/icon_close"
                 android:background="@color/transparent"/>
 
@@ -39,7 +39,7 @@
             android:background="@color/white"
             android:gravity="center"
             android:orientation="horizontal"
-            android:layout_marginTop="40dp">
+            android:layout_marginTop="1dp">
 
             <TextView
                 android:layout_width="wrap_content"
@@ -51,6 +51,10 @@
 
         </LinearLayout>
 
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:background="@color/AppAdocGray"/>
 
         <LinearLayout
             android:layout_width="match_parent"

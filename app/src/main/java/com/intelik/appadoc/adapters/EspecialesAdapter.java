@@ -16,6 +16,7 @@ import java.util.ArrayList;
 
 import Models.Custom;
 import com.intelik.appadoc.interfaces.IViewHolderClick;
+import com.squareup.picasso.Picasso;
 
 public class EspecialesAdapter extends RecyclerView.Adapter<EspecialesAdapter.ViewHolder>{
     private Context _context;
@@ -39,6 +40,22 @@ public class EspecialesAdapter extends RecyclerView.Adapter<EspecialesAdapter.Vi
         return _items.size();
     }
 
+    public void removeItem(int position) {
+        _items.remove(position);
+        notifyItemRemoved(position);
+    }
+
+    public void restoreItem(Custom item, int position) {
+        _items.add(position, item);
+        notifyItemInserted(position);
+    }
+
+    public ArrayList<Custom> getData() {
+        return _items;
+    }
+
+
+
 
     @Override
     public EspecialesAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -61,6 +78,23 @@ public class EspecialesAdapter extends RecyclerView.Adapter<EspecialesAdapter.Vi
 
         holder.get_labelDescription().setText(curCustom.get_desc());
         holder.get_labelName().setText(curCustom.get_name());
+
+        //Si tiene imagen
+
+        if (curCustom.getLink().length()>1) {
+            Picasso.get()
+                    .load(curCustom.getLink())
+                    .placeholder(R.drawable.user_placeholder)
+                    //.error(R.drawable.user_placeholder_error)
+                    .into(holder.mainImage);
+        }
+
+        else
+        {
+            holder.mainImage.setImageResource(R.drawable.user_placeholder);
+        }
+
+        //holder.mainImage.
 
         int curValue = curCustom.getValue1();
 

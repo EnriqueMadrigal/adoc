@@ -25,6 +25,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.intelik.appadoc.Common;
+import com.intelik.appadoc.Politica;
 import com.intelik.appadoc.R;
 import com.intelik.appadoc.Terminos;
 import com.intelik.appadoc.adapters.CustomAdapter;
@@ -104,6 +105,7 @@ public class RegisterPage1 extends Fragment implements  View.OnClickListener{
     private boolean checked_terminos;
 
     private TextView text_terminos;
+    private TextView text_politica;
 
     private NavigationInterface navigationInterface;
 
@@ -153,11 +155,13 @@ public class RegisterPage1 extends Fragment implements  View.OnClickListener{
         check_terminos = (ImageButton) _view.findViewById(R.id.check_terminos);
         check_politica = (ImageButton) _view.findViewById(R.id.check_politica);
         text_terminos = (TextView) _view.findViewById(R.id.text_terminos);
+        text_politica = (TextView) _view.findViewById(R.id.text_politica);
 
 
         check_politica.setOnClickListener(this);
         check_terminos.setOnClickListener(this);
         text_terminos.setOnClickListener(this);
+        text_politica.setOnClickListener(this);
 
 
         _documentos = new ArrayList<>();
@@ -185,7 +189,7 @@ public class RegisterPage1 extends Fragment implements  View.OnClickListener{
         _customAdapter.setDropDownViewResource(R.layout.spinner_item);
         Sp_countries.setAdapter(_customAdapter);
 
-        sp_documentos.setEnabled(false);
+        //sp_documentos.setEnabled(false);
 
         /*
         Custom noselect = new Custom();
@@ -221,11 +225,13 @@ public class RegisterPage1 extends Fragment implements  View.OnClickListener{
 
         _curPos = position;
 
-        _customAdapter1.clear();
-        _documentos.clear();
-        _documentos.addAll(Common.getDocumentos(_curPais));
-        _customAdapter1.notifyDataSetChanged();
-        sp_documentos.setEnabled(true);
+        if (_curPais != 0) {
+            _customAdapter1.clear();
+            _documentos.clear();
+            _documentos.addAll(Common.getDocumentos(_curPais));
+            _customAdapter1.notifyDataSetChanged();
+        }
+        //sp_documentos.setEnabled(true);
 
 
     }
@@ -486,6 +492,11 @@ public class RegisterPage1 extends Fragment implements  View.OnClickListener{
                 Intent intent
                         = new Intent(MyContext, Terminos.class);
                 startActivity(intent);
+
+            case R.id.text_politica:
+                Intent intent2
+                        = new Intent(MyContext, Politica.class);
+                startActivity(intent2);
 
 
 

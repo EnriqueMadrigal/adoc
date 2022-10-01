@@ -25,7 +25,7 @@ public class Custom {
     private int _value1;
 
     public String getLink() {return _link;}
-    public int getValue1() {return -_value1;}
+    public int getValue1() {return _value1;}
 
     public void set_link(String link){this._link = link;}
     public void set_value1(int value){this._value1 = value;}

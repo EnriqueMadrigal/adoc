@@ -517,7 +517,7 @@ public class RegisterActivity extends AppCompatActivity {
         protected void onPreExecute()
         {
             super.onPreExecute();
-            _progressDialog = ProgressDialog.show( context, "Espera un momento..", "Registrando en sugar..", true );
+            _progressDialog = ProgressDialog.show( context, "Espera un momento..", "Registrando en el programa de lealtad..", true );
         }
 
         @Override

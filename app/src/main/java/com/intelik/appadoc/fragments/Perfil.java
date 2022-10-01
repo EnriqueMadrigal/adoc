@@ -1,6 +1,8 @@
 package com.intelik.appadoc.fragments;
 
 import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -39,6 +41,7 @@ public class Perfil extends Fragment {
     androidx.appcompat.widget.AppCompatButton contactanos;
     androidx.appcompat.widget.AppCompatButton cerrar_sesion;
     androidx.appcompat.widget.AppCompatButton acercade;
+    androidx.appcompat.widget.AppCompatButton button_refiere;
 
     TextView MainTitle;
 
@@ -88,12 +91,13 @@ public class Perfil extends Fragment {
         contactanos = (androidx.appcompat.widget.AppCompatButton) _view.findViewById(R.id.button_perfil_contacto);
         cerrar_sesion = (androidx.appcompat.widget.AppCompatButton) _view.findViewById(R.id.button_perfil_cerrar);
         acercade = (androidx.appcompat.widget.AppCompatButton) _view.findViewById(R.id.button_perfil_acerca_de);
+        button_refiere = (androidx.appcompat.widget.AppCompatButton) _view.findViewById(R.id.button_perfil_refiere);
 
         MainTitle = (TextView) _view.findViewById(R.id.fragment_perfilTItle);
 
         Common datos = Common.getInstance();
 
-        MainTitle.setText("Hola, " + datos.first_name + "!");
+        MainTitle.setText(" " + datos.first_name + "!");
 
 
         contactanos.setOnClickListener(new View.OnClickListener() {
@@ -136,6 +140,28 @@ public class Perfil extends Fragment {
             }
         });
 
+        button_refiere.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String mensaje = "!" + datos.first_name + " ";
+                mensaje = mensaje + getString(R.string.teinvito);
+                mensaje = mensaje + "\n";
+                mensaje = mensaje + "\n";
+                mensaje = mensaje + getString(R.string.gana1000);
+                mensaje = mensaje + "\n";
+                mensaje = mensaje + Common.Reviere_link + datos.assigned_user_id;
+
+
+                Intent sendIntent = new Intent();
+                sendIntent.setAction(Intent.ACTION_SEND);
+                sendIntent.putExtra(Intent.EXTRA_TEXT, mensaje);
+                sendIntent.setType("text/plain");
+
+                Intent shareIntent = Intent.createChooser(sendIntent, null);
+                startActivity(shareIntent);
+
+            }
+        });
 
 
 

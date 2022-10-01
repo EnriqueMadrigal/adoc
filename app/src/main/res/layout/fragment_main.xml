@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     tools:context=".fragments.MainFragment">
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
@@ -15,17 +15,20 @@
         android:weightSum="1">
 
         <LinearLayout
+            android:layout_marginTop="20dp"
             android:layout_width="match_parent"
             android:layout_height="48dp"
             android:orientation="horizontal"
-            android:background="@color/AppAdocBlue"
+            android:background="@color/black"
             android:gravity="center">
 
             <TextView
+                android:id="@+id/fragment_main_refiereTitle"
                 style="@style/Title4"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
+                android:clickable="true"
                 android:text="@string/gana" />
 
             <ImageView
@@ -46,6 +49,7 @@
 
     <!-- TODO: Update blank fragment layout -->
     <ScrollView
+        android:layout_marginTop="68dp"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:scrollbarSize="0dp">
@@ -68,16 +72,26 @@
             android:layout_height="48dp"
             android:orientation="horizontal"
             android:background="@color/white"
-            android:gravity="start">
+            android:gravity="center">
 
             <TextView
-                android:id="@+id/fragment_mainTItle"
                 style="@style/Title2"
-                android:layout_marginLeft="20dp"
+                android:layout_marginLeft="0dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:text="@string/hola" />
+
+            <TextView
+                android:id="@+id/fragment_mainTItle"
+                style="@style/Title9"
+                android:layout_marginLeft="0dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="@string/hola" />
+
+
 
 
         </LinearLayout>
@@ -96,7 +110,6 @@
                 android:layout_height="match_parent"
                 android:scaleType="fitCenter"
                 android:src="@drawable/ic_meter_0" />
-
 
         </LinearLayout>
 
@@ -188,6 +201,7 @@
 
 
             </LinearLayout>
+
             <View
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
@@ -207,7 +221,8 @@
             android:layout_marginTop="10dp"
             android:layout_width="match_parent"
             android:layout_height="2dp"
-            android:background="@color/AppAdocGray"/>
+            android:background="@color/AppAdocGray"
+            android:visibility="gone"/>
 
 
     <LinearLayout
@@ -219,7 +234,8 @@
         android:layout_marginRight="20dp"
         android:layout_marginTop="10dp"
         android:gravity="left"
-        android:weightSum="1">
+        android:weightSum="1"
+        android:visibility="gone">
 
         <TextView
             style="@style/Title2"
@@ -249,19 +265,21 @@
 
         <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="360dp"
+        android:layout_height="wrap_content"
         android:orientation="vertical"
         android:paddingLeft="20dp"
         android:paddingRight="20dp"
         android:layout_marginBottom="10dp"
-        android:background="@color/white">
-
+            android:paddingTop="20dp"
+        android:background="@color/white"
+            android:visibility="gone">
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recycler_main"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                 />
+                android:layout_height="match_parent" />
+
+
 
 
         </LinearLayout>
@@ -394,5 +412,25 @@
 
         </LinearLayout>
     </ScrollView>
-    </LinearLayout>
+
+
+        <LinearLayout
+            android:id="@+id/progrees_mainview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:background="#3F000000"
+            android:visibility="visible">
+
+            <ProgressBar
+                android:id="@+id/progressBar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="24dp"
+                />
+
+        </LinearLayout>
+
+
+    </RelativeLayout>
 </FrameLayout>

@@ -3,6 +3,7 @@ package com.intelik.appadoc;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 import android.util.Log;
@@ -57,6 +58,10 @@ public class Common {
     public Date TokenTime;
     public int token_expires_in = 0;
     public String password = "";
+    public Context sharedContext;
+
+
+
 
     public List<String> marcas_favoritas_c;
 
@@ -65,6 +70,11 @@ public class Common {
     public static final String GetContact_link = "https://us-central1-puntos-adoc.cloudfunctions.net/getContact";
     public static final String Register_link = "https://us-central1-puntos-adoc.cloudfunctions.net/saveContact";
     public static final String Update_link = "https://us-central1-puntos-adoc.cloudfunctions.net/updateContact";
+
+    public static final String PuntosAdoc_link = "https://puntosadoc.com/";
+    public static final String Reviere_link = "https://puntosadoc.com/registro?uuid=";
+
+    public static final String Encuestas_link = "https://puntosadoc.com/wp-json/wp/v2/adoc-survey?_embed";
 
 
     public boolean notificaciones_sms = false;
@@ -83,6 +93,7 @@ public class Common {
     public static final String VAR_USER_DOC = "USER_DOC";
     public static final String VAR_USER_PHONE = "USER_PHONE";
 
+    public static final String VAR_USER_TOKEN = "USER_TOKEN";
 
 
     
@@ -148,6 +159,14 @@ public class Common {
                 break;
 
             default:
+                documentos.add(new Custom(1, "CED"));
+                documentos.add(new Custom(2, "DUI"));
+                documentos.add(new Custom(3, "DNI"));
+                documentos.add(new Custom(4, "DPI"));
+                documentos.add(new Custom(5, "PASAPORTE"));
+
+
+
 
             break;
 
@@ -190,7 +209,7 @@ public class Common {
 
         ArrayList<Custom> nuevas_countries = new ArrayList<Custom>();
 
-        nuevas_countries.add(new Custom(0,"País *"));
+        nuevas_countries.add(new Custom(0,"País de residencia *"));
         nuevas_countries.add(new Custom(1,"Costa Rica"));
         nuevas_countries.add(new Custom(2,"El Salvador"));
         nuevas_countries.add(new Custom(3,"Honduras"));
@@ -258,15 +277,56 @@ public class Common {
 
             editor.putString(VAR_USER_GENDER, datos.gender_c);
 
-            if (datos.birthdate.length()!= 0)  editor.putString(VAR_USER_BIRTHDAY, datos.birthdate);
-            if (datos.tipo_documento_identidad_c.length()!= 0)editor.putString(VAR_USER_TYPE_DOC, datos.tipo_documento_identidad_c);
-            if (datos.doc_identidad_c.length()!= 0)editor.putString(VAR_USER_DOC, datos.doc_identidad_c);
-            if (datos.phone_mobile.length()!= 0)editor.putString(VAR_USER_PHONE, datos.phone_mobile);
+            if (datos.birthdate != null) {
+                if (datos.birthdate.length() != 0)
+                    editor.putString(VAR_USER_BIRTHDAY, datos.birthdate);
+            }
 
+            if (datos.tipo_documento_identidad_c != null) {
+                if (datos.tipo_documento_identidad_c.length() != 0)
+                    editor.putString(VAR_USER_TYPE_DOC, datos.tipo_documento_identidad_c);
+            }
+
+            if (datos.doc_identidad_c != null) {
+                if (datos.doc_identidad_c.length() != 0)
+                    editor.putString(VAR_USER_DOC, datos.doc_identidad_c);
+            }
+
+            if (datos.phone_mobile != null) {
+                if (datos.phone_mobile.length() != 0)
+                    editor.putString(VAR_USER_PHONE, datos.phone_mobile);
+            }
 
             editor.commit();
 
         }
+
+
+        public void saveToken(Context context)
+        {
+            SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences( context );
+            SharedPreferences.Editor editor = sharedPref.edit();
+
+            boolean hasChanges = false;
+
+            editor.putString(VAR_USER_TOKEN, this.Token);
+            editor.commit();
+
+        }
+
+
+        public String getToken(Context context)
+        {
+
+            SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences( context );
+            SharedPreferences.Editor editor = sharedPref.edit();
+
+            String dato1 =  sharedPref.getString(VAR_USER_TOKEN,"");
+
+            return dato1;
+
+        }
+
 
 
     public static void saveUserValue(Comm_User usuario, Context context)
@@ -334,6 +394,35 @@ public class Common {
 
             return curUser;
         }
+
+
+        public static void sendRefiere(Context context)
+        {
+
+            Common datos = Common.getInstance();
+
+            String mensaje = datos.first_name + "! ";
+            mensaje = mensaje + context.getString(R.string.teinvito);
+            mensaje = mensaje + "\n";
+            mensaje = mensaje + "\n";
+            mensaje = mensaje + context.getString(R.string.puntosadoces);
+            mensaje = mensaje + "\n";
+            mensaje = mensaje + context.getString(R.string.gana1000);
+            mensaje = mensaje + "\n";
+            mensaje = mensaje + Common.Reviere_link + datos.assigned_user_id;
+
+            Intent sendIntent = new Intent();
+            sendIntent.setAction(Intent.ACTION_SEND);
+            sendIntent.putExtra(Intent.EXTRA_TEXT, mensaje);
+            sendIntent.setType("text/plain");
+
+            Intent shareIntent = Intent.createChooser(sendIntent, null);
+            context.startActivity(shareIntent);
+
+
+
+        }
+
 
 
     public static boolean isNumeric(String str)

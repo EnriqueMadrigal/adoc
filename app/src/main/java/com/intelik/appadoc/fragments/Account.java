@@ -92,6 +92,11 @@ public class Account extends Fragment implements  View.OnClickListener{
 
     private EditText input_account_numdocumento;
     private EditText input_account_phone;
+    private EditText input_account_email;
+    private EditText input_account_country;
+    private EditText input_account_documento;
+
+
     //private EditText input_account_password;
     //private EditText input_account_cpassword;
 
@@ -99,11 +104,11 @@ public class Account extends Fragment implements  View.OnClickListener{
     //private CountryViewModel countries;
 
     private ArrayList<Custom> _paises;
-    private CustomAdapter _customAdapter;
-    private CustomAdapter _customAdapter1;
+    //private CustomAdapter _customAdapter;
+    //private CustomAdapter _customAdapter1;
 
-    private Spinner Sp_countries;
-    private Spinner sp_documentos;
+    //private Spinner Sp_countries;
+    //private Spinner sp_documentos;
     private ArrayList<Custom> _documentos;
     private int _curDocumento = -1;
     private String nombreDocumento = "";
@@ -138,6 +143,9 @@ public class Account extends Fragment implements  View.OnClickListener{
 
     private NavigationInterface navigationInterface;
     private FirebaseAuth mAuth;
+
+    private int Pais_id = 0;
+
 
     public Account() {
         // Required empty public constructor
@@ -191,11 +199,17 @@ public class Account extends Fragment implements  View.OnClickListener{
 
         input_account_numdocumento = (EditText) _view.findViewById(R.id.input_account_numdocumento);
         input_account_phone = (EditText) _view.findViewById(R.id.input_account_phone);
+        input_account_email = (EditText) _view.findViewById(R.id.input_account_email);
+
+        input_account_country = (EditText) _view.findViewById(R.id.input_account_country);
+        input_account_documento = (EditText) _view.findViewById(R.id.input_account_documento);
+
+
         //input_account_password = (EditText) _view.findViewById(R.id.input_account_password);
         //input_account_cpassword = (EditText) _view.findViewById(R.id.input_account_cpassword);
 
-        Sp_countries = (Spinner) _view.findViewById(R.id.input_spinner_countries);
-        sp_documentos = (Spinner) _view.findViewById(R.id.input_spinner_documentos2);
+        //Sp_countries = (Spinner) _view.findViewById(R.id.input_spinner_countries);
+        //sp_documentos = (Spinner) _view.findViewById(R.id.input_spinner_documentos2);
 
 
         saveChanges = (Button) _view.findViewById(R.id.button_savechanges);
@@ -231,12 +245,18 @@ public class Account extends Fragment implements  View.OnClickListener{
         name.setText(datos.first_name);
         lastname.setText(datos.last_name);
         fechanac.setText(datos.birthdate);
+        input_account_email.setText(datos.email1);
+
+        input_account_country.setText(datos.primary_address_country);
+        input_account_documento.setText(datos.tipo_documento_identidad_c);
+
+
 
         String curPais = datos.primary_address_country;
-        int Pais_id = 0;
+        Pais_id = 0;
 
 
-
+/*
 
         _paises = new ArrayList<>();
         _paises = Common.getCountries();
@@ -253,7 +273,7 @@ public class Account extends Fragment implements  View.OnClickListener{
         _documentos = new ArrayList<>();
         _documentos = Common.getDocumentos(Pais_id);
 
-        String curDoc = datos.doc_identidad_c;
+        String curDoc = datos.tipo_documento_identidad_c;
         int Doc_id = 0;
 
         for (Custom doc: _documentos) {
@@ -281,7 +301,7 @@ public class Account extends Fragment implements  View.OnClickListener{
         Common.selectSpinnerItemByValue(Sp_countries, Pais_id);
         Common.selectSpinnerItemByValue(sp_documentos, Doc_id);
 
-
+        */
 
         for (String marca: datos.marcas_favoritas_c)
         {
@@ -336,7 +356,7 @@ public class Account extends Fragment implements  View.OnClickListener{
 
 
 
-
+        /*
         Sp_countries.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view,
@@ -352,11 +372,14 @@ public class Account extends Fragment implements  View.OnClickListener{
 
                 _curPos = position;
 
-                _customAdapter1.clear();
-                _documentos.clear();
-                _documentos.addAll(Common.getDocumentos(_curPais));
-                _customAdapter1.notifyDataSetChanged();
-                //sp_documentos.setEnabled(true);
+                if (_curPais != Pais_id) {
+                    Log.d(TAG,"Se corrio por primera vez");
+                    _customAdapter1.clear();
+                    _documentos.clear();
+                    _documentos.addAll(Common.getDocumentos(_curPais));
+                    _customAdapter1.notifyDataSetChanged();
+                    //sp_documentos.setEnabled(true);
+                }
 
 
             }
@@ -385,28 +408,7 @@ public class Account extends Fragment implements  View.OnClickListener{
             public void onNothingSelected(AdapterView<?> adapter) {  }
         });
 
-        /*
-        //Obtener los paises
-        countries.getCountries().observe(getViewLifecycleOwner(), new Observer<List<Country>>() {
-            @Override
-            public void onChanged(@Nullable List<Country> countries) {
-                // update ui.
-                Log.d(TAG, "Paises recibidos");
-
-
-                for (Country curCountry: countries) {
-                    Custom newCustom = new Custom();
-                    newCustom.set_id(curCountry.id);
-                    newCustom.set_name(curCountry.nombre);
-
-                    _paises.add(newCustom);
-                }
-                _customAdapter.notifyDataSetChanged();
-            }
-        });
-*/
-
-
+        */
 
 
 
@@ -423,7 +425,10 @@ public class Account extends Fragment implements  View.OnClickListener{
 
 
 
+///Deshabilitar los spinners
 
+      //  Sp_countries.setEnabled(false);
+      //  sp_documentos.setEnabled(false);
 
 
 
@@ -556,7 +561,7 @@ public class Account extends Fragment implements  View.OnClickListener{
             return;
         }
 
-
+/*
         if (_curPais <1)
         {
             Common.showWarningDialog(MyContext.getResources().getString(R.string.aviso),MyContext.getResources().getString(R.string.tupais), MyContext);
@@ -579,6 +584,8 @@ public class Account extends Fragment implements  View.OnClickListener{
             Common.showWarningDialog(MyContext.getResources().getString(R.string.aviso),MyContext.getResources().getString(R.string.tudocnumer), MyContext);
             return;
         }
+
+        */
 
         //Marcas favoritas
 
@@ -634,13 +641,13 @@ public class Account extends Fragment implements  View.OnClickListener{
         Common datos = Common.getInstance();
         datos.first_name = _name;
         datos.last_name = _lastname;
-        datos.country_id = _curPais;
-        datos.country = _nombrePais;
+        //datos.country_id = _curPais;
+        //datos.country = _nombrePais;
         //datos.country = curPais.get_name();
-        datos.tipo_documento_identidad_c = nombreDocumento;
-        datos.doc_identidad_c = numDocumento;
+        //datos.tipo_documento_identidad_c = nombreDocumento;
+        //datos.doc_identidad_c = numDocumento;
         datos.phone_mobile = input_account_phone.getText().toString();
-        datos.birthdate =fecha_nac;
+        //datos.birthdate =fecha_nac;
 
         //datos.password = password;
 
@@ -672,13 +679,13 @@ public class Account extends Fragment implements  View.OnClickListener{
         user.first_name = _name;
         user.last_name = _lastname;
         user.phone_mobile = input_account_phone.getText().toString();
-        user.doc_identidad_c = numDocumento;
-        user.tipo_documento_identidad_c = nombreDocumento;
+        //user.doc_identidad_c = numDocumento;
+        //user.tipo_documento_identidad_c = nombreDocumento;
 
         user.primary_address_street = "";
         user.alt_address_street = "";
         user.primary_address_country = _nombrePais;
-        user.birthday = Birthday;
+        //user.birthday = Birthday;
         user.estado_civil_c = "";
         user.primary_address_state = "";
         user.id_user = datos.assigned_user_id;
@@ -689,6 +696,8 @@ public class Account extends Fragment implements  View.OnClickListener{
         }
 
         user.marcas_favoritas_c = marcas;
+        datos.marcas_favoritas_c = marcas_favoritas;
+
 
         new SugarUpdate(user).execute();
 
@@ -762,16 +771,16 @@ private void UpdatePassword()
                 jsonUser.put("first_name", sugarUser.first_name);
                 jsonUser.put("last_name", sugarUser.last_name);
                 jsonUser.put("phone_mobile", sugarUser.phone_mobile);
-                jsonUser.put("no_documento_c", sugarUser.doc_identidad_c);
-                jsonUser.put("doc_identidad_c", sugarUser.tipo_documento_identidad_c);
+               // jsonUser.put("no_documento_c", sugarUser.doc_identidad_c);
+               // jsonUser.put("doc_identidad_c", sugarUser.tipo_documento_identidad_c);
 
                 //jsonUser.put("email1", sugarUser.email1);
                 //jsonUser.put("primary_address_street", sugarUser.primary_address_street);
                 //jsonUser.put("alt_address_street", sugarUser.alt_address_street);
-                jsonUser.put("birthday", sugarUser.birthday);
+               // jsonUser.put("birthday", sugarUser.birthday);
                 //jsonUser.put("estado_civil_c", sugarUser.estado_civil_c);
                 //jsonUser.put("primary_address_state", sugarUser.primary_address_state);
-                jsonUser.put("primary_address_country", sugarUser.primary_address_country);
+                //jsonUser.put("primary_address_country", sugarUser.primary_address_country);
                 jsonUser.put("id", sugarUser.id_user);
 
                 jsonUser.put("marcas_favoritas_c",new JSONArray(marcas_favoritas));

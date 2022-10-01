@@ -6,7 +6,7 @@
     tools:context=".fragments.Account">
 
     <!-- TODO: Update blank fragment layout -->
-    <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:scrollbarSize="0dp">
@@ -36,6 +36,11 @@
             android:layout_height="wrap_content"
             android:text="@string/my_information"
             />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:background="@color/AppAdocGray"/>
 
 
         <View
@@ -73,6 +78,7 @@
             android:gravity="center"
             android:orientation="vertical">
 
+            <!--
             <Spinner
                 style="@style/InputGeneral"
                 android:id="@+id/input_spinner_countries"
@@ -81,9 +87,23 @@
                 android:layout_marginLeft="0dp"
                 android:textColor="@color/AppAdocGray"
                 android:background="@drawable/roundtext"
+                android:clickable="false"
                 >
 
             </Spinner>
+            -->
+
+                <EditText
+                    android:id="@+id/input_account_country"
+                    style="@style/InputGeneral"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/pais"
+                    android:inputType="text"
+                    android:background="@drawable/roundtext"
+                    android:enabled="false"/>
+
+
 
             <View
                 android:layout_width="match_parent"
@@ -150,7 +170,8 @@
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/nombre"
-                    android:background="@drawable/roundtext" />
+                    android:background="@drawable/roundtext"
+                    android:enabled="false"/>
 
 
 
@@ -203,7 +224,8 @@
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/apellidos"
-                    android:background="@drawable/roundtext" />
+                    android:background="@drawable/roundtext"
+                    android:enabled="false"/>
 
 
 
@@ -399,10 +421,34 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:background="@color/white"
+                android:layout_marginTop="20dp"
+                android:weightSum="1">
+
+
+                <EditText
+                    android:id="@+id/input_account_email"
+                    style="@style/InputGeneral"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/email"
+                    android:inputType="text"
+                    android:background="@drawable/roundtext"
+                    android:enabled="false"/>
+
+            </LinearLayout>
+
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:background="@color/white"
                 android:layout_marginTop="10dp"
                 android:weightSum="1">
 
 
+                <!--
                 <Spinner
                     style="@style/InputGeneral"
                     android:id="@+id/input_spinner_documentos2"
@@ -411,9 +457,22 @@
                     android:layout_marginLeft="0dp"
                     android:textColor="@color/AppAdocGray"
                     android:background="@drawable/roundtext"
+                    android:clickable="false"
                     >
 
                 </Spinner>
+            -->
+
+                <EditText
+                    android:id="@+id/input_account_documento"
+                    style="@style/InputGeneral"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/tudocumento"
+                    android:inputType="text"
+                    android:background="@drawable/roundtext"
+                    android:enabled="false"/>
+
 
 
 
@@ -439,7 +498,8 @@
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/nodocumento"
-                    android:background="@drawable/roundtext" />
+                    android:background="@drawable/roundtext"
+                    android:enabled="false"/>
 
 
 
@@ -469,17 +529,18 @@
             android:weightSum="1">
 
 
-
             <EditText
                 android:id="@+id/input_account_fechanac"
                 style="@style/InputGeneral"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
+                android:background="@drawable/roundtext"
+                android:clickable="false"
+                android:focusable="false"
                 android:hint="@string/fechanac"
                 android:inputType="date"
-                android:focusable="false"
-                android:clickable="true"
-                android:background="@drawable/roundtext" />
+                android:enabled="false"
+                />
 
         </LinearLayout>
 

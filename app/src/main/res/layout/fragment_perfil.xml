@@ -20,12 +20,20 @@
             android:layout_height="48dp"
             android:orientation="horizontal"
             android:background="@color/white"
-            android:gravity="start">
+            android:gravity="center">
+
+            <TextView
+                style="@style/Title2"
+                android:layout_marginLeft="20dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="@string/hola" />
 
             <TextView
                 android:id="@+id/fragment_perfilTItle"
-                style="@style/Title2"
-                android:layout_marginLeft="20dp"
+                style="@style/Title9"
+                android:layout_marginLeft="0dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -172,8 +180,8 @@
                 android:id="@+id/button_perfil_acerca_de"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:text="@string/acercade"
-                android:drawableLeft="@drawable/ic_info"
+                android:text="@string/masinformacion"
+                android:drawableLeft="@drawable/ico_info_small"
                 android:gravity="left|center_vertical"
                 android:drawablePadding="10dp"
                 android:background="@color/white"
