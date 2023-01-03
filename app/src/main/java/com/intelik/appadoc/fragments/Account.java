@@ -663,14 +663,27 @@ public class Account extends Fragment implements  View.OnClickListener{
         if (fecha_nac.length()>6) {
             String[] parts = fecha_nac.split("/");
 
-            String year = parts[2].trim();
-            String month = parts[1].trim();
-            String day = parts[0].trim();
+            if (parts.length <2) {
+                parts = fecha_nac.split("-");
+            }
 
-            if (month.length() == 1) month = "0" + month;
-            if (day.length() == 1) day = "0" + day;
+            if (parts.length >2) {
 
-            Birthday = year + "-" + month + "-" + day;
+                String year = parts[2].trim();
+                String month = parts[1].trim();
+                String day = parts[0].trim();
+
+                if (month.length() == 1) month = "0" + month;
+                if (day.length() == 1) day = "0" + day;
+
+                Birthday = year + "-" + month + "-" + day;
+            }
+            else
+            {
+                Birthday = "";
+            }
+
+
         }
 
         SugarContact user = new SugarContact();

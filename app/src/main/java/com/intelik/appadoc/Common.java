@@ -429,7 +429,7 @@ public class Common {
     {
         try
         {
-            int d = Integer.parseInt(str);
+            double d = Double.parseDouble(str);
         }
         catch(NumberFormatException nfe)
         {

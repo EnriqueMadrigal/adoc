@@ -22,6 +22,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -29,6 +30,7 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.Toast;
 import android.widget.Toolbar;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -64,6 +66,7 @@ import Models.CountryViewModel;
 import Models.Custom;
 import Models.Marca;
 import Models.User_Intelik;
+
 
 public class MainActivity extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener {
 
@@ -218,6 +221,7 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
 
         /////////
             */
+
 
         //Revisar si ya se tiene un Token de FireBase
         String currentToken = Common.getInstance().Token;
@@ -454,6 +458,7 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         getSupportFragmentManager().beginTransaction().setCustomAnimations(android.R.anim.slide_in_left, android.R.anim.slide_out_right).replace(R.id.fragment_containerMain, notifications, "Notificaciones").commit();
 
     }
+
 
 
 /*

@@ -40,6 +40,9 @@ public class ContactViewModel extends ViewModel {
     private FirebaseAuth mAuth;
     private FirebaseFunctions mFunctions;
 
+
+    private String currentEmail;
+
     public ContactViewModel()
     {
         mAuth = FirebaseAuth.getInstance();
@@ -55,11 +58,22 @@ public class ContactViewModel extends ViewModel {
             Contacto = new MutableLiveData<User_Intelik>();
             //loadContacto(email);
             //GetContacto(email);
+            this.currentEmail = email;
            new ContactoLoad(email).execute();
         }
         return Contacto;
     }
 
+    public LiveData<User_Intelik> refresh(String email) {
+        if (Contacto == null) {
+            Contacto = new MutableLiveData<User_Intelik>();
+            //loadContacto(email);
+            //GetContacto(email);
+            this.currentEmail = email;
+            new ContactoLoad(email).execute();
+        }
+        return Contacto;
+    }
 
     private void loadContacto(String email) {
         // Do an asynchronous operation to fetch users.

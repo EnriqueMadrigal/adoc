@@ -49,7 +49,7 @@ import Models.MisPreguntasViewModel;
 import Models.MisPuntosViewModel;
 import Models.User_Intelik;
 import com.google.firebase.auth.FirebaseAuth;
-
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -112,6 +112,8 @@ public class MainFragment extends Fragment {
     private LinearLayout stack_tiendas;
     private boolean isVisible_tiendas = false;
 
+
+    private SwipeRefreshLayout swipeRefreshLayout;
 
     private TextView puntos_parasubir;
     private TextView puntos_parasubir_desc;
@@ -193,6 +195,7 @@ public class MainFragment extends Fragment {
         main_currentlevel = (TextView) _view.findViewById(R.id.main_currentlevel);
         image_meter = (ImageView) _view.findViewById(R.id.image_meter);
         progrees_mainview = (LinearLayout) _view.findViewById(R.id.progrees_mainview);
+        swipeRefreshLayout = (SwipeRefreshLayout) _view.findViewById(R.id.swipe_container);
 
 
 
@@ -239,6 +242,38 @@ public class MainFragment extends Fragment {
 
         _mispuntos = new ArrayList<>();
         _mispreguntas = new ArrayList<>();
+
+        String user_email = mAuth.getCurrentUser().getEmail();
+
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                swipeRefreshLayout.setRefreshing(true);
+                progrees_mainview.setVisibility(View.VISIBLE);
+
+                errorServer = true;
+                Start();
+
+
+                //////////
+                contactos.getContacto(user_email).observe(getActivity(), new Observer<User_Intelik>() {
+                    @Override
+                    public void onChanged(@Nullable User_Intelik contacto) {
+                        // update ui.
+                        swipeRefreshLayout.setRefreshing(false);
+                        progrees_mainview.setVisibility(View.GONE);
+
+
+                        Log.d("RegisterActiviti", "Marcas recibidas refresh");
+                        errorServer = false;
+                        setData(contacto);
+                    }
+                });
+
+                ///////////
+
+            }
+        });
 
 
         button_refiere.setOnClickListener(new View.OnClickListener() {
@@ -290,9 +325,10 @@ public class MainFragment extends Fragment {
 */
 //Ocultar las encuestas
 
-
+///--- Ya no esta en uso
         //Obtener los puntos
 
+        /*
         puntos.getPuntos().observe(getViewLifecycleOwner(), new Observer<List<Custom>>() {
             @Override
             public void onChanged(@Nullable List<Custom> customs) {
@@ -311,6 +347,8 @@ public class MainFragment extends Fragment {
                 //_adapter.notifyDataSetChanged();
             }
         });
+*/
+        //// ---Ya no esta en uso
 
 //Obtener las preguntas
 /*
@@ -341,105 +379,31 @@ public class MainFragment extends Fragment {
 
 
 
-
-
-
         contactos = new ViewModelProvider(this).get(ContactViewModel.class);
 
        //Ocultar las encuestas
         //encuestas = new ViewModelProvider(this).get(EncuestasViewModel.class);
 
 
-        String user_email = mAuth.getCurrentUser().getEmail();
+
 
         errorServer = true;
         Start();
+
+
 
         contactos.getContacto(user_email).observe(getActivity(), new Observer<User_Intelik>() {
             @Override
             public void onChanged(@Nullable User_Intelik contacto) {
                 // update ui.
+                swipeRefreshLayout.setRefreshing(false);
+
                 Log.d("RegisterActiviti", "Marcas recibidas");
 
                 progrees_mainview.setVisibility(View.GONE);
                 errorServer = false;
 
-
-                datos.first_name = contacto.first_name;
-                datos.last_name = contacto.last_name;
-                datos.email1 = contacto.email1;
-                //datos.tipo_documento_identidad_c = contacto.tipo_documento_identidad_c;
-                datos.assigned_user_id = contacto.id;
-                datos.primary_address_country = contacto.primary_address_country;
-                datos.marcas_favoritas_c = contacto.marcas_favoritas_c;
-                datos.doc_identidad_c = contacto.doc_identidad_c;
-                datos.no_documento_c = contacto.no_documento_c;
-                datos.birthdate = contacto.birthdate;
-
-
-                //datos.doc_identidad_c = contacto.do
-
-                Common.saveUserValue(MyContext);
-
-
-                mainTitle.setText(" " + contacto.first_name + "!");
-
-                String Puntos_acumulados = contacto.puntos_acumulados_c;
-
-                 int totalPuntos = 0;
-                 int totpuntos_parasubir = 0;
-                 int totpuntos_redimidos = 0;
-                 int avance_nivel = 0;
-
-                int puntos_disponibles_promo = 0;
-                int puntos_acumulados_promo = 0;
-                int has_redimido = 0;
-                String vigencia_puntos = "Julio";
-
-
-                totalPuntos = Common.isNumeric(contacto.puntos_acumulados_c) ? Integer.parseInt(contacto.puntos_acumulados_c) : 0;
-
-                totpuntos_parasubir = Common.isNumeric(contacto.puntos_subir_nivel_c) ? Integer.parseInt(contacto.puntos_subir_nivel_c) : 0;
-                totpuntos_redimidos = Common.isNumeric(contacto.puntos_redimidos_c) ? Integer.parseInt(contacto.puntos_redimidos_c) : 0;
-                avance_nivel = Common.isNumeric(contacto.avance_nivel_c)  ? Integer.parseInt(contacto.avance_nivel_c) : 0;
-
-                puntos_disponibles_promo = Common.isNumeric(contacto.puntos_disponibles_promo_c) ? Integer.parseInt(contacto.puntos_disponibles_promo_c): 0;
-                puntos_acumulados_promo = Common.isNumeric(contacto.puntos_acumulados_promo_c) ? Integer.parseInt(contacto.puntos_acumulados_promo_c): 0;
-                has_redimido = Common.isNumeric(contacto.puntos_redimidos_promo_c) ? Integer.parseInt(contacto.puntos_redimidos_promo_c): 0;
-
-
-
-
-                main_currentpoints.setText(String.valueOf(totalPuntos) + " pts");
-
-                String curNivel = contacto.nivel_del_cliente_c.toLowerCase();
-                main_currentlevel.setText(contacto.nivel_del_cliente_c);
-
-                puntos_parasubir.setText(String.valueOf(totpuntos_parasubir) + " pts");
-                puntos_redimidos.setText(String.valueOf(totpuntos_redimidos));
-                puntos_tienes.setText(String.valueOf(avance_nivel) + " %");
-                puntos_disponibles_act.setText(String.valueOf(totalPuntos));
-
-
-
-                puntos_esp_parasubir.setText(String.valueOf(puntos_disponibles_promo));
-                puntos_esp_redimidos.setText(String.valueOf(has_redimido));
-                puntos_esp_tienes.setText(String.valueOf(puntos_acumulados_promo));
-
-
-                if (curNivel.equals("plata"))
-                {
-                    image_meter.setImageResource(R.drawable.ic_meter_plata);
-                }
-
-                else if (curNivel.equals("oro"))
-                {
-                    image_meter.setImageResource(R.drawable.ic_meter_oro);
-                }
-                else if (curNivel.equals("diamante"))
-                {
-                    image_meter.setImageResource(R.drawable.ic_meter_diamante);
-                }
+                setData(contacto);
 
             }
         });
@@ -570,6 +534,7 @@ public class MainFragment extends Fragment {
 
                 if (errorServer) {
                     progrees_mainview.setVisibility(View.GONE);
+                    swipeRefreshLayout.setRefreshing(false);
                     Common.showWarningDialog(MyContext.getResources().getString(R.string.aviso), MyContext.getResources().getString(R.string.errorservidor), MyContext);
                 }
 
@@ -578,7 +543,7 @@ public class MainFragment extends Fragment {
         };
 
 
-        handler.postDelayed(runnable, 60000);
+        handler.postDelayed(runnable, 45000);
     }
 
 
@@ -673,7 +638,6 @@ public class MainFragment extends Fragment {
     }
 
     public static void slide_up(Context ctx, View v){
-
         Animation a = AnimationUtils.loadAnimation(ctx, R.anim.slide_up);
         if(a != null){
             a.reset();
@@ -683,14 +647,11 @@ public class MainFragment extends Fragment {
                 a.setAnimationListener(new Animation.AnimationListener() {
                     @Override
                     public void onAnimationStart(Animation animation) {
-
                     }
-
                     @Override
                     public void onAnimationEnd(Animation animation) {
                         v.setVisibility(View.GONE);
                     }
-
                     @Override
                     public void onAnimationRepeat(Animation animation) {
 
@@ -701,6 +662,93 @@ public class MainFragment extends Fragment {
             }
         }
     }
+////
+private  void setData(User_Intelik contacto)
+{
 
+
+    datos.first_name = contacto.first_name;
+    datos.last_name = contacto.last_name;
+    datos.email1 = contacto.email1;
+    //datos.tipo_documento_identidad_c = contacto.tipo_documento_identidad_c;
+    datos.assigned_user_id = contacto.id;
+    datos.primary_address_country = contacto.primary_address_country;
+    datos.marcas_favoritas_c = contacto.marcas_favoritas_c;
+    datos.doc_identidad_c = contacto.doc_identidad_c;
+    datos.no_documento_c = contacto.no_documento_c;
+    datos.birthdate = contacto.birthdate;
+
+
+    //datos.doc_identidad_c = contacto.do
+
+    Common.saveUserValue(MyContext);
+
+
+    mainTitle.setText(" " + contacto.first_name + "!");
+
+    String Puntos_acumulados = contacto.puntos_acumulados_c;
+
+    int totalPuntos = 0;
+    int sumaPuntos = 0;
+    int totpuntos_parasubir = 0;
+    int totpuntos_redimidos = 0;
+    int avance_nivel = 0;
+
+    int puntos_disponibles_promo = 0;
+    int puntos_acumulados_promo = 0;
+    int has_redimido = 0;
+    String vigencia_puntos = "Julio";
+
+
+    totalPuntos = Common.isNumeric(contacto.puntos_disponibles_c) ? (int) Double.parseDouble(contacto.puntos_disponibles_c) : 0;
+
+
+    totpuntos_parasubir = Common.isNumeric(contacto.puntos_subir_nivel_c) ? (int) Double.parseDouble(contacto.puntos_subir_nivel_c) : 0;
+    totpuntos_redimidos = Common.isNumeric(contacto.puntos_redimidos_c) ? (int) Double.parseDouble(contacto.puntos_redimidos_c) : 0;
+    avance_nivel = Common.isNumeric(contacto.avance_nivel_c)  ? (int) Double.parseDouble(contacto.avance_nivel_c) : 0;
+
+    puntos_disponibles_promo = Common.isNumeric(contacto.puntos_disponibles_promo_c) ? (int) Double.parseDouble(contacto.puntos_disponibles_promo_c): 0;
+    puntos_acumulados_promo = Common.isNumeric(contacto.puntos_acumulados_promo_c) ? (int) Double.parseDouble(contacto.puntos_acumulados_promo_c): 0;
+    has_redimido = Common.isNumeric(contacto.puntos_redimidos_promo_c) ? (int) Double.parseDouble(contacto.puntos_redimidos_promo_c): 0;
+
+    sumaPuntos =  totalPuntos + puntos_disponibles_promo;
+
+
+    main_currentpoints.setText(String.valueOf(sumaPuntos) + " pts");
+
+    String curNivel = contacto.nivel_del_cliente_c.toLowerCase();
+    main_currentlevel.setText(contacto.nivel_del_cliente_c);
+
+    puntos_parasubir.setText(String.valueOf(totpuntos_parasubir) + " pts");
+    puntos_redimidos.setText(String.valueOf(totpuntos_redimidos));
+    puntos_tienes.setText(String.valueOf(avance_nivel) + " %");
+    puntos_disponibles_act.setText(String.valueOf(totalPuntos));
+
+
+
+    puntos_esp_parasubir.setText(String.valueOf(puntos_disponibles_promo));
+    puntos_esp_redimidos.setText(String.valueOf(has_redimido));
+    puntos_esp_tienes.setText(String.valueOf(puntos_acumulados_promo));
+
+
+    if (curNivel.equals("plata"))
+    {
+        image_meter.setImageResource(R.drawable.ic_meter_plata);
+    }
+
+    else if (curNivel.equals("oro"))
+    {
+        image_meter.setImageResource(R.drawable.ic_meter_oro);
+    }
+    else if (curNivel.equals("diamante"))
+    {
+        image_meter.setImageResource(R.drawable.ic_meter_diamante);
+    }
+
+
+}
+
+
+////
 
 }
