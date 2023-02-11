@@ -16,5 +16,7 @@ public class SugarContact {
             public String primary_address_country;
             public String date_entered;
             public String id_user;
+            public String nit_c;
+            public String gender_c;
             public String[] marcas_favoritas_c;
 }

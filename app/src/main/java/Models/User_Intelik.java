@@ -49,7 +49,9 @@ public class User_Intelik {
     public String puntos_mantener_nivel_c;
     public String porcentaje_subir_c;
     public String puntos_subir_nivel_c;
+    public String gender_c;
 
+    public String nit_c;
 
 public User_Intelik()
 {
@@ -85,6 +87,9 @@ public User_Intelik()
     this.tipo_documento_identidad_c  = "";
     this.doc_identidad_c  = "";
     this.no_documento_c  = "";
+    this.gender_c = "";
+    this.nit_c = "";
+
 
     this.marcas_favoritas_c = new ArrayList<String>();
 

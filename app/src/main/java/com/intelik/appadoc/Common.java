@@ -11,6 +11,7 @@ import android.widget.SimpleCursorAdapter;
 import android.widget.Spinner;
 
 import com.intelik.appadoc.adapters.CustomAdapter;
+import com.intelik.appadoc.adapters.CustomAdapter2;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -60,6 +61,8 @@ public class Common {
     public String password = "";
     public Context sharedContext;
 
+    public String nit = "";
+
 
 
 
@@ -94,6 +97,8 @@ public class Common {
     public static final String VAR_USER_PHONE = "USER_PHONE";
 
     public static final String VAR_USER_TOKEN = "USER_TOKEN";
+
+    public static final String VAR_USER_NIT = "USER_NIT";
 
 
     
@@ -135,27 +140,27 @@ public class Common {
         switch (pais){
             case 1:  //Costa rica
                 documentos.add(new Custom(1, "CED"));
-                documentos.add(new Custom(2, "PASAPORTE"));
+                //documentos.add(new Custom(2, "PASAPORTE"));
                 break;
 
             case 2:  //El Salvador
                 documentos.add(new Custom(1, "DUI"));
-                documentos.add(new Custom(2, "PASAPORTE"));
+               // documentos.add(new Custom(2, "PASAPORTE"));
                 break;
 
             case 3:  //Honduras
                 documentos.add(new Custom(1, "DNI"));
-                documentos.add(new Custom(2, "PASAPORTE"));
+                //documentos.add(new Custom(2, "PASAPORTE"));
                 break;
 
             case 4:  //Nicaragua
                 documentos.add(new Custom(1, "CED"));
-                documentos.add(new Custom(2, "PASAPORTE"));
+                //documentos.add(new Custom(2, "PASAPORTE"));
                 break;
 
             case 5:  //Guatemala
                 documentos.add(new Custom(1, "DPI"));
-                documentos.add(new Custom(2, "PASAPORTE"));
+                //documentos.add(new Custom(2, "PASAPORTE"));
                 break;
 
             default:
@@ -163,7 +168,7 @@ public class Common {
                 documentos.add(new Custom(2, "DUI"));
                 documentos.add(new Custom(3, "DNI"));
                 documentos.add(new Custom(4, "DPI"));
-                documentos.add(new Custom(5, "PASAPORTE"));
+                //documentos.add(new Custom(5, "PASAPORTE"));
 
 
 
@@ -182,7 +187,7 @@ public class Common {
 
         documentos.add(new Custom(0, "Tipo de Documento *"));
 
-        documentos.add(new Custom(1, "PASAPORTE"));
+        //documentos.add(new Custom(1, "PASAPORTE"));
         documentos.add(new Custom(2, "DUI"));
         documentos.add(new Custom(3, "DPI"));
         documentos.add(new Custom(4, "DNI"));
@@ -196,10 +201,10 @@ public class Common {
 
     public static ArrayList<Custom> getGeneros() {
         ArrayList<Custom> generos = new ArrayList<>();
-        generos.add(new Custom(0, "Género"));
-        generos.add(new Custom(1, "MASCULINO"));
-        generos.add(new Custom(2, "FEMENINO"));
-        generos.add(new Custom(3, "No especificar"));
+        generos.add(new Custom(0, "Prefiero no esp.", "N"));
+        generos.add(new Custom(1, "Masculino", "M"));
+        generos.add(new Custom(2, "Femenino", "F"));
+
 
         return generos;
 
@@ -218,6 +223,24 @@ public class Common {
         return nuevas_countries;
 
     }
+
+
+    public static ArrayList<Custom> getPhoneCodes() {
+
+        ArrayList<Custom> nuevas_countries = new ArrayList<Custom>();
+
+
+        nuevas_countries.add(new Custom(1,"usa"));
+        nuevas_countries.add(new Custom(502,"guatemala"));
+        nuevas_countries.add(new Custom(503,"el_ssalvador"));
+        nuevas_countries.add(new Custom(504,"honduras"));
+        nuevas_countries.add(new Custom(505,"nicaragua"));
+        nuevas_countries.add(new Custom(506,"costa_rica"));
+
+        return nuevas_countries;
+
+    }
+
 
 
 
@@ -297,6 +320,13 @@ public class Common {
                     editor.putString(VAR_USER_PHONE, datos.phone_mobile);
             }
 
+            if (datos.nit != null) {
+                if (datos.nit.length() != 0)
+                    editor.putString(VAR_USER_NIT, datos.nit);
+            }
+
+
+
             editor.commit();
 
         }
@@ -364,11 +394,12 @@ public class Common {
         datos.email1 = sharedPref.getString(VAR_LOGIN_NAME, "");
         datos.first_name = sharedPref.getString(VAR_USER_NAME, "");
         datos.last_name = sharedPref.getString(VAR_USER_APELLIDOS, "");
-        //datos.user_gender = sharedPref.getString(VAR_USER_GENDER, "");
+        datos.gender_c = sharedPref.getString(VAR_USER_GENDER, "");
         datos.birthdate = sharedPref.getString(VAR_USER_BIRTHDAY, "");
         datos.tipo_documento_identidad_c = sharedPref.getString(VAR_USER_TYPE_DOC, "");
         datos.doc_identidad_c = sharedPref.getString(VAR_USER_DOC, "");
         datos.phone_mobile = sharedPref.getString(VAR_USER_PHONE, "");
+
 
     }
 
@@ -442,13 +473,94 @@ public class Common {
         CustomAdapter adapter = (CustomAdapter) spnr.getAdapter();
         for (int position = 0; position < adapter.getCount(); position++) {
      //       if(adapter.getItemId(position) == value) {
-            if(adapter.getItemId(position) == value) {
+            Custom checkValue = adapter.getItem(position);
+            if(checkValue.get_id() == value) {
                 spnr.setSelection(position);
                 return;
             }
         }
     }
 
+    public static void selectSpinnerItemByValue2(Spinner spnr, int value) {
+        CustomAdapter2 adapter = (CustomAdapter2) spnr.getAdapter();
+        for (int position = 0; position < adapter.getCount(); position++) {
+            //       if(adapter.getItemId(position) == value) {
+            Custom checkValue = adapter.getItem(position);
+            if(checkValue.get_id() == value) {
+                spnr.setSelection(position);
+                return;
+            }
+        }
+    }
+
+
+
+    public static int getPhoneCode(String phone){
+        int curCodigo = 0;
+
+        int firstIndex = 0;
+        int secondIndex = 0;
+        ///check -
+        secondIndex = phone.indexOf("-");
+
+        if (secondIndex == 0) { return 0; }
+
+        String codigo = phone.substring(firstIndex +1 , secondIndex);
+
+        curCodigo = Integer.parseInt(codigo);
+
+        return curCodigo;
+    }
+
+
+    public static String removePhoneCode(String phone){
+        String curPhone = "";
+
+        int secondIndex = 0;
+        ///check -
+        secondIndex = phone.indexOf("-");
+
+        if (secondIndex == 0) { return phone; }
+
+        curPhone = phone.substring(secondIndex +1);
+
+
+        return curPhone;
+    }
+
+public static String convertDateFormat(String fecha_nac)
+{
+    String Birthday = "";
+
+    if (fecha_nac.length()>6) {
+        String[] parts = fecha_nac.split("/");
+
+        if (parts.length <2) {
+            parts = fecha_nac.split("-");
+        }
+
+        if (parts.length >2) {
+
+            String year = parts[2].trim();
+            String month = parts[1].trim();
+            String day = parts[0].trim();
+
+            if (month.length() == 1) month = "0" + month;
+            if (day.length() == 1) day = "0" + day;
+
+            Birthday = year + "-" + month + "-" + day;
+        }
+        else
+        {
+            Birthday = "";
+        }
+
+
+    }
+
+    return Birthday;
+
+}
 
 
 }

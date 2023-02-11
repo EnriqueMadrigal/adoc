@@ -25,6 +25,7 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -33,6 +34,7 @@ import com.intelik.appadoc.Common;
 import com.intelik.appadoc.R;
 import com.intelik.appadoc.RegisterActivity;
 import com.intelik.appadoc.adapters.CustomAdapter;
+import com.intelik.appadoc.adapters.CustomAdapter2;
 import com.intelik.appadoc.interfaces.NavigationInterface;
 import com.intelik.appadoc.utils.DatePickerFragment;
 
@@ -93,7 +95,9 @@ public class Account extends Fragment implements  View.OnClickListener{
     private EditText input_account_numdocumento;
     private EditText input_account_phone;
     private EditText input_account_email;
-    private EditText input_account_country;
+
+    private Spinner Sp_countries;
+    private Spinner Sp_phones;
     private EditText input_account_documento;
 
 
@@ -103,12 +107,9 @@ public class Account extends Fragment implements  View.OnClickListener{
 
     //private CountryViewModel countries;
 
-    private ArrayList<Custom> _paises;
-    //private CustomAdapter _customAdapter;
-    //private CustomAdapter _customAdapter1;
 
-    //private Spinner Sp_countries;
-    //private Spinner sp_documentos;
+    private CustomAdapter _customAdapter1;
+    private Spinner sp_documentos;
     private ArrayList<Custom> _documentos;
     private int _curDocumento = -1;
     private String nombreDocumento = "";
@@ -144,7 +145,27 @@ public class Account extends Fragment implements  View.OnClickListener{
     private NavigationInterface navigationInterface;
     private FirebaseAuth mAuth;
 
+    private ArrayList<Custom> _paises;
+    private CustomAdapter _customAdapter;
     private int Pais_id = 0;
+    private Custom curPais;
+
+    private EditText _nit;
+
+    private LinearLayout layout_nit;
+
+
+    private Spinner Sp_generos;
+    private ArrayList<Custom> _generos;
+    private CustomAdapter _customAdapter2;
+    private int Genero_id = 0;
+    private Custom curGenero;
+
+
+    private ArrayList<Custom> _phonescodes;
+    private CustomAdapter2 _customAdapter3;
+    private int Phone_id = 0;
+    private Custom curPhone;
 
 
     public Account() {
@@ -201,15 +222,17 @@ public class Account extends Fragment implements  View.OnClickListener{
         input_account_phone = (EditText) _view.findViewById(R.id.input_account_phone);
         input_account_email = (EditText) _view.findViewById(R.id.input_account_email);
 
-        input_account_country = (EditText) _view.findViewById(R.id.input_account_country);
-        input_account_documento = (EditText) _view.findViewById(R.id.input_account_documento);
+        Sp_countries = (Spinner) _view.findViewById(R.id.edit_spinner_countries);
+        Sp_generos = (Spinner) _view.findViewById(R.id.edit_spinner_generos);
+        Sp_phones = (Spinner) _view.findViewById(R.id.edit_spinner_phones);
+
 
 
         //input_account_password = (EditText) _view.findViewById(R.id.input_account_password);
         //input_account_cpassword = (EditText) _view.findViewById(R.id.input_account_cpassword);
 
         //Sp_countries = (Spinner) _view.findViewById(R.id.input_spinner_countries);
-        //sp_documentos = (Spinner) _view.findViewById(R.id.input_spinner_documentos2);
+        sp_documentos = (Spinner) _view.findViewById(R.id.edit_spinner_documentos);
 
 
         saveChanges = (Button) _view.findViewById(R.id.button_savechanges);
@@ -219,6 +242,10 @@ public class Account extends Fragment implements  View.OnClickListener{
         account_check3 = (ImageButton) _view.findViewById(R.id.account_check3);
         account_check4 = (ImageButton) _view.findViewById(R.id.account_check4);
         account_check5 = (ImageButton) _view.findViewById(R.id.account_check5);
+
+        _nit = (EditText) _view.findViewById(R.id.edit_account_nit);
+        layout_nit = (LinearLayout) _view.findViewById(R.id.layout_edit_nit);
+
 
         account_check1.setOnClickListener(this);
         account_check2.setOnClickListener(this);
@@ -244,11 +271,18 @@ public class Account extends Fragment implements  View.OnClickListener{
 
         name.setText(datos.first_name);
         lastname.setText(datos.last_name);
-        fechanac.setText(datos.birthdate);
-        input_account_email.setText(datos.email1);
 
-        input_account_country.setText(datos.primary_address_country);
-        input_account_documento.setText(datos.tipo_documento_identidad_c);
+        String fecha_nac = datos.birthdate;
+
+        if (fecha_nac.length()>6) {
+            fecha_nac = Common.convertDateFormat (fecha_nac);
+            fechanac.setText(fecha_nac);
+        }
+
+        _nit.setText(datos.nit);
+
+
+        input_account_email.setText(datos.email1);
 
 
 
@@ -256,7 +290,7 @@ public class Account extends Fragment implements  View.OnClickListener{
         Pais_id = 0;
 
 
-/*
+
 
         _paises = new ArrayList<>();
         _paises = Common.getCountries();
@@ -270,11 +304,26 @@ public class Account extends Fragment implements  View.OnClickListener{
         }
 
 
+        _customAdapter = new CustomAdapter(MyContext, R.layout.spinner_item, _paises);
+        _customAdapter.setDropDownViewResource(R.layout.spinner_item);
+        Sp_countries.setAdapter(_customAdapter);
+
+        Common.selectSpinnerItemByValue(Sp_countries, Pais_id);
+
+        if (Phone_id == 5) {
+            layout_nit.setVisibility(View.VISIBLE);
+        }
+
+
         _documentos = new ArrayList<>();
         _documentos = Common.getDocumentos(Pais_id);
 
         String curDoc = datos.tipo_documento_identidad_c;
         int Doc_id = 0;
+
+
+
+
 
         for (Custom doc: _documentos) {
             if (doc.get_name().equals(curDoc))
@@ -286,22 +335,57 @@ public class Account extends Fragment implements  View.OnClickListener{
 
 
 
-
         //countries = new ViewModelProvider(this).get(CountryViewModel.class);
 
         _customAdapter1 = new CustomAdapter(MyContext, R.layout.spinner_item, _documentos);
         _customAdapter1.setDropDownViewResource(R.layout.spinner_item);
         sp_documentos.setAdapter(_customAdapter1);
 
-        _customAdapter = new CustomAdapter(MyContext, R.layout.spinner_item, _paises);
-        _customAdapter.setDropDownViewResource(R.layout.spinner_item);
-        Sp_countries.setAdapter(_customAdapter);
 
-
-        Common.selectSpinnerItemByValue(Sp_countries, Pais_id);
         Common.selectSpinnerItemByValue(sp_documentos, Doc_id);
 
-        */
+
+        //Generos
+
+        _generos = new ArrayList<>();
+        _generos = Common.getGeneros();
+
+        if (datos.gender_c.equals("M")) {
+            Genero_id = 1;
+        }
+        else if (datos.gender_c.equals("F")) {
+            Genero_id = 2;
+        }
+
+        else {
+            Genero_id = 0;
+        }
+
+        _customAdapter2 = new CustomAdapter(MyContext, R.layout.spinner_item, _generos);
+        _customAdapter2.setDropDownViewResource(R.layout.spinner_item);
+        Sp_generos.setAdapter(_customAdapter2);
+        Common.selectSpinnerItemByValue(Sp_generos, Genero_id);
+
+
+        //Phonescodes
+
+        _phonescodes = new ArrayList<>();
+        _phonescodes = Common.getPhoneCodes();
+
+        _customAdapter3 = new CustomAdapter2(MyContext, _phonescodes);
+
+        Sp_phones.setAdapter(_customAdapter3);
+
+        Phone_id = Common.getPhoneCode(datos.phone_mobile);
+
+        if (Phone_id > 0) {
+
+            Common.selectSpinnerItemByValue2(Sp_phones, Phone_id);
+
+        }
+
+        input_account_phone.setText(Common.removePhoneCode(datos.phone_mobile));
+
 
         for (String marca: datos.marcas_favoritas_c)
         {
@@ -339,8 +423,8 @@ public class Account extends Fragment implements  View.OnClickListener{
 
         input_account_numdocumento.setText(datos.no_documento_c);
 
-        fechanac.setText(datos.birthdate);
-        input_account_phone.setText(datos.phone_mobile);
+
+
 
 
          fechanac.setOnClickListener(new View.OnClickListener() {
@@ -356,7 +440,7 @@ public class Account extends Fragment implements  View.OnClickListener{
 
 
 
-        /*
+
         Sp_countries.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view,
@@ -372,8 +456,16 @@ public class Account extends Fragment implements  View.OnClickListener{
 
                 _curPos = position;
 
+                if (_curPais ==5) {
+                    layout_nit.setVisibility(View.VISIBLE);
+                }
+                else {
+                    layout_nit.setVisibility(View.GONE);
+                }
+
+
+
                 if (_curPais != Pais_id) {
-                    Log.d(TAG,"Se corrio por primera vez");
                     _customAdapter1.clear();
                     _documentos.clear();
                     _documentos.addAll(Common.getDocumentos(_curPais));
@@ -386,6 +478,7 @@ public class Account extends Fragment implements  View.OnClickListener{
             @Override
             public void onNothingSelected(AdapterView<?> adapter) {  }
         });
+
 
         sp_documentos.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
 
@@ -408,7 +501,46 @@ public class Account extends Fragment implements  View.OnClickListener{
             public void onNothingSelected(AdapterView<?> adapter) {  }
         });
 
-        */
+////Generos
+
+        Sp_generos.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view,
+                                       int position, long id) {
+                // Here you get the current item (a User object) that is selected by its position
+                ((TextView) adapterView.getChildAt(0)).setTextColor(getResources().getColor(R.color.AppAdocGray));
+                Custom curgenero = _customAdapter2.getItem(position);
+                // Here you can do the action you want to...
+                Genero_id = curgenero.get_id();
+                curGenero = curgenero;
+                _curPos = position;
+
+            }
+            @Override
+            public void onNothingSelected(AdapterView<?> adapter) {  }
+        });
+
+
+        Sp_phones.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view,
+                                       int position, long id) {
+                // Here you get the current item (a User object) that is selected by its position
+                //((TextView) adapterView.getChildAt(0)).setTextColor(getResources().getColor(R.color.AppAdocGray));
+                Custom curphone = _customAdapter3.getItem(position);
+                // Here you can do the action you want to...
+                curPhone = curphone;
+                Phone_id = curphone.get_id();
+                _curPos = position;
+            }
+            @Override
+            public void onNothingSelected(AdapterView<?> adapter) {  }
+        });
+
+
+
+
+        ////Generos
 
 
 
@@ -548,44 +680,80 @@ public class Account extends Fragment implements  View.OnClickListener{
 
         String _name = name.getText().toString();
         String _lastname = lastname.getText().toString();
+        String numDocumento = input_account_numdocumento.getText().toString();
+        String nit = _nit.getText().toString();
+
+
+        if (_curPais <1)
+        {
+            Common.showWarningDialog(MyContext.getResources().getString(R.string.aviso),MyContext.getResources().getString(R.string.tupais), MyContext);
+            Sp_countries.setBackground(MyContext.getDrawable(R.drawable.roundtextred));
+            return;
+        }
+        else {
+            Sp_countries.setBackground(MyContext.getDrawable(R.drawable.roundtext));
+        }
+
+
 
         if (_name.length()<3)
         {
             Common.showWarningDialog(MyContext.getResources().getString(R.string.aviso),MyContext.getResources().getString(R.string.tunombre), MyContext);
+            name.setBackground(MyContext.getDrawable(R.drawable.roundtextred));
             return;
+        }
+        else {
+            name.setBackground(MyContext.getDrawable(R.drawable.roundtext));
         }
 
         if (_lastname.length()<5)
         {
             Common.showWarningDialog(MyContext.getResources().getString(R.string.aviso),MyContext.getResources().getString(R.string.tuapellido), MyContext);
+            lastname.setBackground(MyContext.getDrawable(R.drawable.roundtextred));
             return;
+        }
+        else {
+            lastname.setBackground(MyContext.getDrawable(R.drawable.roundtext));
         }
 
-/*
-        if (_curPais <1)
-        {
-            Common.showWarningDialog(MyContext.getResources().getString(R.string.aviso),MyContext.getResources().getString(R.string.tupais), MyContext);
-            return;
-        }
+
 
 
 
         if (_curDocumento <1)
         {
             Common.showWarningDialog(MyContext.getResources().getString(R.string.aviso),MyContext.getResources().getString(R.string.tudocumento), MyContext);
+            sp_documentos.setBackground(MyContext.getDrawable(R.drawable.roundtextred));
             return;
         }
+        else {
+            sp_documentos.setBackground(MyContext.getDrawable(R.drawable.roundtext));
+        }
 
-        String numDocumento = input_account_numdocumento.getText().toString();
+
 
 
         if(numDocumento.length() < 8)
         {
             Common.showWarningDialog(MyContext.getResources().getString(R.string.aviso),MyContext.getResources().getString(R.string.tudocnumer), MyContext);
+            sp_documentos.setBackground(MyContext.getDrawable(R.drawable.roundtextred));
             return;
         }
+        else {
+            sp_documentos.setBackground(MyContext.getDrawable(R.drawable.roundtext));
+        }
 
-        */
+
+        if(nit.length() < 4 && _curPais == 5)
+        {
+            Common.showWarningDialog(MyContext.getResources().getString(R.string.aviso),MyContext.getResources().getString(R.string.tunit), MyContext);
+            _nit.setBackground(MyContext.getDrawable(R.drawable.roundtextred));
+            return;
+        }
+        else {
+            _nit.setBackground(MyContext.getDrawable(R.drawable.roundtext));
+        }
+
 
         //Marcas favoritas
 
@@ -636,18 +804,30 @@ public class Account extends Fragment implements  View.OnClickListener{
     newPassword = password;
 */
 
+    String cur_phone = input_account_phone.getText().toString();
+
+    if (cur_phone.length() >6)
+    {
+        cur_phone = "+" + String.valueOf(Phone_id) + "-" + cur_phone;
+
+    }
+    else {
+        cur_phone = "";
+    }
 
 
         Common datos = Common.getInstance();
         datos.first_name = _name;
         datos.last_name = _lastname;
-        //datos.country_id = _curPais;
-        //datos.country = _nombrePais;
+        datos.country_id = _curPais;
+        datos.country = _nombrePais;
         //datos.country = curPais.get_name();
-        //datos.tipo_documento_identidad_c = nombreDocumento;
-        //datos.doc_identidad_c = numDocumento;
-        datos.phone_mobile = input_account_phone.getText().toString();
-        //datos.birthdate =fecha_nac;
+        datos.tipo_documento_identidad_c = nombreDocumento;
+        datos.doc_identidad_c = numDocumento;
+        datos.phone_mobile = cur_phone;
+        datos.birthdate = fecha_nac;
+        datos.nit = nit;
+        datos.gender_c = curGenero.get_desc();
 
         //datos.password = password;
 
@@ -660,6 +840,10 @@ public class Account extends Fragment implements  View.OnClickListener{
 
         String Birthday = "";
 
+        if (fecha_nac.length()>6) {
+        Birthday = Common.convertDateFormat (fecha_nac);
+    }
+/*
         if (fecha_nac.length()>6) {
             String[] parts = fecha_nac.split("/");
 
@@ -685,23 +869,27 @@ public class Account extends Fragment implements  View.OnClickListener{
 
 
         }
-
+*/
         SugarContact user = new SugarContact();
 
         SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss", Locale.US);
         user.first_name = _name;
         user.last_name = _lastname;
-        user.phone_mobile = input_account_phone.getText().toString();
-        //user.doc_identidad_c = numDocumento;
-        //user.tipo_documento_identidad_c = nombreDocumento;
+        //user.phone_mobile = input_account_phone.getText().toString();
+        user.doc_identidad_c = numDocumento;
+        user.tipo_documento_identidad_c = nombreDocumento;
 
         user.primary_address_street = "";
         user.alt_address_street = "";
         user.primary_address_country = _nombrePais;
-        //user.birthday = Birthday;
+        user.birthday = Birthday;
         user.estado_civil_c = "";
         user.primary_address_state = "";
         user.id_user = datos.assigned_user_id;
+        user.nit_c = nit;
+        user.phone_mobile = cur_phone;
+        user.gender_c = curGenero.get_desc();
+
 
         String[] marcas = new String[marcas_favoritas.size()];
         for(int i=0;i<marcas_favoritas.size();i++){
@@ -784,16 +972,20 @@ private void UpdatePassword()
                 jsonUser.put("first_name", sugarUser.first_name);
                 jsonUser.put("last_name", sugarUser.last_name);
                 jsonUser.put("phone_mobile", sugarUser.phone_mobile);
-               // jsonUser.put("no_documento_c", sugarUser.doc_identidad_c);
-               // jsonUser.put("doc_identidad_c", sugarUser.tipo_documento_identidad_c);
+                jsonUser.put("no_documento_c", sugarUser.doc_identidad_c);
+                jsonUser.put("doc_identidad_c", sugarUser.tipo_documento_identidad_c);
 
                 //jsonUser.put("email1", sugarUser.email1);
                 //jsonUser.put("primary_address_street", sugarUser.primary_address_street);
                 //jsonUser.put("alt_address_street", sugarUser.alt_address_street);
-               // jsonUser.put("birthday", sugarUser.birthday);
+                jsonUser.put("birthday", sugarUser.birthday);
+                jsonUser.put("nit_c", sugarUser.nit_c);
+                jsonUser.put("gender_c", sugarUser.gender_c);
+
+
                 //jsonUser.put("estado_civil_c", sugarUser.estado_civil_c);
                 //jsonUser.put("primary_address_state", sugarUser.primary_address_state);
-                //jsonUser.put("primary_address_country", sugarUser.primary_address_country);
+                jsonUser.put("primary_address_country", sugarUser.primary_address_country);
                 jsonUser.put("id", sugarUser.id_user);
 
                 jsonUser.put("marcas_favoritas_c",new JSONArray(marcas_favoritas));

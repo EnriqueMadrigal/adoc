@@ -677,6 +677,8 @@ private  void setData(User_Intelik contacto)
     datos.doc_identidad_c = contacto.doc_identidad_c;
     datos.no_documento_c = contacto.no_documento_c;
     datos.birthdate = contacto.birthdate;
+    datos.gender_c = contacto.gender_c;
+    datos.nit = contacto.nit_c;
 
 
     //datos.doc_identidad_c = contacto.do

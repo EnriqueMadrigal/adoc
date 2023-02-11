@@ -160,6 +160,8 @@ public class ContactViewModel extends ViewModel {
                                 curUser.puntos_redimidos_c = hashMap.get("puntos_redimidos_c");
                                 curUser.puntos_acumulados_c = hashMap.get("puntos_acumulados_c");
                                 curUser.nivel_del_cliente_c = hashMap.get("nivel_del_cliente_c");
+                                curUser.gender_c = hashMap.get("gender_c");
+                                curUser.nit_c  = hashMap.get("nit_c");
 
                                 Contacto.postValue(curUser);
 
@@ -245,6 +247,8 @@ public class ContactViewModel extends ViewModel {
                 curUser.puntos_redimidos_c = result.getString("puntos_redimidos_c");
                 curUser.puntos_acumulados_c = result.getString("puntos_acumulados_c");
                 curUser.birthdate = result.getString("birthdate");
+                curUser.gender_c = result.getString("gender_c");
+                curUser.nit_c  = result.getString("nit_c");
 
 
                 Contacto.postValue(curUser);
@@ -374,6 +378,9 @@ public class ContactViewModel extends ViewModel {
                     curUser.phone_mobile =  resultado.getString("phone_mobile");
                     curUser.no_documento_c = resultado.getString("no_documento_c");
                     curUser.doc_identidad_c = resultado.getString("doc_identidad_c");
+
+                    curUser.gender_c = resultado.getString("gender_c");
+                    curUser.nit_c  = resultado.getString("nit_c");
 
                     //Obtener las marcas
                     JSONArray Jarray_marcas = resultado.getJSONArray("marcas_favoritas_c");

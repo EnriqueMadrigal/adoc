@@ -3,6 +3,7 @@ package com.intelik.appadoc.fragments;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
+import android.opengl.Visibility;
 import android.os.Bundle;
 
 import androidx.annotation.Nullable;
@@ -14,6 +15,7 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import android.text.Editable;
+import android.text.Layout;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,6 +23,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -95,7 +98,9 @@ public class RegisterPage1 extends Fragment implements  View.OnClickListener{
     private EditText _email;
     private EditText _password;
     private EditText _cpassword;
+    private EditText _nit;
 
+    private LinearLayout layout_nit;
 
 
     private ImageButton check_politica;
@@ -157,6 +162,8 @@ public class RegisterPage1 extends Fragment implements  View.OnClickListener{
         text_terminos = (TextView) _view.findViewById(R.id.text_terminos);
         text_politica = (TextView) _view.findViewById(R.id.text_politica);
 
+        _nit = (EditText) _view.findViewById(R.id.input_nit);
+        layout_nit = (LinearLayout) _view.findViewById(R.id.layout_nit);
 
         check_politica.setOnClickListener(this);
         check_terminos.setOnClickListener(this);
@@ -233,6 +240,12 @@ public class RegisterPage1 extends Fragment implements  View.OnClickListener{
         }
         //sp_documentos.setEnabled(true);
 
+        if (_curPais ==5) {
+            layout_nit.setVisibility(View.VISIBLE);
+        }
+        else {
+            layout_nit.setVisibility(View.GONE);
+        }
 
     }
     @Override
@@ -292,24 +305,37 @@ public class RegisterPage1 extends Fragment implements  View.OnClickListener{
 
                  String name = _name.getText().toString();
                  String lastname = _lastname.getText().toString();
+                 String nit = _nit.getText().toString();
 
                  if (name.length()<3)
                  {
                      Common.showWarningDialog(MyContext.getResources().getString(R.string.aviso),MyContext.getResources().getString(R.string.tunombre), MyContext);
+                     _name.setBackground(MyContext.getDrawable(R.drawable.roundtextred));
                      return;
+                 }
+                 else {
+                     _name.setBackground(MyContext.getDrawable(R.drawable.roundtext));
                  }
 
                 if (lastname.length()<5)
                 {
                     Common.showWarningDialog(MyContext.getResources().getString(R.string.aviso),MyContext.getResources().getString(R.string.tuapellido), MyContext);
+                    _lastname.setBackground(MyContext.getDrawable(R.drawable.roundtextred));
                     return;
+                }
+                else {
+                    _lastname.setBackground(MyContext.getDrawable(R.drawable.roundtext));
                 }
 
 
                 if (_curPais <1)
                 {
                     Common.showWarningDialog(MyContext.getResources().getString(R.string.aviso),MyContext.getResources().getString(R.string.tupais), MyContext);
+                    Sp_countries.setBackground(MyContext.getDrawable(R.drawable.roundtextred));
                     return;
+                }
+                else {
+                    Sp_countries.setBackground(MyContext.getDrawable(R.drawable.roundtext));
                 }
 
 
@@ -317,7 +343,11 @@ public class RegisterPage1 extends Fragment implements  View.OnClickListener{
                 if (_curDocumento <1)
                 {
                     Common.showWarningDialog(MyContext.getResources().getString(R.string.aviso),MyContext.getResources().getString(R.string.tudocumento), MyContext);
+                    sp_documentos.setBackground(MyContext.getDrawable(R.drawable.roundtextred));
                     return;
+                }
+                else {
+                    sp_documentos.setBackground(MyContext.getDrawable(R.drawable.roundtext));
                 }
 
                 String numDocumento = _numDocumento.getText().toString();
@@ -326,7 +356,22 @@ public class RegisterPage1 extends Fragment implements  View.OnClickListener{
                 if(numDocumento.length() < 8)
                 {
                     Common.showWarningDialog(MyContext.getResources().getString(R.string.aviso),MyContext.getResources().getString(R.string.tudocnumer), MyContext);
+                    _numDocumento.setBackground(MyContext.getDrawable(R.drawable.roundtextred));
                     return;
+                }
+                else {
+                    _numDocumento.setBackground(MyContext.getDrawable(R.drawable.roundtext));
+                }
+
+
+                if(nit.length() < 4 && _curPais == 5)
+                {
+                    Common.showWarningDialog(MyContext.getResources().getString(R.string.aviso),MyContext.getResources().getString(R.string.tunit), MyContext);
+                    _nit.setBackground(MyContext.getDrawable(R.drawable.roundtextred));
+                    return;
+                }
+                else {
+                    _nit.setBackground(MyContext.getDrawable(R.drawable.roundtext));
                 }
 
 
@@ -338,26 +383,42 @@ public class RegisterPage1 extends Fragment implements  View.OnClickListener{
                 if(email.length() == 0)
                 {
                     Common.showWarningDialog(MyContext.getResources().getString(R.string.aviso),MyContext.getResources().getString(R.string.tuemail), MyContext);
+                    _email.setBackground(MyContext.getDrawable(R.drawable.roundtextred));
                     return;
+                }
+                else {
+                    _email.setBackground(MyContext.getDrawable(R.drawable.roundtext));
                 }
 
 
                 if (!Common.isValidMail(email))
                 {
                     Common.showWarningDialog(MyContext.getResources().getString(R.string.aviso),MyContext.getResources().getString(R.string.tuemailinvalido), MyContext);
+                    _email.setBackground(MyContext.getDrawable(R.drawable.roundtextred));
                     return;
+                }
+                else {
+                    _email.setBackground(MyContext.getDrawable(R.drawable.roundtextred));
                 }
 
                 if(password.length() == 0)
                 {
                     Common.showWarningDialog(MyContext.getResources().getString(R.string.aviso),MyContext.getResources().getString(R.string.tupass), MyContext);
+                    _password.setBackground(MyContext.getDrawable(R.drawable.roundtextred));
                     return;
+                }
+                else {
+                    _password.setBackground(MyContext.getDrawable(R.drawable.roundtext));
                 }
 
                 if(password.length() < 8)
                 {
                     Common.showWarningDialog(MyContext.getResources().getString(R.string.aviso),MyContext.getResources().getString(R.string.tuminpass), MyContext);
+                    _password.setBackground(MyContext.getDrawable(R.drawable.roundtextred));
                     return;
+                }
+                else {
+                    _password.setBackground(MyContext.getDrawable(R.drawable.roundtext));
                 }
 
                 if (!password.equals(cpassword))
@@ -370,13 +431,17 @@ public class RegisterPage1 extends Fragment implements  View.OnClickListener{
                 if (!checked_politica)
                 {
                     Common.showWarningDialog(MyContext.getResources().getString(R.string.aviso),MyContext.getResources().getString(R.string.checkpolitica), MyContext);
+                    check_politica.setImageResource(R.drawable.check_onred);
                     return;
                 }
+
 
 
                 if (!checked_terminos)
                 {
                     Common.showWarningDialog(MyContext.getResources().getString(R.string.aviso),MyContext.getResources().getString(R.string.checkterminos), MyContext);
+                    check_terminos.setImageResource(R.drawable.check_onred);
+
                     return;
                 }
 

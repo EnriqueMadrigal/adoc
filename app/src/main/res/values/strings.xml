@@ -12,6 +12,7 @@
     <string name="pais">País de residencia *</string>
     <string name="siguiente">Siguiente >></string>
     <string name="nodocumento">Número de Documento *</string>
+    <string name="nonit">NIT</string>
     <string name="paganterior"><u>« Página Anterior</u></string>
     <string name="genero">Género</string>
     <string name="fechanac">Fecha de Nacimiento</string>
@@ -29,6 +30,7 @@
     <string name="tuapellido">Por favor scribe tus apellidos..</string>
     <string name="tudocumento">Por favor selecciona el tipo de documento..</string>
     <string name="tudocnumer">Por favor escribe tu número de documento..</string>
+    <string name="tunit">Por favor escribe tu número de nit..</string>
     <string name="tugenero">Por favor selecciona el género..</string>
     <string name="tufecha">Por favor selecciona tu fecha de nacimiento..</string>
     <string name="tuphone">Por favor escribe tu Número de telefono..</string>

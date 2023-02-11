@@ -55,6 +55,14 @@ public class Custom {
     }
 
 
+    public Custom(int _curid, String _curname, String _curdesc)
+    {
+        _name = _curname;
+        _desc = _curdesc;
+        _id = _curid;
+    }
+
+
     public Custom(int curid, String desc, String link, int value)
     {
         _desc = desc;

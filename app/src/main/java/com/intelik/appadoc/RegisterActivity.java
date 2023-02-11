@@ -313,6 +313,7 @@ public class RegisterActivity extends AppCompatActivity {
             user.primary_address_country = datos.country;
             user.estado_civil_c = "";
             user.primary_address_state = "";
+            user.nit_c = datos.nit;
 
             user.date_entered = (String) df.format(new Date());
 
@@ -425,6 +426,7 @@ public class RegisterActivity extends AppCompatActivity {
         //user.birthday = Birthday;
         user.estado_civil_c = "";
         user.primary_address_state = "";
+        user.nit_c = datos.nit;
 
         user.date_entered = (String) df.format(new Date());
 
