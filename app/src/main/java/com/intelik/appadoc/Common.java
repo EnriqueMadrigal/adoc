@@ -99,6 +99,7 @@ public class Common {
     public static final String VAR_USER_TOKEN = "USER_TOKEN";
 
     public static final String VAR_USER_NIT = "USER_NIT";
+    public static final String VAR_USER_DUMMY = "USER_DUMMY";
 
 
     
@@ -297,7 +298,6 @@ public class Common {
             editor.putString(VAR_USER_NAME, datos.first_name);
             editor.putString(VAR_LOGIN_NAME, datos.email1);
             editor.putString(VAR_USER_APELLIDOS, datos.last_name);
-
             editor.putString(VAR_USER_GENDER, datos.gender_c);
 
             if (datos.birthdate != null) {
@@ -399,7 +399,9 @@ public class Common {
         datos.tipo_documento_identidad_c = sharedPref.getString(VAR_USER_TYPE_DOC, "");
         datos.doc_identidad_c = sharedPref.getString(VAR_USER_DOC, "");
         datos.phone_mobile = sharedPref.getString(VAR_USER_PHONE, "");
+        datos.nit = sharedPref.getString(VAR_USER_NIT, "");
 
+        String Dummy = sharedPref.getString(VAR_USER_DUMMY, "");
 
     }
 
@@ -501,9 +503,11 @@ public class Common {
         int firstIndex = 0;
         int secondIndex = 0;
         ///check -
+        if (phone.length()<6) {return 0;}
+
         secondIndex = phone.indexOf("-");
 
-        if (secondIndex == 0) { return 0; }
+        if (secondIndex <= 0) { return 0; }
 
         String codigo = phone.substring(firstIndex +1 , secondIndex);
 

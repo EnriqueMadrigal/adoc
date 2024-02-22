@@ -88,9 +88,9 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
 
 
 
-            Log.d(TAG, "Message Notification Body: " + desc);
-            Log.d(TAG, "Message Notification Title: " + title);
-            Log.d(TAG, "Message Notification Image: " + image);
+           // Log.d(TAG, "Message Notification Body: " + desc);
+           // Log.d(TAG, "Message Notification Title: " + title);
+           // Log.d(TAG, "Message Notification Image: " + image);
 
             db = new DBHelper(Common.getInstance().sharedContext);
             db.insertNotification(title,desc,image);
